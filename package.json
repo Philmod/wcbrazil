@@ -11,7 +11,11 @@
   "dependencies": {
     "express.io": "1.1.13",
     "scraper": "0.0.9",
-    "async": "0.8.0"
+    "async": "0.8.0",
+    "underscore": "1.6.0",
+    "connect-redis": "1.4.7",
+    "winston": "0.7.3",
+    "express-winston": "0.2.6"
   },
   "repository": {
     "type": "git"
