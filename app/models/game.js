@@ -34,7 +34,7 @@ module.exports = function(server) {
       var start = new Date(date.getFullYear(), date.getMonth(), date.getDate());
       var nextDay = new Date(date.getFullYear(), date.getMonth(), date.getDate());
       nextDay.setDate(date.getDate()+1);
-      var end = new Date(nextDay.getFullYear(), nextDay.getMonth(), nextDay.getDate());
+      var end = new Date(nextDay.getFullYear(), nextDay.getMonth(), nextDay.getDate(), 6, 0, 0);
       this.find({time: {$gte: start, $lt: end}}, callback);
     }
 

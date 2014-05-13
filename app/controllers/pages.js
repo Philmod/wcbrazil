@@ -14,8 +14,6 @@ module.exports = function(server) {
 
       Game.findByDate(date, function(e, games) {
 
-        console.log('gaesm : ', games.length)
-
         res.render('index', {
             title : 'WCBrazil'
           , games : games
