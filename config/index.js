@@ -37,15 +37,11 @@ module.exports = function(server, next) {
    */
   server.utils  = require('../lib/utils');
   server.errors = require('../lib/errors');
+  server.common = require('../lib/common');
 
   /** 
    * DB.
    */
-  // server.config.mongodb = require('./mongodb')[serverEnv];
-
-  /**
-   * Redis.
-   */
-  // server.config.redis = require('./redis')[serverEnv];
+  server.config.mongodb = require('./mongodb')[serverEnv];
 
 };
