@@ -20,7 +20,7 @@ require('./config/express')(server);
 /**
  * Models.
  */
-// require('./config/models')(server);
+require('./config/models')(server);
 
 /**
  * Controllers.
