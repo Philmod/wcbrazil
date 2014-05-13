@@ -9,13 +9,13 @@ module.exports = function(server) {
     ;
 
   var Game = module.exports = new Schema({
-      date  : { type: Date }
+      time  : { type: Date }
     , teams : [ { type: String }]
     , score : [ { type: Number, default: 0 }]
     , group : { type: String }
   });
 
-  Game.plugin(common.timestamps());
+  Game.plugin(common.timestamps('created', 'updated'));
 
   /**
    * Methods.
