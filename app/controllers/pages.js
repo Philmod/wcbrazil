@@ -10,7 +10,11 @@ module.exports = function(server) {
 
     index: function(req, res, next) {
 
-      Game.findByDate(new Date(2014, 5, 16), function(e, games) {
+      var date = new Date(2014, 5, 14); // change to 'new Date()'
+
+      Game.findByDate(date, function(e, games) {
+
+        console.log('gaesm : ', games.length)
 
         res.render('index', {
             title : 'WCBrazil'

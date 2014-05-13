@@ -2,32 +2,26 @@ extends layout
 
 block content
 
-  //- Marketing messaging and featurettes
-  //- Wrap the rest of the page in another container to center all the content. 
-  .container.marketing
-    //- Three columns of text below the carousel 
+  //- Games scores.
+  .container.games
     .row
-      .col-lg-4
-        img.img-circle(data-src='holder.js/140x140', alt='Generic placeholder image')
-        h2 Heading
-        p
-          | Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.
-        p
-          a.btn.btn-default(href='#', role='button') View details »
-      .col-lg-4
-        img.img-circle(data-src='holder.js/140x140', alt='Generic placeholder image')
-        h2 Heading
-        p
-          | Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.
-        p
-          a.btn.btn-default(href='#', role='button') View details »
-      .col-lg-4
-        img.img-circle(data-src='holder.js/140x140', alt='Generic placeholder image')
-        h2 Heading
-        p
-          | Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-        p
-          a.btn.btn-default(href='#', role='button') View details »
+      each game in games
+        div(class="col-lg-" + 12/games.length)
+          h2 
+            = game.teams[0]
+            |  - 
+            = game.teams[1]
+          p
+            = new Date(game.time).getHours()
+            |  h  
+            - var minutes = new Date(game.time).getMinutes();
+            - if (minutes === 0) minutes = '00';
+            = minutes
+          h3 
+            = game.score[0]
+            |  - 
+            = game.score[1]
+
 
   //- Bootstrap core JavaScript
   //- Placed at the end of the document so the pages load faster 

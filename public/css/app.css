@@ -80,26 +80,34 @@ ul.navbar-nav a.button-href-wrapper {
 
 
 
-/* MARKETING CONTENT
+/* GAMES CONTENT
 -------------------------------------------------- */
 
 /* Pad the edges of the mobile views a bit */
-.marketing {
+.games {
   padding-left: 15px;
   padding-right: 15px;
 }
 
 /* Center align the text within the three columns below the carousel */
-.marketing .col-lg-4 {
+.games .col-lg-4 {
   text-align: center;
   margin-bottom: 20px;
 }
-.marketing h2 {
-  font-weight: normal;
+.games .col-lg-3 {
+  text-align: center;
+  margin-bottom: 20px;
 }
-.marketing .col-lg-4 p {
-  margin-left: 10px;
-  margin-right: 10px;
+.games .col-lg-6 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.games .col-lg-12 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.games h2 {
+  font-weight: normal;
 }
 
 
