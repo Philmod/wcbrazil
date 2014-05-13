@@ -3,6 +3,8 @@ var status = require('../lib/status.js')
 
 module.exports = function(server) {
 
+  var pages = server.controller('pages');
+
   /** 
    * Status.
    */
@@ -11,9 +13,7 @@ module.exports = function(server) {
   /**
    * Main page.
    */
-  server.get('/', function(req, res, next) {
-    res.send('ok');
-  })
+  server.get('/', pages.index);
 
   
   /**

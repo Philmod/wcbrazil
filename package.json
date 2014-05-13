@@ -15,7 +15,8 @@
     "underscore": "1.6.0",
     "connect-redis": "1.4.7",
     "winston": "0.7.3",
-    "express-winston": "0.2.6"
+    "express-winston": "0.2.6",
+    "jade": "0.35.0"
   },
   "repository": {
     "type": "git"

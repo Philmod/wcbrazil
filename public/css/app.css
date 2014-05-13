@@ -1,0 +1,264 @@
+/* GLOBAL STYLES
+-------------------------------------------------- */
+/* Padding below the footer and lighter body text */
+
+body {
+  padding-top: 50px;
+  padding-bottom: 40px;
+  color: #5a5a5a;
+}
+
+
+/* CUSTOMIZE THE HEADER
+-------------------------------------------------- */
+header {
+
+}
+
+
+/* CUSTOMIZE THE FOOTER
+-------------------------------------------------- */
+footer {
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+
+/* CUSTOMIZE THE NAVBAR
+-------------------------------------------------- */
+
+/* Special class on .container surrounding .navbar, used for positioning it into place. */
+.navbar-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+}
+
+/* Flip around the padding for proper display in narrow viewports */
+.navbar-wrapper .container {
+  padding-left: 0;
+  padding-right: 0;
+}
+.navbar-wrapper .navbar {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+ul.navbar-nav a.button-href-wrapper {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+
+/* CUSTOMIZE THE CAROUSEL
+-------------------------------------------------- */
+
+/* Carousel base class */
+.carousel {
+  height: 500px;
+  margin-bottom: 60px;
+}
+/* Since positioning the image, we need to help out the caption */
+.carousel-caption {
+  z-index: 10;
+}
+
+/* Declare heights because of positioning of img element */
+.carousel .item {
+  height: 500px;
+  background-color: #777;
+}
+.carousel-inner > .item > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  height: 500px;
+}
+
+
+
+/* MARKETING CONTENT
+-------------------------------------------------- */
+
+/* Pad the edges of the mobile views a bit */
+.marketing {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Center align the text within the three columns below the carousel */
+.marketing .col-lg-4 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.marketing h2 {
+  font-weight: normal;
+}
+.marketing .col-lg-4 p {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+
+/* Featurettes
+------------------------- */
+
+.featurette-divider {
+  margin: 80px 0; /* Space out the Bootstrap <hr> more */
+}
+
+/* Thin out the marketing headings */
+.featurette-heading {
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+
+
+/* SETTINGS PAGE
+------------------------- */
+
+#settings {
+	min-height: 600px;
+}
+
+/* Connections */
+.connection {
+  padding: 10px 0;
+  margin-top: 20px;
+  border-top: 1px solid #ccc;
+  overflow: hidden;
+}
+.connection a {
+  cursor: pointer;
+}
+.connection .connection-title {
+  padding-top: 8px;
+  padding-left: 10px;
+  width: 130px;
+  float: left;
+  font-size: 12px;
+  font-weight: bold;
+}
+.connection .connection-title p {
+  padding-left: 21px;
+  line-height: 16px;
+  margin: 0;
+}
+.connection .connection-title .twitter {
+  background: url("/img/sources/twitter-16px.png") left no-repeat;
+}
+.connection .connection-title .facebook {
+  background: url("/img/sources/facebook-16px.png") left no-repeat;
+}
+.connection .connection-title .google {
+  background: url("/img/sources/google-16px.png") left no-repeat;
+}
+.connection .connection-title .instagram {
+  background: url("/img/sources/instagram-16px.png") left no-repeat;
+}
+.connection .connection-actions {
+  float: left;
+  width: 629px;
+}
+.connection .connection-actions .button {
+  margin-top: 1px;
+}
+.connection .connection-actions img {
+  display: block;
+  float: left;
+  width: 60px;
+  height: 60px;
+  padding: 1px;
+  background: #fff;
+  border: 1px solid #ddd;
+  margin-right: 10px;
+}
+.connection .connection-actions .connection-actions-inner {
+  width: 555px;
+  padding-top: 5px;
+  float: left;
+}
+.connection .connection-actions .connection-actions-inner p {
+  margin: 0 0 5px;
+}
+.connection .connection-actions .connection-actions-inner ul {
+  margin: 0 0 10px;
+  padding: 0;
+  list-style: none;
+}
+.connection .connection-actions .connection-actions-inner ul li {
+  margin-bottom: 2px;
+}
+.connection .connection-actions .connection-actions-inner ul li label {
+  font-size: 12px;
+  color: #666;
+}
+.connection .connection-actions .connection-actions-inner ul li label input {
+  vertical-align: middle;
+}
+.connection .connection-actions .connection-actions-inner ul li label strong {
+  padding-left: 5px;
+  font-weight: normal;
+}
+.connection .connection-actions .connection-actions-inner .unlink {
+  color: #b30c00;
+}
+.connection .connection-actions .connection-actions-inner .unlink:hover {
+  color: #000;
+}
+
+
+
+
+/* RESPONSIVE CSS
+-------------------------------------------------- */
+
+@media (min-width: 768px) {
+
+  /* Remove the edge padding needed for mobile */
+  .marketing {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* Navbar positioning foo */
+  .navbar-wrapper {
+    margin-top: 20px;
+  }
+  .navbar-wrapper .container {
+    padding-left:  15px;
+    padding-right: 15px;
+  }
+  .navbar-wrapper .navbar {
+    padding-left:  0;
+    padding-right: 0;
+  }
+
+  /* The navbar becomes detached from the top, so we round the corners */
+  .navbar-wrapper .navbar {
+    border-radius: 4px;
+  }
+
+  /* Bump up size of carousel content */
+  .carousel-caption p {
+    margin-bottom: 20px;
+    font-size: 21px;
+    line-height: 1.4;
+  }
+
+  .featurette-heading {
+    font-size: 50px;
+  }
+
+}
+
+@media (min-width: 992px) {
+  .featurette-heading {
+    margin-top: 120px;
+  }
+}
