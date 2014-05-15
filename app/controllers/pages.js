@@ -1,7 +1,7 @@
 module.exports = function(server) {
   
   var errors = server.errors
-    , Game  = server.model('Game')
+    , Game = server.model('Game')
     ;
 
 
@@ -17,6 +17,7 @@ module.exports = function(server) {
         res.render('index', {
             title : 'WCBrazil'
           , games : games
+          , bets  : {}
         });
 
       });

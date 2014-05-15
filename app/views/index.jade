@@ -20,7 +20,10 @@ block content
             {{game.score[0]}}
             |  - 
             {{game.score[1]}}
-           
+
+      div(class='col-lg-6 comments')
+
+      div(class='col-lg-6 bets')
 
 
   //- Bootstrap core JavaScript
@@ -38,5 +41,6 @@ block content
   script(src='js/filters.js')
 
   //- Variables passed from expressjs.
-  script
+  script.
     var games = !{JSON.stringify(games)}
+    var bets = !{JSON.stringify(bets)}
