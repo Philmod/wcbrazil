@@ -39,3 +39,10 @@ var port = server.set('port');
 server.listen(port || 80, function() {
   console.log("WCBrazil HTTP listening on port " + port);  
 });
+
+// Test socket
+setInterval(function () {
+  server.io.broadcast('send:time', {
+    time: (new Date()).toString()
+  });
+}, 1000);

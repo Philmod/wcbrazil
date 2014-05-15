@@ -2,30 +2,41 @@ extends layout
 
 block content
 
-  //- Games scores.
-  .container.games
-    .row
-      each game in games
-        div(class="col-lg-" + 12/games.length + " game")
+  div(ng-controller='AppCtrl')
+
+    .container
+      //- Games scores.
+      div(class='row games' ng-controller='GamesCtrl')
+        div(class='game col-lg-{{12/games.length}}' ng-repeat='game in games')
           h2 
-            = game.teams[0]
+            {{game.teams[0]}}
             |  - 
-            = game.teams[1]
+            {{game.teams[1]}}
           p
-            = new Date(game.time).getHours()
+            {{game.time | hours }}
             |  h  
-            - var minutes = new Date(game.time).getMinutes();
-            - if (minutes === 0) minutes = '00';
-            = minutes
-          h3(class="game-" + game.teams[0] + "-" + game.teams[1])
-            = game.score[0]
+            {{game.time | minutes }}
+          h3(class='game-{{game.teams[0]}}-{{game.teams[1]}}')
+            {{game.score[0]}}
             |  - 
-            = game.score[1]
+            {{game.score[1]}}
+           
 
 
   //- Bootstrap core JavaScript
   //- Placed at the end of the document so the pages load faster 
+  script(src='/socket.io/socket.io.js')
+  script(src='bower_components/angular/angular.js')
+  script(src='bower_components/angular-route/angular-route.js')
+  script(src='bower_components/angular-socket-io/socket.js')
   script(src='js/lib/jquery/jquery-2.0.3.min.js')
   script(src='bootstrap/js/bootstrap.min.js')
   script(src='bootstrap/js/holder.js')
-  script(src='js/main.js')
+  script(src='js/app.js')
+  script(src='js/services.js')
+  script(src='js/controllers.js')
+  script(src='js/filters.js')
+
+  //- Variables passed from expressjs.
+  script
+    var games = !{JSON.stringify(games)}

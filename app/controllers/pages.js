@@ -12,7 +12,7 @@ module.exports = function(server) {
 
       var date = new Date(2014, 5, 14); // change to 'new Date()'
 
-      Game.findByDate(date, function(e, games) {
+      Game.findByDate(date, function(e, games) { 
 
         res.render('index', {
             title : 'WCBrazil'
