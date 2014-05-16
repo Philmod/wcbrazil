@@ -14,25 +14,15 @@ module.exports = function(server) {
   if(mongodb.user)
     auth = mongodb.user+":"+mongodb.pass+"@";
 
-  var mongourl = 'mongodb://' + auth + mongodb.host + ':' + (mongodb.port || 27017) + '/' + mongodb.database;
+  var mongourl = process.env.MONGOLAB_URI ||
+    process.env.MONGOHQ_URL ||
+    'mongodb://' + auth + mongodb.host + ':' + (mongodb.port || 27017) + '/' + mongodb.database;
   
-  if(mongodb.replicaSet) {
-    for(var i=0, len = mongodb.replicaSet.length; i<len; i++) {
-       var replica = mongodb.replicaSet[i];
-       var replica_url = 'mongodb://' + auth + replica.host + ':' + (replica.port || 27017) + '/' + replica.database;
-       mongourl += ','+replica_url;
-    }
-  }
+  db = mongoose.createConnection(mongourl, options, function (err, db2) {
+    if (err) log.sub('MONGODB').error(err.message);
+  });
+  var eventHandler = db.db;
 
-  if (mongourl.indexOf(',') != -1) {
-    db = mongoose.connectSet(mongourl, options);
-    var eventHandler = db.connection;
-  } else {
-    db = mongoose.createConnection(mongourl, options, function (err, db2) {
-      if (err) log.sub('MONGODB').error(err.message);
-    });
-    var eventHandler = db.db;
-  }
   eventHandler.on('open', function(err) {
     console.log('Mongoose connected.');
   }); 
