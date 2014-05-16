@@ -24,6 +24,7 @@ module.exports = function(server) {
    */
   var scoreScraping = setInterval(function() {
     console.log('Start scraping scores, at ', new Date());
+    /*
     async.concatSeries(server.config.scraping.groups, scoreScraper.scrap, function(err, results) {
       if (err) console.log('error : ', err);
       console.log('results scraping : ', results, results.length);
@@ -35,6 +36,7 @@ module.exports = function(server) {
       //   3. Recalculate bets (+ broadcast)
 
     });
+    */
   }, server.config.scraping.dt);
 
   /**
