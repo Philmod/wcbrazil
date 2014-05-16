@@ -23,7 +23,14 @@ block content
 
       div(class='col-lg-6 comments')
 
-      div(class='col-lg-6 bets')
+      div(class='col-lg-6 bets' ng-controller='BetsCtrl')
+        table(class='table table-striped table-bordered table-hover')
+          tbody
+            tr(ng-repeat='bet in bets' ng-class="{ 'success': bet.difference===1, 'danger': bet.difference===-1, 'warning': bet.difference===0 }")
+              td 
+                {{bet.username}}
+              td
+                {{bet.score}}
 
 
   //- Bootstrap core JavaScript

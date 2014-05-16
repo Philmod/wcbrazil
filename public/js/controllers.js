@@ -14,5 +14,10 @@ angular.module('wcbrazilApp.controllers', [])
       $scope.games = data;
     });
   })
+  .controller('BetsCtrl', function ($scope, socket) {
+    $scope.bets = bets;
+    socket.on('bets:update', function (data) {
+      $scope.bets = data;
+    });
+  })
   ;
-
