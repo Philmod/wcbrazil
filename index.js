@@ -41,7 +41,7 @@ require('./config/sockets')(server);
  * Start server.
  */
 var port = server.set('port');
-server.listen(port || 80, function() {
+server.listen(process.env.PORT || port || 80, function() {
   console.log("WCBrazil HTTP listening on port " + port);  
 });
 
