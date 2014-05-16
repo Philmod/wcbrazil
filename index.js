@@ -1,6 +1,7 @@
 /**
  * Dependencies.
  */
+var newrelic = require('newrelic');
 var express = require('express.io')
   , server  = express()
   , util = require('util')
