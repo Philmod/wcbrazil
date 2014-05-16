@@ -3,6 +3,7 @@
  */
 var express = require('express.io')
   , server  = express()
+  , util = require('util')
   ;
 
 server.http().io();
@@ -61,4 +62,8 @@ setInterval(function () {
     server.io.broadcast('games:update', games);
 
   });
-}, 2000);
+}, 10000);
+
+setInterval(function() {
+  console.log('Memory : ', util.inspect(process.memoryUsage()));
+}, 5000)
