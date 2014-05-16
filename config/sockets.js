@@ -10,9 +10,9 @@ module.exports = function(server) {
    * Set Redis store.
    */
   server.io.set('store', new express.io.RedisStore({
-    redisPub: redis.createClient(),
-    redisSub: redis.createClient(),
-    redisClient: redis.createClient()
+    redisPub: server.redis,
+    redisSub: server.redis,
+    redisClient: server.redis
   }));
 
   /**

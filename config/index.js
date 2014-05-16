@@ -7,6 +7,7 @@ module.exports = function(server, next) {
     , http = require('http')
     , fs   = require('fs')
     , path = require('path')
+    , redis = require('redis')
     ;
 
   /**
@@ -51,5 +52,17 @@ module.exports = function(server, next) {
       groups: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
     , dt: 60*1000
   };
+
+  /**
+   * Redis.
+   */
+  if (process.env.REDISTOGO_URL) {
+    var rtg = require("url").parse(process.env.REDISTOGO_URL);
+    server.redis = redis.createClient(rtg.port, rtg.hostname);
+    server.redis.auth(rtg.auth.split(":")[1]);
+  } else {
+    server.redis = redis.createClient();
+  }
+
 
 };

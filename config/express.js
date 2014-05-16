@@ -37,11 +37,7 @@ module.exports = function(server) {
    * Session store.
    */
   var store = new RedisStore({
-    //   db     : server.config.redis.database
-    // , host   : server.config.redis.host
-    // , port   : server.config.redis.port
-    // , pass   : server.config.redis.password
-    // , prefix : 'wcbrazil_sess:'
+    client: server.redis
   });
   server.configure(function() {
     server.use(express.session({
