@@ -21,7 +21,7 @@ block content
             |  - 
             {{game.score[1]}}
 
-      div(class='col-lg-6 comments')
+      #livefyre-comments.col-lg-6
 
       div(class='col-lg-6 bets' ng-controller='BetsCtrl')
         table(class='table table-striped table-bordered table-hover')
@@ -46,8 +46,24 @@ block content
   script(src='js/services.js')
   script(src='js/controllers.js')
   script(src='js/filters.js')
+  script(src='http://zor.livefyre.com/wjs/v3.0/javascripts/livefyre.js')
 
   //- Variables passed from expressjs.
   script.
     var games = !{JSON.stringify(games)}
     var bets = !{JSON.stringify(bets)}
+
+  //- Livefyre comments
+  script.
+    var articleId = fyre.conv.load.makeArticleId(null);
+    fyre.conv.load({}, [{
+        el: 'livefyre-comments',
+        network: "livefyre.com",
+        siteId: "358978",
+        articleId: articleId,
+        signed: false,
+        collectionMeta: {
+            articleId: articleId,
+            url: fyre.conv.load.makeCollectionUrl(),
+        }
+    }], function() {});
