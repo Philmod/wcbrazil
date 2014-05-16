@@ -1,7 +1,7 @@
 
 var express = require('express.io')
   , redis = require('redis')
-  , RedisStore = express.io.RedisStore
+  // , RedisStore = express.io.RedisStore
   ;
 
 module.exports = function(server) {
@@ -9,11 +9,11 @@ module.exports = function(server) {
   /**
    * Set Redis store.
    */
-  server.io.set('store', new express.io.RedisStore({
-    redisPub: server.redis,
-    redisSub: server.redis,
-    redisClient: server.redis
-  }));
+  // server.io.set('store', new express.io.RedisStore({
+  //   redisPub: server.redis,
+  //   redisSub: server.redis,
+  //   redisClient: server.redis
+  // }));
 
   /**
    * Basic callbacks.
