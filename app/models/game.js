@@ -6,6 +6,8 @@ module.exports = function(server) {
     , Schema   = mongoose.Schema
     , ObjectId = Schema.ObjectId
     , Mixed    = Schema.Types.Mixed
+    , async    = require('async')
+    , _        = server.utils._
     ;
 
   var Game = module.exports = new Schema({
@@ -36,6 +38,39 @@ module.exports = function(server) {
       nextDay.setDate(date.getDate()+1);
       var end = new Date(nextDay.getFullYear(), nextDay.getMonth(), nextDay.getDate(), 6, 0, 0);
       this.find({time: {$gte: start, $lt: end}}, callback);
+    },
+
+    updateScores: function(games, callback) {
+      var self = this
+        , nbUpdated = 0;
+
+      // Transform the scores in Integer.
+      games = _.map(games, function(g) {
+        g.score[0] = parseInt(g.score[0]);
+        g.score[1] = parseInt(g.score[1]);
+        return g;
+      });
+      // Filter the played games.
+      games = _.filter(games, function(g) { return !_.isNaN(parseInt(g.score[0])) });
+      if (games.length === 0) return callback(null, nbUpdated);
+
+      // Update a score if needed.
+      var updateScore = function(g, cb) {
+        self.findOne({teams: g.teams}, function(e, gameDb) {
+          if (e) return cb(e);
+          if ( (g.score[0] !== gameDb.score[0]) || (g.score[1] !== gameDb.score[1])) {
+            gameDb.score = g.score;
+            nbUpdated += 1;
+            gameDb.save(cb);
+          }
+        });
+      };
+
+      // Loop.
+      async.each(games, updateScore, function(e) {
+        callback(e, nbUpdated);
+      });
+
     }
 
   });
