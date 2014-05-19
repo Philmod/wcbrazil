@@ -20,13 +20,6 @@ module.exports = function(server) {
   Game.plugin(common.timestamps('created', 'updated'));
 
   /**
-   * Methods.
-   */
-  Game.method({
-
-  });
-
-  /**
    * Static.
    */
   Game.static({
@@ -40,41 +33,24 @@ module.exports = function(server) {
       this.find({time: {$gte: start, $lt: end}}, callback);
     },
 
-    updateScores: function(games, callback) {
-      var self = this
-        , nbUpdated = 0;
-
-      // Transform the scores in Integer.
-      games = _.map(games, function(g) {
-        g.score[0] = parseInt(g.score[0]);
-        g.score[1] = parseInt(g.score[1]);
-        return g;
+    updateScore: function(g, callback) {
+      this.findOne({teams: g.teams}, function(e, gameDb) {
+        if (e) return callback(e);
+        if ( (g.score[0] !== gameDb.score[0]) || (g.score[1] !== gameDb.score[1])) {
+          gameDb.score = g.score;
+          gameDb.save(callback);
+        }
       });
-      // Filter the played games.
-      games = _.filter(games, function(g) { return !_.isNaN(parseInt(g.score[0])) });
-      if (games.length === 0) return callback(null, nbUpdated);
-
-      // Update a score if needed.
-      var updateScore = function(g, cb) {
-        self.findOne({teams: g.teams}, function(e, gameDb) {
-          if (e) return cb(e);
-          if ( (g.score[0] !== gameDb.score[0]) || (g.score[1] !== gameDb.score[1])) {
-            gameDb.score = g.score;
-            nbUpdated += 1;
-            gameDb.save(cb);
-          }
-        });
-      };
-
-      // Loop.
-      async.each(games, updateScore, function(e) {
-        callback(e, nbUpdated);
-      });
-
     }
 
   });
 
+  /**
+   * Methods.
+   */
+  Game.method({
+
+  });
 
   /**
    * Pre save.

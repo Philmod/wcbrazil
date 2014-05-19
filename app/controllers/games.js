@@ -22,6 +22,37 @@ module.exports = function(server) {
   // });
 
   /**
+   * Changed games.
+   */
+  var changedGames = function(games) {
+    // Transform the scores in Integer.
+    games = _.map(games, function(g) {
+      g.score[0] = parseInt(g.score[0]);
+      g.score[1] = parseInt(g.score[1]);
+      return g;
+    });
+
+    // Filter the played games.
+    games = _.filter(games, function(g) { return !_.isNaN(parseInt(g.score[0])) });  
+
+    return games;
+  }
+
+  /**
+   * Update all scores.
+   */
+  var updateScores = function(games, callback) {
+    games = changedGames(games);
+    if (games.length === 0) return callback();
+
+    async.each(games, function(item, cb) {
+      Game.updateScore(item, cb); // Bug when I use this method directly.
+    }, callback);
+  }
+  
+
+
+  /**
    * Scrap scores.
    */
   var scoreScraping = setInterval(function() {
@@ -44,7 +75,7 @@ module.exports = function(server) {
 
     console.log('games scraped : ', results);
 
-    Game.updateScores(results);
+    updateScores(results);
     
     // async.concatSeries(server.config.scraping.groups, scoreScraper.scrap, function(err, results) {
     //   if (err) console.log('error : ', err);
