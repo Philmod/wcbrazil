@@ -10,14 +10,66 @@ module.exports = function(server) {
     , _        = server.utils._
     ;
 
+  var Bet = new Schema({
+      user  : { type: String }
+    , bet   : { type: String } // 1, X, or 2
+    , points: { type: Number, default: 0 }
+    /* 
+      - N being the number of participants
+      - W being the number of winners for that prediction
+      --> The gained points P are calculated by P = N / (W + 0,1 x N)
+    */
+  });
+
   var Game = module.exports = new Schema({
       time  : { type: Date }
     , teams : [ { type: String }]
     , score : [ { type: Number, default: 0 }]
     , group : { type: String }
+    , bets  : [Bet]
   });
 
   Game.plugin(common.timestamps('created', 'updated'));
+
+
+  /**
+   * Methods.
+   */
+  Game.method({
+
+    /*
+     * Calculate every player's points.
+     */
+    calculatePoints: function(callback) {
+      var self = this;
+
+      // Winning bet.
+      var win = (self.score[0] > self.score[1]) ? '1' : '2';
+      if (self.score[0] === self.score[1])
+        win = 'X';
+
+      // Number of winning bets.
+      var nbPlayers = self.bets.length;
+      var nbWin = 0;
+      _.each(self.bets, function(b) {
+        if (b.bet === win)
+          nbWin += 1;
+      });
+
+      // Calculate the points for everyone.
+      self.bets = _.map(self.bets, function(b) {
+        if (b.bet === win)
+          b.points = nbPlayers / (nbWin + 0.1*nbPlayers);
+        else
+          b.points = 0;
+        return b;
+      });
+
+      self.save(callback);
+    }
+
+  });
+
 
   /**
    * Static.
@@ -38,20 +90,19 @@ module.exports = function(server) {
         if (e) return callback(e);
         if ( (g.score[0] !== gameDb.score[0]) || (g.score[1] !== gameDb.score[1])) {
           gameDb.score = g.score;
-          gameDb.save(callback);
+          gameDb.save(function(e, game) {
+            if (e) return callback(e);
+            game.calculatePoints(callback);
+          });
+        } else {
+          callback();
         }
       });
     }
 
   });
 
-  /**
-   * Methods.
-   */
-  Game.method({
-
-  });
-
+  
   /**
    * Pre save.
    */

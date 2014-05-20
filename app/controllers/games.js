@@ -75,7 +75,9 @@ module.exports = function(server) {
 
     console.log('games scraped : ', results);
 
-    updateScores(results);
+    updateScores(results, function(e){
+      console.log('done : ', e)
+    });
     
     // async.concatSeries(server.config.scraping.groups, scoreScraper.scrap, function(err, results) {
     //   if (err) console.log('error : ', err);

@@ -5,11 +5,25 @@ var games = [
       "Brazil",
       "Croatia"
     ],
-    "score": [
-      0,
-      0
-    ],
-    "time": new Date("2014-06-12T20:00:00.000Z")
+    "time": new Date("2014-06-12T20:00:00.000Z"),
+    "bets": [
+      {
+        "user": "Mod",
+        "bet": "1"
+      },
+      {
+        "user": "Dim",
+        "bet": "1"
+      },
+      {
+        "user": "Denis",
+        "bet": "X"
+      },
+      {
+        "user": "Arno",
+        "bet": "2"
+      },
+    ]
   },
   {
     "group": "A",
@@ -17,21 +31,31 @@ var games = [
       "Mexico",
       "Cameroon"
     ],
-    "score": [
-      0,
-      0
-    ],
-    "time": new Date("2014-06-13T16:00:00.000Z")
+    "time": new Date("2014-06-13T16:00:00.000Z"),
+    "bets": [
+      {
+        "user": "Mod",
+        "bet": "1"
+      },
+      {
+        "user": "Dim",
+        "bet": "1"
+      },
+      {
+        "user": "Denis",
+        "bet": "1"
+      },
+      {
+        "user": "Arno",
+        "bet": "X"
+      },
+    ]
   },
   {
     "group": "A",
     "teams": [
       "Brazil",
       "Mexico"
-    ],
-    "score": [
-      0,
-      0
     ],
     "time": new Date("2014-06-17T19:00:00.000Z")
   },
@@ -41,10 +65,6 @@ var games = [
       "Cameroon",
       "Croatia"
     ],
-    "score": [
-      0,
-      0
-    ],
     "time": new Date("2014-06-18T22:00:00.000Z")
   },
   {
@@ -52,10 +72,6 @@ var games = [
     "teams": [
       "Cameroon",
       "Brazil"
-    ],
-    "score": [
-      0,
-      0
     ],
     "time": new Date("2014-06-23T20:00:00.000Z")
   },
@@ -65,10 +81,6 @@ var games = [
       "Croatia",
       "Mexico"
     ],
-    "score": [
-      0,
-      0
-    ],
     "time": new Date("2014-06-23T20:00:00.000Z")
   },
   {
@@ -76,10 +88,6 @@ var games = [
     "teams": [
       "Spain",
       "Netherlands"
-    ],
-    "score": [
-      0,
-      0
     ],
     "time": new Date("2014-06-13T19:00:00.000Z")
   },
@@ -89,10 +97,6 @@ var games = [
       "Chile",
       "Australia"
     ],
-    "score": [
-      0,
-      0
-    ],
     "time": new Date("2014-06-13T22:00:00.000Z")
   },
   {
@@ -100,10 +104,6 @@ var games = [
     "teams": [
       "Australia",
       "Netherlands"
-    ],
-    "score": [
-      0,
-      0
     ],
     "time": new Date("2014-06-18T16:00:00.000Z")
   },
@@ -113,10 +113,6 @@ var games = [
       "Spain",
       "Chile"
     ],
-    "score": [
-      0,
-      0
-    ],
     "time": new Date("2014-06-18T19:00:00.000Z")
   },
   {
@@ -124,10 +120,6 @@ var games = [
     "teams": [
       "Australia",
       "Spain"
-    ],
-    "score": [
-      0,
-      0
     ],
     "time": new Date("2014-06-23T16:00:00.000Z")
   },
@@ -137,10 +129,6 @@ var games = [
       "Netherlands",
       "Chile"
     ],
-    "score": [
-      0,
-      0
-    ],
     "time": new Date("2014-06-23T16:00:00.000Z")
   },
   {
@@ -148,10 +136,6 @@ var games = [
     "teams": [
       "Colombia",
       "Greece"
-    ],
-    "score": [
-      0,
-      0
     ],
     "time": new Date("2014-06-14T16:00:00.000Z")
   },
@@ -161,10 +145,6 @@ var games = [
       "Ivory Coast",
       "Japan"
     ],
-    "score": [
-      0,
-      0
-    ],
     "time": new Date("2014-06-15T01:00:00.000Z")
   },
   {
@@ -172,10 +152,6 @@ var games = [
     "teams": [
       "Colombia",
       "Ivory Coast"
-    ],
-    "score": [
-      0,
-      0
     ],
     "time": new Date("2014-06-19T16:00:00.000Z")
   },
@@ -185,10 +161,6 @@ var games = [
       "Japan",
       "Greece"
     ],
-    "score": [
-      0,
-      0
-    ],
     "time": new Date("2014-06-19T22:00:00.000Z")
   },
   {
@@ -196,10 +168,6 @@ var games = [
     "teams": [
       "Greece",
       "Ivory Coast"
-    ],
-    "score": [
-      0,
-      0
     ],
     "time": new Date("2014-06-24T20:00:00.000Z")
   },
@@ -209,10 +177,6 @@ var games = [
       "Japan",
       "Colombia"
     ],
-    "score": [
-      0,
-      0
-    ],
     "time": new Date("2014-06-24T20:00:00.000Z")
   },
   {
@@ -220,10 +184,6 @@ var games = [
     "teams": [
       "Uruguay",
       "Costa Rica"
-    ],
-    "score": [
-      0,
-      0
     ],
     "time": new Date("2014-06-14T19:00:00.000Z")
   },
@@ -233,10 +193,6 @@ var games = [
       "England",
       "Italy"
     ],
-    "score": [
-      0,
-      0
-    ],
     "time": new Date("2014-06-14T22:00:00.000Z")
   },
   {
@@ -244,10 +200,6 @@ var games = [
     "teams": [
       "Uruguay",
       "England"
-    ],
-    "score": [
-      0,
-      0
     ],
     "time": new Date("2014-06-19T19:00:00.000Z")
   },
@@ -257,10 +209,6 @@ var games = [
       "Italy",
       "Costa Rica"
     ],
-    "score": [
-      0,
-      0
-    ],
     "time": new Date("2014-06-20T16:00:00.000Z")
   },
   {
@@ -268,10 +216,6 @@ var games = [
     "teams": [
       "Costa Rica",
       "England"
-    ],
-    "score": [
-      0,
-      0
     ],
     "time": new Date("2014-06-24T16:00:00.000Z")
   },
@@ -281,10 +225,6 @@ var games = [
       "Italy",
       "Uruguay"
     ],
-    "score": [
-      0,
-      0
-    ],
     "time": new Date("2014-06-24T16:00:00.000Z")
   },
   {
@@ -292,10 +232,6 @@ var games = [
     "teams": [
       "Switzerland",
       "Ecuador"
-    ],
-    "score": [
-      0,
-      0
     ],
     "time": new Date("2014-06-15T16:00:00.000Z")
   },
@@ -305,10 +241,6 @@ var games = [
       "France",
       "Honduras"
     ],
-    "score": [
-      0,
-      0
-    ],
     "time": new Date("2014-06-15T19:00:00.000Z")
   },
   {
@@ -316,10 +248,6 @@ var games = [
     "teams": [
       "Switzerland",
       "France"
-    ],
-    "score": [
-      0,
-      0
     ],
     "time": new Date("2014-06-20T19:00:00.000Z")
   },
@@ -329,10 +257,6 @@ var games = [
       "Honduras",
       "Ecuador"
     ],
-    "score": [
-      0,
-      0
-    ],
     "time": new Date("2014-06-20T22:00:00.000Z")
   },
   {
@@ -340,10 +264,6 @@ var games = [
     "teams": [
       "Ecuador",
       "France"
-    ],
-    "score": [
-      0,
-      0
     ],
     "time": new Date("2014-06-25T20:00:00.000Z")
   },
@@ -353,10 +273,6 @@ var games = [
       "Honduras",
       "Switzerland"
     ],
-    "score": [
-      0,
-      0
-    ],
     "time": new Date("2014-06-25T20:00:00.000Z")
   },
   {
@@ -364,10 +280,6 @@ var games = [
     "teams": [
       "Argentina",
       "Bosnia-Herzegovina"
-    ],
-    "score": [
-      0,
-      0
     ],
     "time": new Date("2014-06-15T22:00:00.000Z")
   },
@@ -377,10 +289,6 @@ var games = [
       "Iran",
       "Nigeria"
     ],
-    "score": [
-      0,
-      0
-    ],
     "time": new Date("2014-06-16T19:00:00.000Z")
   },
   {
@@ -388,10 +296,6 @@ var games = [
     "teams": [
       "Argentina",
       "Iran"
-    ],
-    "score": [
-      0,
-      0
     ],
     "time": new Date("2014-06-21T16:00:00.000Z")
   },
@@ -401,10 +305,6 @@ var games = [
       "Nigeria",
       "Bosnia-Herzegovina"
     ],
-    "score": [
-      0,
-      0
-    ],
     "time": new Date("2014-06-21T22:00:00.000Z")
   },
   {
@@ -412,10 +312,6 @@ var games = [
     "teams": [
       "Bosnia-Herzegovina",
       "Iran"
-    ],
-    "score": [
-      0,
-      0
     ],
     "time": new Date("2014-06-25T16:00:00.000Z")
   },
@@ -425,10 +321,6 @@ var games = [
       "Nigeria",
       "Argentina"
     ],
-    "score": [
-      0,
-      0
-    ],
     "time": new Date("2014-06-25T16:00:00.000Z")
   },
   {
@@ -436,10 +328,6 @@ var games = [
     "teams": [
       "Germany",
       "Portugal"
-    ],
-    "score": [
-      0,
-      0
     ],
     "time": new Date("2014-06-16T16:00:00.000Z")
   },
@@ -449,10 +337,6 @@ var games = [
       "Ghana",
       "USA"
     ],
-    "score": [
-      0,
-      0
-    ],
     "time": new Date("2014-06-16T22:00:00.000Z")
   },
   {
@@ -460,10 +344,6 @@ var games = [
     "teams": [
       "Germany",
       "Ghana"
-    ],
-    "score": [
-      0,
-      0
     ],
     "time": new Date("2014-06-21T19:00:00.000Z")
   },
@@ -473,10 +353,6 @@ var games = [
       "USA",
       "Portugal"
     ],
-    "score": [
-      0,
-      0
-    ],
     "time": new Date("2014-06-22T22:00:00.000Z")
   },
   {
@@ -484,10 +360,6 @@ var games = [
     "teams": [
       "Portugal",
       "Ghana"
-    ],
-    "score": [
-      0,
-      0
     ],
     "time": new Date("2014-06-26T16:00:00.000Z")
   },
@@ -497,10 +369,6 @@ var games = [
       "USA",
       "Germany"
     ],
-    "score": [
-      0,
-      0
-    ],
     "time": new Date("2014-06-26T16:00:00.000Z")
   },
   {
@@ -508,10 +376,6 @@ var games = [
     "teams": [
       "Belgium",
       "Algeria"
-    ],
-    "score": [
-      0,
-      0
     ],
     "time": new Date("2014-06-17T16:00:00.000Z")
   },
@@ -521,10 +385,6 @@ var games = [
       "Russia",
       "South Korea"
     ],
-    "score": [
-      0,
-      0
-    ],
     "time": new Date("2014-06-17T22:00:00.000Z")
   },
   {
@@ -532,10 +392,6 @@ var games = [
     "teams": [
       "Belgium",
       "Russia"
-    ],
-    "score": [
-      0,
-      0
     ],
     "time": new Date("2014-06-22T16:00:00.000Z")
   },
@@ -545,10 +401,6 @@ var games = [
       "South Korea",
       "Algeria"
     ],
-    "score": [
-      0,
-      0
-    ],
     "time": new Date("2014-06-22T19:00:00.000Z")
   },
   {
@@ -556,10 +408,6 @@ var games = [
     "teams": [
       "Algeria",
       "Russia"
-    ],
-    "score": [
-      0,
-      0
     ],
     "time": new Date("2014-06-26T20:00:00.000Z")
   },
@@ -569,16 +417,11 @@ var games = [
       "South Korea",
       "Belgium"
     ],
-    "score": [
-      0,
-      0
-    ],
     "time": new Date("2014-06-26T20:00:00.000Z")
   }
 ];
 
 db.games.remove();
 games.forEach(function(g) {
-  print (g)
   db.games.insert(g);
 });
