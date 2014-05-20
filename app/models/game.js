@@ -92,10 +92,12 @@ module.exports = function(server) {
           gameDb.score = g.score;
           gameDb.save(function(e, game) {
             if (e) return callback(e);
-            game.calculatePoints(callback);
+            game.calculatePoints(function(e) {
+              callback(e, true);
+            });
           });
         } else {
-          callback();
+          callback(null, false);
         }
       });
     }

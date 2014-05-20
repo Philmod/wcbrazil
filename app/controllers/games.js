@@ -45,9 +45,15 @@ module.exports = function(server) {
     games = changedGames(games);
     if (games.length === 0) return callback();
 
+    var nbUpdated = 0;
     async.each(games, function(item, cb) {
-      Game.updateScore(item, cb); // Bug when I use this method directly.
-    }, callback);
+      Game.updateScore(item, function(e, isUpdated) {
+        if (isUpdated) nbUpdated += 1;
+        cb(e);
+      });
+    }, function(e) {
+      callback(e, nbUpdated);
+    });
   }
   
 
@@ -75,8 +81,14 @@ module.exports = function(server) {
 
     console.log('games scraped : ', results);
 
-    updateScores(results, function(e){
-      console.log('done : ', e)
+    updateScores(results, function(e, nbUpdated) {
+      console.log('done : ', e, nbUpdated);
+      if (nbUpdated > 0) {
+        var date = new Date(2014, 5, 14); // change to 'new Date()'
+        Game.findByDate(date, function(e, games) { 
+          server.io.broadcast('games:update', games);
+        });
+      }
     });
     
     // async.concatSeries(server.config.scraping.groups, scoreScraper.scrap, function(err, results) {

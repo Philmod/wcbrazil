@@ -47,24 +47,9 @@ server.listen(process.env.PORT || port || 80, function() {
   console.log("WCBrazil HTTP listening on port " + port);  
 });
 
-// Test socket
-var Game = server.model('Game');
-function random (low, high) {
-  return Math.round( Math.random() * (high - low) + low );
-}
-setInterval(function () {
-  var date = new Date(2014, 5, 14); // change to 'new Date()'
-  Game.findByDate(date, function(e, games) { 
-    games[0].score[0] = random(0,5);
-    games[1].score[0] = random(0,5);
-    games[1].score[1] = random(0,5);
-    games[2].score[1] = random(0,5);
-    
-    server.io.broadcast('games:update', games);
-
-  });
-}, 10000);
-
+/*
+ * Check memory leaks.
+ */
 setInterval(function() {
   console.log('Memory : ', util.inspect(process.memoryUsage()));
 }, 5000)
