@@ -100,6 +100,21 @@ module.exports = function(server) {
           callback(null, false);
         }
       });
+    },
+
+    getBetsPoints: function(callback) {
+      var bets = {};
+      this.find({}, function(e, games) {
+        if (e) return callback(e);
+        _.each(games, function(g) {
+          _.each(g.bets, function(b) {
+            if (!bets[b.user])
+              bets[b.user] = 0;
+            bets[b.user] += b.points || 0;
+          });
+        });
+        callback(null, bets);
+      });
     }
 
   });

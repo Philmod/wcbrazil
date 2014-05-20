@@ -55,7 +55,39 @@ module.exports = function(server) {
       callback(e, nbUpdated);
     });
   }
-  
+
+  /**
+   * Broadcast the games.
+   */
+  var broadcastGames = function() {
+    var date = new Date(2014, 5, 14); // change to 'new Date()'
+
+    Game.findByDate(date, function(e, games) { 
+      if (e) console.error('Error getting the games : ', e);
+      else 
+        server.io.broadcast('games:update', games);
+    });
+  }
+
+  /**
+   * Broadcast the bets results.
+   */
+  var broadcastBets = function() {
+    Game.getBetsPoints(function(e, bets) {
+      if (e) console.error('Error getting the bets : ', e);
+      else {
+        var betsOut = [];
+        for (var i in bets) {
+          betsOut.push({
+              user: i
+            , points: Math.round(bets[i] * 10) / 10
+          });
+        };
+        betsOut = _.sortBy(betsOut, function(b) {return -b.points});
+        server.io.broadcast('bets:update', betsOut);
+      }
+    });
+  }  
 
 
   /**
@@ -79,15 +111,13 @@ module.exports = function(server) {
       return g;
     });
 
-    console.log('games scraped : ', results);
+    // console.log('games scraped : ', results);
 
     updateScores(results, function(e, nbUpdated) {
       console.log('done : ', e, nbUpdated);
-      if (nbUpdated > 0) {
-        var date = new Date(2014, 5, 14); // change to 'new Date()'
-        Game.findByDate(date, function(e, games) { 
-          server.io.broadcast('games:update', games);
-        });
+      if (!e && nbUpdated > 0) {
+        broadcastGames();
+        broadcastBets();
       }
     });
     

@@ -28,9 +28,9 @@ block content
           tbody
             tr(ng-repeat='bet in bets' ng-class="{ 'success': bet.difference===1, 'danger': bet.difference===-1, 'warning': bet.difference===0 }")
               td 
-                {{bet.username}}
+                {{bet.user}}
               td
-                {{bet.score}}
+                {{bet.points}}
 
 
   //- Bootstrap core JavaScript
