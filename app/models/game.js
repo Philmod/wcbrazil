@@ -113,7 +113,15 @@ module.exports = function(server) {
             bets[b.user] += b.points || 0;
           });
         });
-        callback(null, bets);
+        var betsOut = [];
+        for (var i in bets) {
+          betsOut.push({
+              user: i
+            , points: Math.round(bets[i] * 10) / 10
+          });
+        };
+        betsOut = _.sortBy(betsOut, function(b) {return -b.points});
+        callback(null, betsOut);
       });
     }
 

@@ -76,15 +76,7 @@ module.exports = function(server) {
     Game.getBetsPoints(function(e, bets) {
       if (e) console.error('Error getting the bets : ', e);
       else {
-        var betsOut = [];
-        for (var i in bets) {
-          betsOut.push({
-              user: i
-            , points: Math.round(bets[i] * 10) / 10
-          });
-        };
-        betsOut = _.sortBy(betsOut, function(b) {return -b.points});
-        server.io.broadcast('bets:update', betsOut);
+        server.io.broadcast('bets:update', bets);
       }
     });
   }  
@@ -114,7 +106,7 @@ module.exports = function(server) {
     // console.log('games scraped : ', results);
 
     updateScores(results, function(e, nbUpdated) {
-      console.log('done : ', e, nbUpdated);
+      console.log('Scraping done, at  : ', new Date());
       if (!e && nbUpdated > 0) {
         broadcastGames();
         broadcastBets();

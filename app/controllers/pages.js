@@ -14,33 +14,14 @@ module.exports = function(server) {
 
       Game.findByDate(date, function(e, games) { 
 
-        var bets = [
-          {
-              username: 'Phimod'
-            , score: 55
-            , difference: 1
-          },
-          {
-              username: 'Dim'
-            , score: 54
-            , difference: -1
-          },
-          {
-              username: 'Arno'
-            , score: 50
-            , difference: -1
-          },
-          {
-              username: 'Denis'
-            , score: 48
-            , difference: 0
-          },
-        ];
-
-        res.render('index', {
-            title : 'WCBrazil'
-          , games : games
-          , bets  : bets
+        Game.getBetsPoints(function(e, bets) {
+          
+          res.render('index', {
+              title : 'WCBrazil'
+            , games : games
+            , bets  : bets
+          });
+          
         });
 
       });
