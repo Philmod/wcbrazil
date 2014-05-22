@@ -52,4 +52,9 @@ server.listen(process.env.PORT || port || 80, function() {
  */
 setInterval(function() {
   console.log('Memory : ', util.inspect(process.memoryUsage()));
-}, 5000)
+}, 10000);
+
+/**
+ * Load Data.
+ */
+require('./db/load_data.js')(server);
