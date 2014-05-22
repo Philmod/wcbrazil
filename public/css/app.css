@@ -55,6 +55,10 @@ ul.navbar-nav a.button-href-wrapper {
   padding-bottom: 8px;
 }
 
+.navbar {
+  background: #404040;
+}
+
 /* GAMES CONTENT
 -------------------------------------------------- */
 
