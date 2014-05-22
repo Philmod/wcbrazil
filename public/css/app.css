@@ -5,14 +5,18 @@
 body {
   padding-top: 50px;
   padding-bottom: 40px;
-  color: #5a5a5a;
+  background: #F0F0F0;
+}
+
+.main {
+  padding-top: 20px;
 }
 
 
 /* CUSTOMIZE THE HEADER
 -------------------------------------------------- */
 header {
-  padding-bottom: 20px;
+
 }
 
 
@@ -56,22 +60,28 @@ ul.navbar-nav a.button-href-wrapper {
 
 /* Pad the edges of the mobile views a bit */
 .games {
-  padding-left: 15px;
-  padding-right: 15px;
+  /*padding-left: 15px;
+  padding-right: 15px;*/
+  color: #707070;
 }
 
 /* Center align the text within the three columns below the carousel */
 .game {
   text-align: center;
   margin-bottom: 20px;
-  background-color: #F0F0F0;
-  border: 2px solid;
-  border-radius: 5px;
+  background-color: #FFFFFF;
+  border-radius: 6px;
+  /*border: 1px solid;*/
+  /*border-color: #A8A8A8;*/
 }
 
 .games h2 {
   font-weight: normal;
-  font-size: 25px;
+  font-size: 24px;
+}
+
+.games p {
+  font-size: 14px;
 }
 
 .col-lg-3 {
@@ -88,6 +98,84 @@ ul.navbar-nav a.button-href-wrapper {
   margin-left: 5px;
   margin-right: 5px;
   width: 49%;
+}
+
+
+
+/* LIVEFYRE COMMENTS
+-------------------------------------------------- */
+
+#livefyre-comments {
+  margin: 0;
+}
+
+
+
+/* BETS
+-------------------------------------------------- */
+
+.bets {
+  margin-left: 17px;
+}
+
+.bets .table {
+  background-color: #FFFFFF;
+  font-size: 18px;
+  color: #787878;
+}
+
+.bets .table td, th {
+  height: 62px;
+}
+
+.bets .table th {
+  text-align: center;
+  font-size: 24px;
+  vertical-align: middle;
+}
+
+.bets .table td {
+  text-align: left;
+  vertical-align: middle;
+}
+
+.bets .table td:last-child {
+  font-weight: bold;
+}
+
+.bets .table td:first-child {
+  text-align: center;
+}​
+
+.table-curved {
+    border-collapse: separate;
+}
+.table-curved {
+    /*border: solid #ccc 1px;*/
+    border-radius: 6px;
+    border-left:0px;
+}
+.table-curved td, .table-curved th {
+    /*border-left: 1px solid #ccc;
+    border-top: 1px solid #ccc;*/
+}
+.table-curved th {
+    border-top: none;
+}
+.table-curved th:first-child {
+    border-radius: 6px 0 0 0;
+}
+.table-curved th:last-child {
+    border-radius: 0 6px 0 0;
+}
+.table-curved th:only-child{
+    border-radius: 6px 6px 0 0;
+}
+.table-curved tr:last-child td:first-child {
+    border-radius: 0 0 0 6px;
+}
+.table-curved tr:last-child td:last-child {
+    border-radius: 0 0 6px 0;
 }
 
 

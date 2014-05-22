@@ -2,35 +2,41 @@ extends layout
 
 block content
 
-  div(ng-controller='AppCtrl')
+  div(class="main container" ng-controller='AppCtrl')
 
-    .container
-      //- Games scores.
-      div(class='row games' ng-controller='GamesCtrl')
-        div(class='game col-lg-{{12/games.length}}' ng-repeat='game in games')
-          h2 
-            {{game.teams[0]}}
-            |  - 
-            {{game.teams[1]}}
-          p
-            {{game.time | hours }}
-            |  h  
-            {{game.time | minutes }}
-          h3
-            {{game.score[0]}}
-            |  - 
-            {{game.score[1]}}
+    //- Games scores.
+    div(class='row games' ng-controller='GamesCtrl')
+      div(class='game col-lg-{{12/games.length}}' ng-repeat='game in games')
+        h2 
+          {{game.teams[0]}}
+          |  vs 
+          {{game.teams[1]}}
+        p
+          {{game.time | hours }}
+          |  h  
+          {{game.time | minutes }}
+        h3
+          {{game.score[0]}}
+          |  - 
+          {{game.score[1]}}
 
-      #livefyre-comments.col-lg-6
+    #livefyre-comments.col-lg-6
 
-      div(class='col-lg-6 bets' ng-controller='BetsCtrl')
-        table(class='table table-striped table-bordered table-hover')
-          tbody
-            tr(ng-repeat='bet in bets' ng-class="{ 'success': bet.difference===1, 'danger': bet.difference===-1, 'warning': bet.difference===0 }")
-              td 
-                {{bet.user}}
-              td
-                {{bet.points}}
+    div(class='col-lg-6 bets' ng-controller='BetsCtrl')
+      table(class='table table-hover table-curved')
+        thead
+          tr
+            th
+            th And the winner is...
+            th
+        tbody
+          tr(ng-repeat='bet in bets' ng-class="{ 'success': bet.difference===1, 'danger': bet.difference===-1, 'warning': bet.difference===0 }")
+            td
+              {{$index+1}}
+            td 
+              {{bet.user}}
+            td
+              {{bet.points}}
 
 
   //- Bootstrap core JavaScript
