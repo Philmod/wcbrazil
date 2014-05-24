@@ -110,7 +110,11 @@ ul.navbar-nav a.button-href-wrapper {
 -------------------------------------------------- */
 
 #livefyre-comments {
-  margin: 0;
+  margin-left: 5px;
+  margin-right: 5px;
+  background: white;
+  padding: 15px;
+  border-radius: 6px;
 }
 
 
@@ -119,7 +123,9 @@ ul.navbar-nav a.button-href-wrapper {
 -------------------------------------------------- */
 
 .bets {
-  margin-left: 17px;
+  /*margin-left: 17px;*/
+  padding-left: 0px;
+  padding-right: 2px;
 }
 
 .bets .table {
