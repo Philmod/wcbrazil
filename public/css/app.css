@@ -72,7 +72,7 @@ ul.navbar-nav a.button-href-wrapper {
 /* Center align the text within the three columns below the carousel */
 .game {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 11px;
   background-color: #FFFFFF;
   border-radius: 6px;
   /*border: 1px solid;*/
@@ -125,7 +125,7 @@ ul.navbar-nav a.button-href-wrapper {
 .bets {
   /*margin-left: 17px;*/
   padding-left: 0px;
-  padding-right: 2px;
+  padding-right: 3px;
 }
 
 .bets .table {
