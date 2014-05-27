@@ -3,10 +3,10 @@
 
 @media (max-width: 1200px) {
 
-  .col-xs-3 {
+  .col-sm-3 {
     width: 23%;
   }
-  .col-xs-6 {
+  .col-sm-6 {
     width: 47.1%;
   }
 
@@ -30,7 +30,7 @@
 
 @media (max-width: 1000px) {
 
-  .col-xs-6 {
+  .col-sm-6 {
     width: 47.5%;
   }
 
@@ -50,6 +50,12 @@
     height: 32px;
   }
 
+}
+
+@media (max-width: 768px) {
+  .bets, #livefyre-comments {
+    width: 96.1%;
+  }
 }
 
 @media (max-width: 568px) {

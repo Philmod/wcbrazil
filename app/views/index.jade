@@ -6,7 +6,7 @@ block content
 
     //- Games scores.
     div(class='row games' ng-controller='GamesCtrl')
-      div(class='game col-xs-{{12/games.length}}' ng-repeat='game in games')
+      div(class='game col-sm-{{12/games.length}}' ng-repeat='game in games')
         h2 
           {{game.teams[0]}}
           |  vs 
@@ -55,9 +55,9 @@ block content
           
 
     .row
-      #livefyre-comments.col-xs-6
+      #livefyre-comments.col-sm-6
 
-      div(class='col-xs-6 bets' ng-controller='BetsCtrl')
+      div(class='col-sm-6 bets' ng-controller='BetsCtrl')
         table(class='table table-hover table-curved')
           thead
             tr
