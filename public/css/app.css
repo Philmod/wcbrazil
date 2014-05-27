@@ -115,7 +115,7 @@ ul.navbar-nav a.button-href-wrapper {
 .col-lg-6 {
   margin-left: 5px;
   margin-right: 5px;
-  width: 49%;
+  width: 48.9%;
 }
 
 
@@ -124,11 +124,12 @@ ul.navbar-nav a.button-href-wrapper {
 -------------------------------------------------- */
 
 #livefyre-comments {
-  margin-left: 5px;
-  margin-right: 5px;
+  /*margin-left: 5px;
+  margin-right: 5px;*/
   background: white;
   padding: 15px;
   border-radius: 6px;
+  margin-bottom: 10px;
 }
 
 
@@ -139,7 +140,7 @@ ul.navbar-nav a.button-href-wrapper {
 .bets {
   /*margin-left: 17px;*/
   padding-left: 0px;
-  padding-right: 3px;
+  padding-right: 0px;
 }
 
 .bets .table {
@@ -232,10 +233,4 @@ ul.navbar-nav a.button-href-wrapper {
     border-radius: 4px;
   }
 
-}
-
-@media (min-width: 992px) {
-  .featurette-heading {
-    margin-top: 120px;
-  }
 }
