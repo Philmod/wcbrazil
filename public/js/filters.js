@@ -14,4 +14,9 @@ angular.module('wcbrazilApp.filters', [])
       return minutes
     }
   })
+  .filter('removeSpace', function() {
+    return function(str) {
+      return str.replace(/\s+/g, '');
+    };
+  })
   ;

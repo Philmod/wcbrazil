@@ -79,6 +79,20 @@ ul.navbar-nav a.button-href-wrapper {
   /*border-color: #A8A8A8;*/
 }
 
+/* Score */
+.score, .dash {
+  display: inline-block;
+}
+.dash {
+  padding-bottom: 12px;
+}
+.scores > * {
+  vertical-align: middle;
+}
+.scoresText {
+  display: none; /*inline*/
+}
+
 .games h2 {
   font-weight: normal;
   font-size: 24px;

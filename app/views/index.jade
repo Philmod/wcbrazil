@@ -15,14 +15,47 @@ block content
           {{game.time | hours }}
           |  h  
           {{game.time | minutes }}
-        h3
-          {{game.score[0]}}
-          |  - 
-          {{game.score[1]}}
+        .scoresText
+          h3
+            {{game.score[0]}}
+            |  - 
+            {{game.score[1]}}
+        .scores
+          div(id="flip" class='games score play')
+            ul(class="flip {{(game.teams[0] + game.teams[1] + 0) | removeSpace}}")
+              - for (var i = 0; i < 10; ++i) {
+                li
+                  a(href='#')
+                    .up
+                      .shadow
+                      .inn 
+                        =i
+                    .down
+                      .shadow
+                      .inn 
+                        =i
+              - }
+          .dash
+            h3
+              -
+          div(id="flip" class='games score play')
+            ul(class="flip {{(game.teams[0] + game.teams[1] + 1) | removeSpace}}")
+              - for (var i = 0; i < 10; ++i) {
+                li
+                  a(href='#')
+                    .up
+                      .shadow
+                      .inn 
+                        =i
+                    .down
+                      .shadow
+                      .inn 
+                        =i
+              - }
+          
 
     .row 
       #livefyre-comments.col-lg-6
-        | just blank things to test html
 
       div(class='col-lg-6 bets' ng-controller='BetsCtrl')
         table(class='table table-hover table-curved')

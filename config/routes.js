@@ -15,6 +15,13 @@ module.exports = function(server) {
    */
   server.get('/', pages.index);
 
+  /**
+   * Partials.
+   */
+  server.get('/partial/:name', function (req, res, next) {
+    res.render('partials/' + req.params.name);
+  });
+
   
   /**
    * Error handler.
