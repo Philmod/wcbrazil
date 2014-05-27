@@ -62,4 +62,11 @@
   .time {
     display: none;
   }
+
+  .games h2, .bets .table th {
+    font-size: 12px;
+  }
+  .scoresText h3 {
+    font-size: 18px;
+  }
 }
