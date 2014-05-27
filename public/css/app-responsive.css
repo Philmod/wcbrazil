@@ -1,0 +1,65 @@
+/* RESPONSIVE CSS
+-------------------------------------------------- */
+
+@media (max-width: 1200px) {
+
+  .col-xs-3 {
+    width: 23%;
+  }
+  .col-xs-6 {
+    width: 47.1%;
+  }
+
+  .games h2, .bets .table th {
+    font-size: 18px;
+  }
+
+  .games p {
+    font-size: 12px;
+  }
+
+  .bets .table td {
+    font-size: 16px;
+  } 
+
+  .bets .table td, th {
+    height: 48px;
+  }
+
+}
+
+@media (max-width: 1000px) {
+
+  .col-xs-6 {
+    width: 47.5%;
+  }
+
+  .games h2, .bets .table th {
+    font-size: 14px;
+  }
+
+  .games p {
+    font-size: 10px;
+  }
+
+  .bets .table td {
+    font-size: 12px;
+  } 
+
+  .bets .table td, th {
+    height: 32px;
+  }
+
+}
+
+@media (max-width: 568px) {
+  .scoresText {
+    display: inline;
+  }
+  .scores {
+    display: none;
+  }
+  .time {
+    display: none;
+  }
+}

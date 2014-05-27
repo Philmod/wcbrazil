@@ -64,9 +64,8 @@ ul.navbar-nav a.button-href-wrapper {
 
 /* Pad the edges of the mobile views a bit */
 .games {
-  /*padding-left: 15px;
-  padding-right: 15px;*/
   color: #707070;
+  display:flex;
 }
 
 /* Center align the text within the three columns below the carousel */
@@ -75,8 +74,6 @@ ul.navbar-nav a.button-href-wrapper {
   margin-bottom: 11px;
   background-color: #FFFFFF;
   border-radius: 6px;
-  /*border: 1px solid;*/
-  /*border-color: #A8A8A8;*/
 }
 
 /* Score */
@@ -102,17 +99,17 @@ ul.navbar-nav a.button-href-wrapper {
   font-size: 14px;
 }
 
-.col-lg-3 {
+.col-xs-3 {
   margin-left: 5px;
   margin-right: 5px;
   width: 24%;
 }
-.col-lg-4 {
+.col-xs-4 {
   margin-left: 5px;
   margin-right: 5px;
   width: 31.6%;
 }
-.col-lg-6 {
+.col-xs-6 {
   margin-left: 5px;
   margin-right: 5px;
   width: 48.9%;
@@ -124,8 +121,6 @@ ul.navbar-nav a.button-href-wrapper {
 -------------------------------------------------- */
 
 #livefyre-comments {
-  /*margin-left: 5px;
-  margin-right: 5px;*/
   background: white;
   padding: 15px;
   border-radius: 6px;
@@ -138,7 +133,6 @@ ul.navbar-nav a.button-href-wrapper {
 -------------------------------------------------- */
 
 .bets {
-  /*margin-left: 17px;*/
   padding-left: 0px;
   padding-right: 0px;
 }
@@ -201,36 +195,4 @@ ul.navbar-nav a.button-href-wrapper {
 }
 .table-curved tr:last-child td:last-child {
     border-radius: 0 0 6px 0;
-}
-
-
-/* RESPONSIVE CSS
--------------------------------------------------- */
-
-@media (min-width: 768px) {
-
-  /* Remove the edge padding needed for mobile */
-  .games {
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  /* Navbar positioning foo */
-  .navbar-wrapper {
-    margin-top: 20px;
-  }
-  .navbar-wrapper .container {
-    padding-left:  15px;
-    padding-right: 15px;
-  }
-  .navbar-wrapper .navbar {
-    padding-left:  0;
-    padding-right: 0;
-  }
-
-  /* The navbar becomes detached from the top, so we round the corners */
-  .navbar-wrapper .navbar {
-    border-radius: 4px;
-  }
-
 }
