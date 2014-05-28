@@ -78,6 +78,7 @@ ul.navbar-nav a.button-href-wrapper {
   margin-bottom: 11px;
   background-color: #FFFFFF;
   border-radius: 6px;
+  min-height: 150px;
 }
 
 /* Score */
@@ -87,11 +88,21 @@ ul.navbar-nav a.button-href-wrapper {
 .dash {
   padding-bottom: 12px;
 }
+.scores {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+}
 .scores > * {
   vertical-align: middle;
 }
 .scoresText {
   display: none; /*inline*/
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
 }
 
 .games h2 {

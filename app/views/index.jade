@@ -7,14 +7,16 @@ block content
     //- Games scores.
     div(class='row games' ng-controller='GamesCtrl')
       div(class='game col-xs-6 col-sm-{{12/games.length}}' ng-repeat='game in games')
-        h2 
-          {{game.teams[0]}}
-          |  vs 
-          {{game.teams[1]}}
-        p.time
-          {{game.time | hours }}
-          |  h  
-          {{game.time | minutes }}
+        .teams
+          h2 
+            {{game.teams[0]}}
+            |  vs 
+            {{game.teams[1]}}
+        .time
+          p
+            {{game.time | hours }}
+            |  h  
+            {{game.time | minutes }}
         .scoresText
           h3
             {{game.score[0]}}
