@@ -4,12 +4,50 @@
 
 angular.module('wcbrazilApp.controllers', [])
   .controller('AppCtrl', function ($scope, socket) {
-    var browser = get_browser();
-    var browserV = get_browser_version();
-    if (browser === 'MSIE' && browserV === '8') {
+    // Check if ie8.
+    if (get_browser() === 'MSIE' && get_browser_version() === '8') {
       var root = document.documentElement;
       root.className += " ie8";
     }
+    // Socket.io
+    var disconnected = false;
+    socket.on('connect', function() {
+      $scope.closeAlert();
+      if (disconnected) {
+        showAlert('alert-success', 'Connected to the server.');
+        setTimeout(function() {
+          $scope.closeAlert();
+          disconnected = false;
+        }, 1000);
+      }
+    });
+    socket.on('disconnect', function() {
+      showAlert('alert-danger', 'You have been disconnected of the server. Refresh if this message doesn\'t disappear');
+      disconnected = true;
+    });
+    socket.on('connect_failed', function() {
+      showAlert('alert-danger', 'The browser cannot connect to the realtime server. Refresh or contact the webmaster.');
+    });
+    socket.on('error', function(e) {
+      console.log('socket error : ', e);
+    });
+    socket.on('reconnect_failed', function() {
+      showAlert('alert-danger', 'The browser cannot reconnect to the realtime server. Refresh or contact the webmaster.');
+      disconnected = true;
+    });
+    // Alerts.
+    $scope.mainAlert = {
+      isShown: false
+    };
+    function showAlert(alertType, message) {
+      $scope.mainAlert.message = message;
+      $scope.mainAlert.isShown = true;
+      $scope.mainAlert.alertType = alertType;
+    }
+    $scope.closeAlert = function() {        
+      $scope.mainAlert.isShown = false;
+    };
+    
   })
   .controller('GamesCtrl', function ($scope, socket) {
     // Store games.

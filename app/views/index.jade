@@ -4,6 +4,11 @@ block content
 
   div(class="main container" ng-controller='AppCtrl')
 
+    div(class="alert {{mainAlert.alertType}}" ng-show='mainAlert.isShown')
+      button.close(type='button', ng-click='closeAlert()', aria-hidden='true') ×
+      | {{mainAlert.message}}
+
+
     //- Games scores.
     div(class='row games' ng-controller='GamesCtrl')
       div(class='game col-xs-6 col-sm-{{12/games.length}}' ng-repeat='game in games')
