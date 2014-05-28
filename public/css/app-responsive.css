@@ -56,6 +56,9 @@
   .bets, #livefyre-comments {
     width: 96.1%;
   }
+  .fyre .fyre-comment-footer a {
+    padding: 0;
+  }
 }
 
 @media (max-width: 568px) {
