@@ -1,0 +1,9 @@
+.ie8 .scoresText {
+  display: inline;
+}
+.ie8 .scores {
+  display: none;
+}
+.ie8 .time {
+  display: none;
+}
