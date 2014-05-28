@@ -59,6 +59,9 @@
 }
 
 @media (max-width: 568px) {
+  .col-sm-3 {
+    width: 22.1%;
+  }
   .scoresText {
     display: inline;
   }

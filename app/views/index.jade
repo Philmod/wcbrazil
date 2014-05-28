@@ -6,7 +6,7 @@ block content
 
     //- Games scores.
     div(class='row games' ng-controller='GamesCtrl')
-      div(class='game col-sm-{{12/games.length}}' ng-repeat='game in games')
+      div(class='game col-xs-6 col-sm-{{12/games.length}}' ng-repeat='game in games')
         h2 
           {{game.teams[0]}}
           |  vs 

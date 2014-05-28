@@ -59,6 +59,10 @@ ul.navbar-nav a.button-href-wrapper {
   background: #404040;
 }
 
+.navbar-toggle {
+  display: none;
+}
+
 /* GAMES CONTENT
 -------------------------------------------------- */
 
