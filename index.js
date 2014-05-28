@@ -50,9 +50,10 @@ server.listen(process.env.PORT || port || 80, function() {
 /*
  * Check memory leaks.
  */
-setInterval(function() {
-  console.log('Memory : ', util.inspect(process.memoryUsage()));
-}, 10000);
+require('./lib/memusage')(server, {
+    interval: 10000,
+    maxMemory: 1024
+});
 
 /**
  * Load Data.
