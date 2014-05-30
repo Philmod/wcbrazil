@@ -4,13 +4,13 @@ block content
 
   div(class="main container" ng-controller='AppCtrl')
 
-    div(class="alert {{mainAlert.alertType}}" ng-show='mainAlert.isShown')
+    div(class="alert {{mainAlert.alertType}}" ng-show='mainAlert.isShown' ng-cloak)
       button.close(type='button', ng-click='closeAlert()', aria-hidden='true') ×
       | {{mainAlert.message}}
 
 
     //- Games scores.
-    div(class='row games' ng-controller='GamesCtrl')
+    div(class='row games' ng-controller='GamesCtrl' ng-cloak)
       div(class='game col-xs-6 col-sm-{{12/games.length}}' ng-repeat='game in games')
         .teams
           h2 
@@ -62,9 +62,9 @@ block content
           
 
     .row
-      #livefyre-comments.col-sm-6
+      #livefyre-comments.col-sm-6(ng-cloak)
 
-      div(class='col-sm-6 bets' ng-controller='BetsCtrl')
+      div(class='col-sm-6 bets' ng-controller='BetsCtrl' ng-cloak)
         table(class='table table-hover table-curved')
           thead
             tr
