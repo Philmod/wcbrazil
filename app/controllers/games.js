@@ -48,7 +48,7 @@ module.exports = function(server) {
    * Broadcast the games.
    */
   var broadcastGames = function() {
-    var date = new Date(2014, 5, 14); // change to 'new Date()'
+    var date = new Date(2014, 5, 13); // change to 'new Date()'
 
     Game.findByDate(date, function(e, games) { 
       if (e) console.error('Error getting the games : ', e);
@@ -74,7 +74,7 @@ module.exports = function(server) {
    * Scrap scores.
    */
   var scoreScraping = setInterval(function() {
-    console.log('Start scraping scores, at ', new Date());
+    // console.log('Start scraping scores, at ', new Date());
 
     function random (low, high) {
       return Math.round( Math.random() * (high - low) + low );
