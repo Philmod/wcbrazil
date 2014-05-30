@@ -88,7 +88,7 @@
 
 @media (max-width: 568px) {
   .col-sm-4 {
-    width: 30.8%;
+    width: 30.0%;
   }
   .col-sm-3 {
     width: 22.7%;
@@ -116,6 +116,9 @@
 }
 
 @media (max-width: 480px) {
+  .col-sm-4 {
+    width: 30.6%;
+  }
   .col-sm-3 {
     width: 22.1%;
   }
