@@ -48,7 +48,7 @@ module.exports = function(server) {
    * Broadcast the games.
    */
   var broadcastGames = function() {
-    var date = new Date(2014, 5, 13); // change to 'new Date()'
+    var date = new Date(2014, 5, 12); // change to 'new Date()'
 
     Game.findByDate(date, function(e, games) { 
       if (e) console.error('Error getting the games : ', e);
