@@ -78,6 +78,9 @@ module.exports = function(server) {
 
     // Find all the game for a specific time.
     findByDate: function(date, callback) {
+      var dateStart = new Date(2014, 5, 12);
+      if (date < dateStart)
+        date = dateStart;
       var start = new Date(date.getFullYear(), date.getMonth(), date.getDate());
       var nextDay = new Date(date.getFullYear(), date.getMonth(), date.getDate());
       nextDay.setDate(date.getDate()+1);
