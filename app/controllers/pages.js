@@ -10,7 +10,7 @@ module.exports = function(server) {
 
     index: function(req, res, next) {
 
-      var date = new Date();
+      var date = new Date(2014, 5, 14);
 
       Game.findByDate(date, function(e, games) { 
 

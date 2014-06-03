@@ -68,15 +68,15 @@ block content
         table(class='table table-hover table-curved')
           thead
             tr
-              th
-              th And the winner is...
-              th
+              th(colspan=8) And the winner is...
           tbody
             tr(ng-repeat='bet in bets' ng-class="{ 'success': bet.difference===1, 'danger': bet.difference===-1, 'warning': bet.difference===0 }")
               td
                 {{$index+1}}
               td 
                 {{bet.user}}
+              td(class='daybet' ng-repeat='b in bet.bets track by $index')
+                {{b}}
               td
                 {{bet.points}}
 

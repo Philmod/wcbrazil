@@ -7,7 +7,8 @@ module.exports = function(server) {
     , ObjectId = Schema.ObjectId
     , Mixed    = Schema.Types.Mixed
     , async    = require('async')
-    , _        = server.utils._
+    , utils    = server.utils
+    , _        = utils._
     ;
 
   var Bet = new Schema({
@@ -76,7 +77,7 @@ module.exports = function(server) {
    */
   Game.static({
 
-    // Find all the game for a specific time.
+    
     findByDate: function(date, callback) {
       var dateStart = new Date(2014, 5, 12);
       if (date < dateStart)
@@ -106,24 +107,41 @@ module.exports = function(server) {
     },
 
     getBetsPoints: function(callback) {
+      var self = this;
       var bets = {};
-      this.find({}, function(e, games) {
+      var betsDay = {};
+      self.find({}).sort('time').exec(function(e, games) {
         if (e) return callback(e);
+
+        var date = new Date(2014, 5, 14); // TO BE CHANGED
+
         _.each(games, function(g) {
+          // Sum the points.
           _.each(g.bets, function(b) {
             if (!bets[b.user])
               bets[b.user] = 0;
             bets[b.user] += b.points || 0;
           });
+
+          // Export the bets of the day.
+          if (utils.isSameDay(g.time, date)) {
+            _.each(g.bets, function(b) {
+              if (!betsDay[b.user])
+                betsDay[b.user] = [];
+              betsDay[b.user].push(b.bet);
+            });
+          }
         });
         var betsOut = [];
         for (var i in bets) {
           betsOut.push({
               user: i
             , points: Math.round(bets[i] * 10) / 10
+            , bets: betsDay[i]
           });
         };
         betsOut = _.sortBy(betsOut, function(b) {return -b.points});
+        
         callback(null, betsOut);
       });
     }

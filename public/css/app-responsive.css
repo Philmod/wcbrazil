@@ -74,6 +74,10 @@
     min-height: 152px;
   }
 
+  .daybet {
+    font-size: 11px;
+  }
+
 }
 
 @media (max-width: 768px) {
