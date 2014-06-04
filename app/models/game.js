@@ -9,6 +9,8 @@ module.exports = function(server) {
     , async    = require('async')
     , utils    = server.utils
     , _        = utils._
+    , moment   = require('moment')
+    , moment   = require('moment-timezone')
     ;
 
   var Bet = new Schema({
@@ -124,7 +126,7 @@ module.exports = function(server) {
           });
 
           // Export the bets of the day.
-          if (utils.isSameDay(g.time, date)) {
+          if (moment(g.time).tz('America/Fortaleza').format('YYYY-MM-D') === moment(date).tz('America/Fortaleza').format('YYYY-MM-D')) {
             _.each(g.bets, function(b) {
               if (!betsDay[b.user])
                 betsDay[b.user] = [];

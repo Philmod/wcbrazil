@@ -20,7 +20,9 @@
     "mongoose": "3.8.3",
     "redis": "0.10.1",
     "newrelic": "1.5.5",
-    "cli-color": "0.1.6"
+    "cli-color": "0.1.6",
+    "moment": "2.6.0",
+    "moment-timezone": "0.0.6"
   },
   "repository": {
     "type": "git",
