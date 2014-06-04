@@ -9,7 +9,6 @@ module.exports = function(server) {
     , async    = require('async')
     , utils    = server.utils
     , _        = utils._
-    , moment   = require('moment')
     , moment   = require('moment-timezone')
     ;
 
@@ -81,13 +80,12 @@ module.exports = function(server) {
 
     
     findByDate: function(date, callback) {
+      date = new Date(date);
       var dateStart = new Date(2014, 5, 12);
       if (date < dateStart)
         date = dateStart;
-      var start = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-      var nextDay = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-      nextDay.setDate(date.getDate()+1);
-      var end = new Date(nextDay.getFullYear(), nextDay.getMonth(), nextDay.getDate(), 6, 0, 0);
+      var start = date;
+      var end = new Date(moment(date).add('days', 1).format());
       this.find({time: {$gte: start, $lt: end}}, callback);
     },
 
@@ -115,7 +113,7 @@ module.exports = function(server) {
       self.find({}).sort('time').exec(function(e, games) {
         if (e) return callback(e);
 
-        var date = new Date(2014, 5, 14); // TO BE CHANGED
+        var date = moment.tz("2014-06-14", "America/Fortaleza");
 
         _.each(games, function(g) {
           // Sum the points.

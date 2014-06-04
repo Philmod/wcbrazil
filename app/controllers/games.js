@@ -1,6 +1,7 @@
 var fs = require('fs')
   , async = require('async')
   , scoreScraper = require('../../lib/scraper-group.js')()
+  , moment = require('moment-timezone')
   ;
 
 module.exports = function(server) {
@@ -48,7 +49,7 @@ module.exports = function(server) {
    * Broadcast the games.
    */
   var broadcastGames = function() {
-    var date = new Date(2014, 5, 14);
+    var date = moment.tz("2014-06-14", "America/Fortaleza").format();
 
     Game.findByDate(date, function(e, games) { 
       if (e) console.error('Error getting the games : ', e);
