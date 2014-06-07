@@ -182,7 +182,7 @@ ul.navbar-nav a.button-href-wrapper {
   vertical-align: middle;
 }
 
-.bets .table td:last-child {
+.bets .table .betPoints {
   font-weight: bold;
   text-align: right;
   padding-right: 20px;
@@ -223,6 +223,13 @@ ul.navbar-nav a.button-href-wrapper {
     border-radius: 0 0 6px 0;
 }
 
-.daybet {
+.daybet, .betDiffRanking {
   font-size: 14px;
+}
+
+.up {
+  color: green;
+}
+.down {
+  color: red;
 }

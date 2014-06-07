@@ -1,8 +1,8 @@
 module.exports = function(server) {
   
   var errors = server.errors
-    , moment = require('moment-timezone')
     , Game = server.model('Game')
+    , utils = server.utils
     ;
 
 
@@ -11,11 +11,11 @@ module.exports = function(server) {
 
     index: function(req, res, next) {
 
-      var date = moment.tz("2014-06-14", "America/Fortaleza").format();
+      var date = utils.getDate();
 
       Game.findByDate(date, function(e, games) { 
 
-        Game.getBetsPoints(function(e, bets) {
+        Game.getBetsPoints(date, function(e, bets) {
           
           res.render('index', {
               title : 'WCBrazil'

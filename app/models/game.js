@@ -106,14 +106,13 @@ module.exports = function(server) {
       });
     },
 
-    getBetsPoints: function(callback) {
+    getBetsPoints: function(date, callback) {
       var self = this;
       var bets = {};
       var betsDay = {};
-      self.find({}).sort('time').exec(function(e, games) {
+      // Get games until next day.
+      self.find({time: {$lte: (new Date(moment(date).add('days', 1).format()))}}).sort('time').exec(function(e, games) {
         if (e) return callback(e);
-
-        var date = moment.tz("2014-06-14", "America/Fortaleza");
 
         _.each(games, function(g) {
           // Sum the points.
@@ -133,18 +132,59 @@ module.exports = function(server) {
           }
         });
         var betsOut = [];
+
+        self.getPointsBefore(date, function(e, pointsBefore, rankingBefore) {
+          if (e) return callback(e);
+          for (var i in bets) {
+            betsOut.push({
+                user: i
+              , points: Math.round(bets[i] * 10) / 10
+              , differencePoints: (Math.round( (bets[i] - pointsBefore[i]) * 10) / 10)
+              , rankingBefore: rankingBefore[i]
+              , bets: betsDay[i]
+            });
+          };
+          betsOut = _.sortBy(betsOut, function(b) {return -b.points});
+
+          for (var i = 0; i<betsOut.length; i++) {
+            betsOut[i].differenceRanking = betsOut[i].rankingBefore - i;
+          }
+
+          callback(null, betsOut);
+        });
+        
+      });
+    },
+
+    getPointsBefore: function(date, callback) {
+      var self = this;
+      var bets = {};
+      var betsOrdered = [];
+      var ranking = {};
+      self.find({time: {$lt: date}}).sort('time').exec(function(e, games) {
+        if (e) return callback(e);
+        for (var i = 0; i<games.length-1; i++) {
+          var g = games[i];
+          _.each(g.bets, function(b) {
+            if (!bets[b.user])
+              bets[b.user] = 0;
+            bets[b.user] += b.points || 0;
+          });
+        }
         for (var i in bets) {
-          betsOut.push({
+          betsOrdered.push({
               user: i
             , points: Math.round(bets[i] * 10) / 10
-            , bets: betsDay[i]
           });
-        };
-        betsOut = _.sortBy(betsOut, function(b) {return -b.points});
+        }
+        betsOrdered = _.sortBy(betsOrdered, function(b) {return -b.points});
+        for (var i = 0; i<betsOrdered.length; i++) {
+          ranking[betsOrdered[i].user] = i;
+        }
         
-        callback(null, betsOut);
+        callback(null, bets, ranking);
       });
-    }
+    },
 
   });
 

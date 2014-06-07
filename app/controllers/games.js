@@ -7,7 +7,8 @@ var fs = require('fs')
 module.exports = function(server) {
 
   var Game = server.model('Game')
-    , _    = server.utils._
+    , utils = server.utils
+    , _ = utils._
     ;
 
   /**
@@ -48,10 +49,8 @@ module.exports = function(server) {
   /**
    * Broadcast the games.
    */
-  var broadcastGames = function() {
-    var date = moment.tz("2014-06-14", "America/Fortaleza").format();
-
-    Game.findByDate(date, function(e, games) { 
+  var broadcastGames = function(date) {
+    Game.findByDate(date, function(e, games) {
       if (e) console.error('Error getting the games : ', e);
       else 
         server.io.broadcast('games:update', games);
@@ -61,8 +60,8 @@ module.exports = function(server) {
   /**
    * Broadcast the bets results.
    */
-  var broadcastBets = function() {
-    Game.getBetsPoints(function(e, bets) {
+  var broadcastBets = function(date) {
+    Game.getBetsPoints(date, function(e, bets) {
       if (e) console.error('Error getting the bets : ', e);
       else {
         server.io.broadcast('bets:update', bets);
@@ -75,7 +74,8 @@ module.exports = function(server) {
    * Scrap scores.
    */
   var scoreScraping = setInterval(function() {
-    // console.log('Start scraping scores, at ', new Date());
+
+    var date = utils.getDate();
 
     function random (low, high) {
       return Math.round( Math.random() * (high - low) + low );
@@ -97,8 +97,8 @@ module.exports = function(server) {
     updateScores(results, function(e, nbUpdated) {
       console.log('Scraping done, at  : ', new Date());
       if (!e && nbUpdated > 0) {
-        broadcastGames();
-        broadcastBets();
+        broadcastGames(date);
+        broadcastBets(date);
       }
     });
     

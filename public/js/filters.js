@@ -19,4 +19,12 @@ angular.module('wcbrazilApp.filters', [])
       return str.replace(/\s+/g, '');
     };
   })
+  .filter('removeSign', function() {
+    return function(nb) {
+      var str = '' + nb;
+      if (str[0] === '-')
+        str = str.substring(1);
+      return str;
+    };
+  })
   ;

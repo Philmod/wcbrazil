@@ -70,15 +70,19 @@ block content
             tr
               th(colspan=8) And the winner is...
           tbody
-            tr(ng-repeat='bet in bets' ng-class="{ 'success': bet.difference===1, 'danger': bet.difference===-1, 'warning': bet.difference===0 }")
+            tr(ng-repeat='bet in bets')
               td
                 {{$index+1}}
               td 
                 {{bet.user}}
               td(class='daybet' ng-repeat='b in bet.bets track by $index')
                 {{b}}
-              td
+              td(class='betPoints')
                 {{bet.points}}
+              td(class='betDiffRanking', ng-class="{ 'up': bet.differenceRanking>0, 'down': bet.differenceRanking<0, 'stable': bet.differenceRanking===0 }")
+                {{bet.differenceRanking > 0 ? '&#x25B2;' : ''}}
+                {{bet.differenceRanking < 0 ? '&#x25BC;' : ''}}
+                {{bet.differenceRanking | removeSign}}
 
 
   //- Bootstrap core JavaScript
