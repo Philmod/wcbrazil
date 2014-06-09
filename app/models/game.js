@@ -140,14 +140,23 @@ module.exports = function(server) {
                 user: i
               , points: Math.round(bets[i] * 10) / 10
               , differencePoints: (Math.round( (bets[i] - pointsBefore[i]) * 10) / 10)
+              , ranking: null
               , rankingBefore: rankingBefore[i]
               , bets: betsDay[i]
             });
           };
           betsOut = _.sortBy(betsOut, function(b) {return -b.points});
 
+          var j = 0;
           for (var i = 0; i<betsOut.length; i++) {
-            betsOut[i].differenceRanking = betsOut[i].rankingBefore - i;
+            if (i===0 || betsOut[i].points !== betsOut[i-1].points) {
+              j += 1;
+            }
+            betsOut[i].ranking = j;
+          }
+
+          for (var i = 0; i<betsOut.length; i++) {
+            betsOut[i].differenceRanking = betsOut[i].rankingBefore - betsOut[i].ranking;
           }
 
           callback(null, betsOut);
@@ -178,10 +187,15 @@ module.exports = function(server) {
           });
         }
         betsOrdered = _.sortBy(betsOrdered, function(b) {return -b.points});
+
+        var j = 0;
         for (var i = 0; i<betsOrdered.length; i++) {
-          ranking[betsOrdered[i].user] = i;
+          if (i===0 || betsOrdered[i].points !== betsOrdered[i-1].points) {
+            j += 1;
+          }
+          ranking[betsOrdered[i].user] = j;
         }
-        
+
         callback(null, bets, ranking);
       });
     },
