@@ -107,6 +107,11 @@ module.exports = function(server) {
     },
 
     getBetsPoints: function(date, callback) {
+      date = new Date(date);
+      var dateStart = new Date(2014, 5, 12);
+      if (date < dateStart)
+        date = dateStart;
+      
       var self = this;
       var bets = {};
       var betsDay = {};
