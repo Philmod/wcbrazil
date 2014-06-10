@@ -24,6 +24,8 @@ angular.module('wcbrazilApp.filters', [])
       var str = '' + nb;
       if (str[0] === '-')
         str = str.substring(1);
+      if (str === '0')
+        str = '-';
       return str;
     };
   })
