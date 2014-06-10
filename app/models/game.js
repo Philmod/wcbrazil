@@ -111,7 +111,7 @@ module.exports = function(server) {
       var dateStart = new Date(2014, 5, 12);
       if (date < dateStart)
         date = dateStart;
-      
+
       var self = this;
       var bets = {};
       var betsDay = {};
@@ -161,7 +161,7 @@ module.exports = function(server) {
           }
 
           for (var i = 0; i<betsOut.length; i++) {
-            betsOut[i].differenceRanking = betsOut[i].rankingBefore - betsOut[i].ranking;
+            betsOut[i].differenceRanking = (betsOut[i].rankingBefore) ? (betsOut[i].rankingBefore - betsOut[i].ranking) : '';
           }
 
           callback(null, betsOut);
