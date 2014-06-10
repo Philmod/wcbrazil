@@ -67,7 +67,18 @@ module.exports = function(server) {
         server.io.broadcast('bets:update', bets);
       }
     });
-  }  
+  }
+
+  /**
+   * Get groups playing today.
+   */
+  var groupsDay = function(date, callback) {
+    Game.findByDate(date, function(e, games) {
+      if (e) return callback(e);
+      var groups = _.map(games, function(g) { return g.group});
+      callback(null, _.uniq(groups));
+    });
+  }
 
 
   /**
@@ -77,42 +88,22 @@ module.exports = function(server) {
 
     var date = utils.getDate();
 
-    function random (low, high) {
-      return Math.round( Math.random() * (high - low) + low );
-    }
-    function randomBool () {
-      return !! Math.round(Math.random() * 1);
-    }
-    var results = _.map(games, function(g) {
-      // Random changes.
-      if (randomBool()) {
-        g.score[0] = (randomBool()) ? random(0,5) : 0;
-        g.score[1] = (randomBool()) ? random(0,5) : 0;
-      }
-      return g;
-    });
+    groupsDay(date, function(e, groups) {
+      if (e) return console.error('Error getting the groups of the day : ', e);
+      async.concatSeries(groups, scoreScraper.scrap, function(e, results) {
+        if (e) return console.log('Error scraping the results : ', e);
 
-    // console.log('games scraped : ', results);
+        updateScores(results, function(e, nbUpdated) {
+          console.log('Scraping done, at  : ', new Date(), results.length);
+          if (!e && nbUpdated > 0) {
+            broadcastGames(date);
+            broadcastBets(date);
+          }
+        });
 
-    updateScores(results, function(e, nbUpdated) {
-      console.log('Scraping done, at  : ', new Date());
-      if (!e && nbUpdated > 0) {
-        broadcastGames(date);
-        broadcastBets(date);
-      }
-    });
+      });
+    })
     
-    // async.concatSeries(server.config.scraping.groups, scoreScraper.scrap, function(err, results) {
-    //   if (err) console.log('error : ', err);
-    //   console.log('results scraping : ', results, results.length);
-    //   // Check if score changed.
-
-    //   // If changed : 
-    //   //   1. Update DB
-    //   //   2. Broadcast to connected people
-    //   //   3. Recalculate bets (+ broadcast)
-
-    // });
     
   }, server.config.scraping.dt);
 
