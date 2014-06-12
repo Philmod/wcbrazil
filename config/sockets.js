@@ -7,6 +7,13 @@ var express = require('express.io')
 module.exports = function(server) {
 
   /**
+   * Configuration.
+   */
+  server.io.enable('browser client minification');  // send minified client
+  server.io.enable('browser client etag');          // apply etag caching logic based on version number
+  server.io.enable('browser client gzip');          // gzip the file
+
+  /**
    * Set Redis store.
    */
   // server.io.set('store', new express.io.RedisStore({
