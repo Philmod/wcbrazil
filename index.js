@@ -93,6 +93,7 @@ new compressor.minify({
             , 'public/css/app-responsive.css'
             , 'public/css/app-browser.css'
             , 'public/css/flip.css'
+            , 'public/css/anton.css'
             ],
     fileOut: 'public/base-onefile.css',
     callback: function(err, min){
