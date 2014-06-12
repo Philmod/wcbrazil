@@ -24,7 +24,7 @@ angular.module('wcbrazilApp.controllers', [])
     socket.on('disconnect', function() {
       showAlert('alert-danger', 'You have been disconnected of the server. Refresh if this message doesn\'t disappear');
       disconnected = true;
-      socket.reconnect();
+      // socket.reconnect();
     });
     socket.on('connect_failed', function() {
       showAlert('alert-danger', 'The browser cannot connect to the realtime server. Refresh or contact the webmaster.');

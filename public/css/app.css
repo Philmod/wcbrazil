@@ -3,7 +3,7 @@
 /* Padding below the footer and lighter body text */
 
 body {
-  padding-top: 50px;
+  padding-top: 65px;
   padding-bottom: 40px;
   background: #F0F0F0;
 }
@@ -60,7 +60,28 @@ ul.navbar-nav a.button-href-wrapper {
 }
 
 .navbar {
-  background: #404040;
+  background: black; /*#404040;*/
+}
+
+.navbar-header {
+  float: left;
+  padding: 15px;
+  text-align: center;
+  width: 100%;
+  padding-top: 25px;
+}
+.container>.navbar-header, .container>.navbar-collapse {
+  margin: 0;
+}
+.navbar-brand {
+  float:none;
+}
+.navbar>.container .navbar-brand {
+  font-family: 'Anton';
+  font-size: 42px;
+  color: #FFD347;
+  margin: 0;
+  padding: 0;
 }
 
 .navbar-toggle {

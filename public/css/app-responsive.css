@@ -40,6 +40,10 @@
 
 @media (max-width: 1000px) {
 
+  .navbar>.container .navbar-brand {
+    font-size: 36px;
+  }
+
   .col-sm-4 {
     width: 31.2%;
   }
@@ -81,6 +85,11 @@
 }
 
 @media (max-width: 768px) {
+
+  .navbar>.container .navbar-brand {
+    font-size: 32px;
+  }
+
   .col-sm-3 {
     width: 22.7%;
   }
@@ -101,6 +110,11 @@
 }
 
 @media (max-width: 568px) {
+
+  .navbar>.container .navbar-brand {
+    font-size: 28px;
+  }
+
   .col-sm-3 {
     width: 22.7%;
   }
@@ -131,6 +145,9 @@
 }
 
 @media (max-width: 480px) {
+  .navbar>.container .navbar-brand {
+    font-size: 24px;
+  }
   .col-sm-3 {
     width: 22.1%;
   }
