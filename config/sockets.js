@@ -29,4 +29,11 @@ module.exports = function(server) {
     req.io.emit('whatever', {message: 'yo'});
   });
 
+  /**
+   * Refresh socket.
+   */
+  setInterval(function() {
+    server.io.broadcast('socket:refresh', {});
+  }, 5*1000);
+
 };

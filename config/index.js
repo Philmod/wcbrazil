@@ -50,7 +50,7 @@ module.exports = function(server, next) {
    */
   server.config.scraping = {
       groups: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
-    , dt: 60*1000
+    , dt: 30*1000
   };
 
   /**

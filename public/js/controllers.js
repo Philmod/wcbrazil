@@ -11,6 +11,9 @@ angular.module('wcbrazilApp.controllers', [])
     }
     // Socket.io
     var disconnected = false;
+    socket.on('socket:refresh', function (data) {
+      console.log('socket refreshed.');
+    });
     socket.on('connect', function() {
       $scope.closeAlert();
       if (disconnected) {
