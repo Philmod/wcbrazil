@@ -33,7 +33,7 @@ module.exports = function(server) {
    */
   var updateScores = function(games, callback) {
     games = changedGames(games);
-    if (games.length === 0) return callback();
+    if (games.length === 0) return callback(null, 0);
 
     var nbUpdated = 0;
     async.each(games, function(item, cb) {
@@ -69,17 +69,6 @@ module.exports = function(server) {
     });
   }
 
-  /**
-   * Get groups playing today.
-   */
-  var groupsDay = function(date, callback) {
-    Game.findByDate(date, function(e, games) {
-      if (e) return callback(e);
-      var groups = _.map(games, function(g) { return g.group});
-      callback(null, _.uniq(groups));
-    });
-  }
-
 
   /**
    * Scrap scores.
@@ -88,13 +77,15 @@ module.exports = function(server) {
 
     var date = utils.getDate();
 
-    groupsDay(date, function(e, groups) {
+    Game.groupByDate(date, function(e, groups) {
       if (e) return console.error('Error getting the groups of the day : ', e);
+
+      console.log('groups to scrap : ', groups);
       async.concatSeries(groups, scoreScraper.scrap, function(e, results) {
         if (e) return console.log('Error scraping the results : ', e);
 
         updateScores(results, function(e, nbUpdated) {
-          console.log('Scraping done, at  : ', new Date(), results.length);
+          console.log('Scraping done, at  : ', new Date(), nbUpdated, results.length);
           if (!e && nbUpdated > 0) {
             broadcastGames(date);
             broadcastBets(date);

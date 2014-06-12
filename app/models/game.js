@@ -89,6 +89,20 @@ module.exports = function(server) {
       this.find({time: {$gte: start, $lt: end}}, callback);
     },
 
+    /**
+     * Get groups playing at that time.
+     */
+    groupByDate: function(date, callback) {
+      date = new Date(date);
+      var start = new Date(moment(date).subtract('hours', 2).format());
+      var end = date;
+      this.find({time: {$gte: start, $lt: end}}, function(e, games) {
+        if (e) return callback(e);
+        var groups = _.map(games, function(g) { return g.group});
+        callback(null, _.uniq(groups));
+      });
+    },
+
     updateScore: function(g, callback) {
       this.findOne({teams: g.teams}, function(e, gameDb) {
         if (e) return callback(e);

@@ -21,7 +21,6 @@ module.exports = function(server) {
   server.get('/partial/:name', function (req, res, next) {
     res.render('partials/' + req.params.name);
   });
-
   
   /**
    * Error handler.
