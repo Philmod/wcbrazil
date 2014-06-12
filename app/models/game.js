@@ -84,8 +84,8 @@ module.exports = function(server) {
       var dateStart = new Date(2014, 5, 12);
       if (date < dateStart)
         date = dateStart;
-      var start = date;
-      var end = new Date(moment(date).add('days', 1).format());
+      var start = moment(date).tz('America/Fortaleza').startOf('day').format();
+      var end = moment(date).tz('America/Fortaleza').endOf('day').format();
       this.find({time: {$gte: start, $lt: end}}, callback);
     },
 
@@ -130,7 +130,7 @@ module.exports = function(server) {
       var bets = {};
       var betsDay = {};
       // Get games until next day.
-      self.find({time: {$lte: (new Date(moment(date).add('days', 1).format()))}}).sort('time').exec(function(e, games) {
+      self.find({time: {$lte: (moment(date).tz('America/Fortaleza').endOf('day').format())}}).sort('time').exec(function(e, games) {
         if (e) return callback(e);
 
         _.each(games, function(g) {
