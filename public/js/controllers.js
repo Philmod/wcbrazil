@@ -21,7 +21,7 @@ angular.module('wcbrazilApp.controllers', [])
         setTimeout(function() {
           $scope.closeAlert();
           disconnected = false;
-        }, 1000);
+        }, 500);
       }
     });
     socket.on('disconnect', function() {
