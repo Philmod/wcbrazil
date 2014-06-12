@@ -20,5 +20,11 @@ exports.config = {
      * production applications.
      */
     level : 'warn'
+  },
+  // other configuration
+  rules : {
+    ignore : [
+      '^/socket.io/.*/xhr-polling'
+    ]
   }
 };
