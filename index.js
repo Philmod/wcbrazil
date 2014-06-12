@@ -76,6 +76,7 @@ new compressor.minify({
             , 'public/js/services.js'
             , 'public/js/controllers.js'
             , 'public/js/filters.js'
+            , 'node_modules/express.io/node_modules/socket.io/node_modules/socket.io-client/dist/socket.io.min.js'
             ],
     fileOut: 'public/base-onefile.js',
     callback: function(err, min){
