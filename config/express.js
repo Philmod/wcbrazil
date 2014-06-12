@@ -12,6 +12,7 @@ module.exports = function(server) {
     server.use(express.logger('dev'));
 
     server.use(express.compress());
+    server.use(express.staticCache({maxLength:1024}));
     server.use(express.static(__dirname + '/../public'));
     // server.use(express.favicon(__dirname + '/../public/img/alarmclock.ico'))
     server.use(express.bodyParser());
