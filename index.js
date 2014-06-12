@@ -83,7 +83,6 @@ new compressor.minify({
     callback: function(err, min){
       if (err) console.log('Error minifying JS files', err);
       else console.log('JS Minified.');
-      // console.log(min);
     }
 });
 new compressor.minify({
@@ -99,6 +98,5 @@ new compressor.minify({
     callback: function(err, min){
       if (err) console.log('Error minifying CSS files', err);
       else console.log('CSS Minified.');
-      // console.log(min);
     }
 });

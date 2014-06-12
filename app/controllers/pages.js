@@ -13,7 +13,7 @@ module.exports = function(server) {
 
       var date = utils.getDate();
 
-      Game.findByDate(date, function(e, games) { 
+      Game.findByDate(date, function(e, games) {
 
         Game.getBetsPoints(date, function(e, bets) {
           

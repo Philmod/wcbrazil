@@ -24,9 +24,9 @@ block content
             {{game.time | minutes }}
         .scoresText
           h3
-            {{game.score[0]}}
+            {{game.score[0] || 0}}
             |  - 
-            {{game.score[1]}}
+            {{game.score[1] || 0}}
         .scores
           div(id="flip" class='games score play')
             ul(class="flip {{(game.teams[0] + game.teams[1] + 0) | removeSpace}}")
