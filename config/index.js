@@ -63,9 +63,5 @@ module.exports = function(server, next) {
   } else {
     server.redis = redis.createClient();
   }
-  server.redis.on('error', function(err) {
-    console.log('Shit, redis error : ', err);
-  })
-
 
 };
