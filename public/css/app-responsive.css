@@ -146,7 +146,7 @@
 
 @media (max-width: 480px) {
   .navbar>.container .navbar-brand {
-    font-size: 24px;
+    font-size: 22px;
   }
   .col-sm-3 {
     width: 22.1%;
