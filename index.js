@@ -5,6 +5,7 @@ var newrelic = require('newrelic');
 var express = require('express.io')
   , server  = express()
   , util = require('util')
+  , compressor = require('node-minify')
   ;
 
 server.http().io();
@@ -59,3 +60,42 @@ require('./lib/memusage')(server, {
  * Load Data.
  */
 require('./db/load_data.js')(server);
+
+/**
+ * Compress/minify statics.
+ */
+new compressor.minify({
+    type: 'uglifyjs',
+    fileIn: [ 'public/bower_components/angular/angular.js'
+            , 'public/bower_components/angular-route/angular-route.js'
+            , 'public/bower_components/angular-socket-io/socket.js'
+            , 'public/js/lib/jquery/jquery-2.0.3.min.js'
+            , 'public/bootstrap/js/bootstrap.min.js'
+            , 'public/bootstrap/js/holder.js'
+            , 'public/js/app.js'
+            , 'public/js/services.js'
+            , 'public/js/controllers.js'
+            , 'public/js/filters.js'
+            ],
+    fileOut: 'public/base-onefile.js',
+    callback: function(err, min){
+      if (err) console.log('Error minifying JS files', err);
+      else console.log('JS Minified.');
+      // console.log(min);
+    }
+});
+new compressor.minify({
+    type: 'yui-css',
+    fileIn: [ 'public/bootstrap/css/bootstrap.min.css'
+            , 'public/css/app.css'
+            , 'public/css/app-responsive.css'
+            , 'public/css/app-browser.css'
+            , 'public/css/flip.css'
+            ],
+    fileOut: 'public/base-onefile.css',
+    callback: function(err, min){
+      if (err) console.log('Error minifying CSS files', err);
+      else console.log('CSS Minified.');
+      // console.log(min);
+    }
+});
