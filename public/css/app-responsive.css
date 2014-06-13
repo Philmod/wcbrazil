@@ -38,7 +38,7 @@
 
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1024px) {
 
   .navbar>.container .navbar-brand {
     font-size: 36px;
@@ -82,6 +82,10 @@
     font-size: 11px;
   }
 
+  .fyre .fyre-comment-footer a {
+    padding: 0;
+  }
+  
 }
 
 @media (max-width: 768px) {
@@ -102,9 +106,6 @@
   
   .bets, #livefyre-comments {
     width: 96.1%;
-  }
-  .fyre .fyre-comment-footer a {
-    padding: 0;
   }
   
 }
