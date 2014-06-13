@@ -86,7 +86,7 @@ module.exports = function(server) {
         date = dateStart;
       var start = moment(date).tz('America/Fortaleza').startOf('day').format();
       var end = moment(date).tz('America/Fortaleza').endOf('day').format();
-      this.find({time: {$gte: start, $lt: end}}, callback);
+      this.find({time: {$gte: start, $lt: end}}).sort('time').exec(callback);
     },
 
     /**
