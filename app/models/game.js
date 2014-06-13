@@ -94,7 +94,7 @@ module.exports = function(server) {
      */
     groupByDate: function(date, callback) {
       date = new Date(date);
-      var start = new Date(moment(date).subtract('hours', 24).format());
+      var start = new Date(moment(date).subtract('hours', 2).format());
       var end = date;
       this.find({time: {$gte: start, $lt: end}}, function(e, games) {
         if (e) return callback(e);
