@@ -52,7 +52,7 @@ server.listen(process.env.PORT || port || 80, function() {
  * Check memory leaks.
  */
 require('./lib/memusage')(server, {
-    interval: 60000,
+    interval: 10000,
     maxMemory: 1024
 });
 
