@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "express.io": "1.1.13",
-    "scraper": "0.0.9",
     "async": "0.8.0",
     "underscore": "1.6.0",
     "connect-redis": "1.4.7",
@@ -23,7 +22,9 @@
     "cli-color": "0.1.6",
     "moment": "2.6.0",
     "moment-timezone": "0.0.6",
-    "node-minify": "0.10.3"
+    "node-minify": "0.10.3",
+    "request": "2.36.0",
+    "cheerio": "0.17.0"
   },
   "repository": {
     "type": "git",
