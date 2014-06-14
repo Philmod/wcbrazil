@@ -6,6 +6,9 @@ var express = require('express.io')
 
 module.exports = function(server) {
 
+  var Game = server.model('Game')
+    , utils = server.utils;
+
   /**
    * Configuration.
    */
@@ -32,8 +35,13 @@ module.exports = function(server) {
   /**
    * Routes.
    */
-  server.io.route('whatever', function(req) {
-    req.io.emit('whatever', {message: 'yo'});
+  server.io.route('socket:reconnected', function(req) {
+    Game.findByDate(utils.getDate(), function(e, games) {
+      if (!e && games) req.io.emit('games:update', games);
+    });
+    Game.getBetsPoints(utils.getDate(), function(e, bets) {
+      if (!e && bets) req.io.emit('bets:update', bets);
+    });
   });
 
   /**

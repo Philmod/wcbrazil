@@ -18,6 +18,7 @@ angular.module('wcbrazilApp.controllers', [])
       $scope.closeAlert();
       if (disconnected) {
         showAlert('alert-success', 'Connected to the server.');
+        socket.emit('socket:reconnected'); // Tell the server about the reconnection, to get the latest.
         setTimeout(function() {
           $scope.closeAlert();
           disconnected = false;
