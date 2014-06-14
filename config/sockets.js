@@ -35,10 +35,12 @@ module.exports = function(server) {
   /**
    * Routes.
    */
-  server.io.route('socket:reconnected', function(req) {
+  server.io.route('games:get', function(req) {
     Game.findByDate(utils.getDate(), function(e, games) {
       if (!e && games) req.io.emit('games:update', games);
     });
+  });
+  server.io.route('bets:get', function(req) {
     Game.getBetsPoints(utils.getDate(), function(e, bets) {
       if (!e && bets) req.io.emit('bets:update', bets);
     });
