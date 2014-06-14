@@ -129,7 +129,7 @@ module.exports = function(server) {
       var self = this;
       var bets = {};
       var betsDay = {};
-      // Get games until next day.
+      // Get games until end of the day.
       self.find({time: {$lte: (moment(date).tz('America/Fortaleza').endOf('day').format())}}).sort('time').exec(function(e, games) {
         if (e) return callback(e);
 
@@ -152,8 +152,11 @@ module.exports = function(server) {
         });
         var betsOut = [];
 
+        // Get the bets scores since the last game.
         self.getPointsBefore(date, function(e, pointsBefore, rankingBefore) {
           if (e) return callback(e);
+
+          // Add all the information to the returned object 'betsOut'.
           for (var i in bets) {
             betsOut.push({
                 user: i
@@ -166,12 +169,13 @@ module.exports = function(server) {
           };
           betsOut = _.sortBy(betsOut, function(b) {return -b.points});
 
-          var j = 0;
+          // Set the ranking.
+          var rank = 0;
           for (var i = 0; i<betsOut.length; i++) {
             if (i===0 || betsOut[i].points !== betsOut[i-1].points) {
-              j += 1;
+              rank = i + 1;  
             }
-            betsOut[i].ranking = j;
+            betsOut[i].ranking = rank;
           }
 
           for (var i = 0; i<betsOut.length; i++) {
@@ -207,12 +211,13 @@ module.exports = function(server) {
         }
         betsOrdered = _.sortBy(betsOrdered, function(b) {return -b.points});
 
-        var j = 0;
+        // Set the ranking.
+        var rank = 0;
         for (var i = 0; i<betsOrdered.length; i++) {
           if (i===0 || betsOrdered[i].points !== betsOrdered[i-1].points) {
-            j += 1;
+            rank = i + 1;  
           }
-          ranking[betsOrdered[i].user] = j;
+          ranking[betsOrdered[i].user] = rank;
         }
 
         callback(null, bets, ranking);
