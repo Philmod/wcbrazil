@@ -25,7 +25,8 @@ angular.module('wcbrazilApp.controllers', [])
       }
     });
     socket.on('disconnect', function() {
-      showAlert('alert-danger', 'You have been disconnected of the server. Refresh if this message doesn\'t disappear');
+      if (!refreshing)
+        showAlert('alert-danger', 'You have been disconnected of the server. Refresh if this message doesn\'t disappear');
       disconnected = true;
       // socket.reconnect();
     });
@@ -51,6 +52,11 @@ angular.module('wcbrazilApp.controllers', [])
     $scope.closeAlert = function() {        
       $scope.mainAlert.isShown = false;
     };
+    // Catch refresh.
+    var refreshing = false;
+    window.onbeforeunload = function() {
+      refreshing = true;
+    }
     
   })
   .controller('GamesCtrl', function ($scope, socket) {
