@@ -48,11 +48,16 @@ server.listen(process.env.PORT || port || 80, function() {
   console.log("WCBrazil HTTP listening on port " + port);  
 });
 
+/**
+ * Start twitter streaming.
+ */
+require('./lib/twitter-stream.js')(server);
+
 /*
  * Check memory leaks.
  */
 require('./lib/memusage')(server, {
-    interval: 10000,
+    interval: 30000,
     maxMemory: 1024
 });
 
