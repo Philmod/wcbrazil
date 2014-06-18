@@ -106,6 +106,7 @@ module.exports = function(server) {
     updateScore: function(g, callback) {
       this.findOne({teams: g.teams}, function(e, gameDb) {
         if (e) return callback(e);
+        if (!gameDb) return callback(new Error('There is no game with these teams: ' + JSON.stringify(g.teams)));
         if ( (g.score[0] !== gameDb.score[0]) || (g.score[1] !== gameDb.score[1])) {
           gameDb.score = g.score;
           gameDb.save(function(e, game) {

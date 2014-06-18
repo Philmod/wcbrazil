@@ -86,6 +86,7 @@ module.exports = function(server) {
 
         updateScores(results, function(e, nbUpdated) {
           console.log('Scraping done, at  : ', new Date(), nbUpdated);
+          if (e) console.error('Error updating the scores : ', e);
           if (!e && nbUpdated > 0) {
             broadcastGames(date);
             broadcastBets(date);
