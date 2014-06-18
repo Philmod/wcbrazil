@@ -109,6 +109,8 @@ module.exports = function(server) {
       Game.updateScore(game, function(e, isUpdated) {
         if (e) console.log(' ==> newScore error : ', e);
         else console.log(' ==> newScore score updated : ', isUpdated);
+        broadcastGames(date);
+        broadcastBets(date);
       });
     }
 
