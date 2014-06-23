@@ -60,10 +60,18 @@ module.exports = function(server) {
     calculatePoints: function(callback) {
       var self = this;
 
-      // Winning bet.
+      // Winning bet pool.
       var win = (self.score[0] > self.score[1]) ? '1' : '2';
       if (self.score[0] === self.score[1])
         win = 'X';
+      // Winning bet finales.
+      if (self.date >= FINALES_START_DATE) {
+
+        win = (self.score[0] > self.score[1]) ? '1' : '2';
+
+      }
+console.log('oh yeah : ', win)
+
 
       // Number of winning bets.
       var nbPlayers = self.bets.length;
