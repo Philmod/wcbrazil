@@ -196,7 +196,14 @@ module.exports = function(server) {
       var ranking = {};
       self.find({time: {$lt: date}}).sort('time').exec(function(e, games) {
         if (e) return callback(e);
-        for (var i = 0; i<games.length-1; i++) {
+        if (!games) return callback();
+
+        // Check if the last 2 games were together.
+        var skip = 1;
+        if (games.length > 2 && games[games.length-1].time === games[games.length-2].time)
+          skip = 2;
+
+        for (var i = 0; i<games.length-skip; i++) {
           var g = games[i];
           _.each(g.bets, function(b) {
             if (!bets[b.user])
