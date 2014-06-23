@@ -200,7 +200,7 @@ module.exports = function(server) {
 
         // Check if the last 2 games were together.
         var skip = 1;
-        if (games.length > 2 && games[games.length-1].time === games[games.length-2].time)
+        if (games.length > 2 && moment(games[games.length-1].time).format() == moment(games[games.length-2].time).format() )
           skip = 2;
 
         for (var i = 0; i<games.length-skip; i++) {
