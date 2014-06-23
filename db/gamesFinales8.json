@@ -1,0 +1,74 @@
+[
+  {
+    "teams": [
+      "Brazil",
+      "Chile"
+    ],
+    "score": [],
+    "time": "2014-06-28T16:00:00.000Z",
+    "finales": 8
+  },
+  {
+    "teams": [
+      "Colombia",
+      "Italia"
+    ],
+    "score": [],
+    "time": "2014-06-28T20:00:00.000Z",
+    "finales": 8
+  },
+  {
+    "teams": [
+      "Netherlands",
+      "Mexico"
+    ],
+    "score": [],
+    "time": "2014-06-29T16:00:00.000Z",
+    "finales": 8
+  },
+  {
+    "teams": [
+      "Costa Rica",
+      "Ivory Coast"
+    ],
+    "score": [],
+    "time": "2014-06-29T20:00:00.000Z",
+    "finales": 8
+  },
+  {
+    "teams": [
+      "France",
+      "Nigeria"
+    ],
+    "score": [],
+    "time": "2014-06-30T16:00:00.000Z",
+    "finales": 8
+  },
+  {
+    "teams": [
+      "Germany",
+      "Russia"
+    ],
+    "score": [],
+    "time": "2014-06-30T20:00:00.000Z",
+    "finales": 8
+  },
+  {
+    "teams": [
+      "Argentina",
+      "Switzerland"
+    ],
+    "score": [],
+    "time": "2014-07-01T16:00:00.000Z",
+    "finales": 8
+  },
+  {
+    "teams": [
+      "Belgium",
+      "USA"
+    ],
+    "score": [],
+    "time": "2014-07-01T20:00:00.000Z",
+    "finales": 8
+  }
+]

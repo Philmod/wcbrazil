@@ -29,6 +29,7 @@ module.exports = function(server) {
     , score : [ { type: Number, default: 0 }]
     , group : { type: String }
     , bets  : [Bet]
+    , finales : { type: Number, default: -1 }
   });
 
   Game.plugin(common.timestamps('created', 'updated'));
