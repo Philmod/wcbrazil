@@ -1,5 +1,8 @@
 module.exports = function(server) {
 
+  /**
+   * Dependencies.
+   */
   var mongoose = server.mongoose
     , common   = server.common
     , errors   = server.errors
@@ -12,9 +15,17 @@ module.exports = function(server) {
     , moment   = require('moment-timezone')
     ;
 
+  /**
+   * Constants.
+   */
+  var FINALES_START_DATE = new Date(moment.tz("2014-06-28 00:00:00", "America/Fortaleza").format());
+
+  /**
+   * Bet schema.
+   */
   var Bet = new Schema({
       user  : { type: String }
-    , bet   : { type: String } // 1, X, or 2
+    , bet   : { type: String } // 1, X, or 2; 1+, 1++, 2+, 2++, 1X, 2X
     , points: { type: Number, default: 0 }
     /* 
       - N being the number of participants
@@ -23,6 +34,9 @@ module.exports = function(server) {
     */
   });
 
+  /**
+   * Game schema.
+   */
   var Game = module.exports = new Schema({
       time  : { type: Date }
     , teams : [ { type: String }]
@@ -131,8 +145,19 @@ module.exports = function(server) {
       var self = this;
       var bets = {};
       var betsDay = {};
+
       // Get games until end of the day.
-      self.find({time: {$lte: (moment(date).tz('America/Fortaleza').endOf('day').format())}}).sort('time').exec(function(e, games) {
+      var query = {
+        time: {
+          $lte: (moment(date).tz('America/Fortaleza').endOf('day').format())
+        }
+      };
+      // If finales, don't take older bets.
+      if (date >= FINALES_START_DATE) {
+        query.time.$gte = FINALES_START_DATE;
+      }
+      // Querying.
+      self.find(query).sort('time').exec(function(e, games) {
         if (e) return callback(e);
 
         _.each(games, function(g) {
@@ -195,7 +220,19 @@ module.exports = function(server) {
       var bets = {};
       var betsOrdered = [];
       var ranking = {};
-      self.find({time: {$lt: date}}).sort('time').exec(function(e, games) {
+
+      // Get games until end of the day.
+      var query = {
+        time: {
+          $lt: date
+        }
+      };
+      // If finales, don't take older bets.
+      if (date >= FINALES_START_DATE) {
+        query.time.$gte = FINALES_START_DATE;
+      }
+      // Querying.
+      self.find(query).sort('time').exec(function(e, games) {
         if (e) return callback(e);
         for (var i = 0; i<games.length-1; i++) {
           var g = games[i];

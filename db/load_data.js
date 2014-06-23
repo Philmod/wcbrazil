@@ -163,12 +163,15 @@ module.exports = function(server) {
                 });
               }
               g.bets = gameBets;
+              n += 1;
               g.save(cb);
             } else {
               cb();
             }
           });
         }, function(e) {
+          if (e) stop('Error loading the bets finales ', e);
+          console.log('Bets finales loaded : ', n);
           cbFile(e);
         });
 
