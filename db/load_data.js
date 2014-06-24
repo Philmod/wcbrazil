@@ -113,7 +113,7 @@ module.exports = function(server) {
         var n = 0;
 
         async.each(games, function(item, cb) {
-          Game.findOne(item, function(e, g) {
+          Game.findOne({teams: item.teams, time: item.time, finales: item.finales}, function(e, g) {
             if (e) return cb(e);
             if (g) return cb();
             var game = new Game(item);

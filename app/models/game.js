@@ -41,6 +41,7 @@ module.exports = function(server) {
       minutes : { type: Number, default: 0 }
     , score : [ { type: Number, default: 0 }]
     , time : { type: String }
+    , correction : { type: Boolean, default: false }
   })
 
   /**
@@ -67,21 +68,39 @@ module.exports = function(server) {
     /*
      * Calculate every player's points.
      */
-    calculatePoints: function(callback) {
+    calculatePoints: function(g, callback) {
       var self = this;
 
       // Winning bet pool.
       var win = (self.score[0] > self.score[1]) ? '1' : '2';
       if (self.score[0] === self.score[1])
         win = 'X';
+
       // Winning bet finales.
-      if (self.date >= FINALES_START_DATE) {
-
-        win = (self.score[0] > self.score[1]) ? '1' : '2';
-
+      if (new Date(utils.getDate()) >= FINALES_START_DATE) {
+        win = null;
+        var time = g.timeGoal;
+        if (g.correction) {
+          // find the last goal
+          var i = self.goals.length-1;
+          while (self.goals[i].correction && i>=0) {
+            i -= 1;
+          }
+          time = self.goals[i].minutes || 0;
+        }
+        if (time <= 90) {
+          if ( (Math.abs(self.score[0] - self.score[1])) >= 2)
+            win = (self.score[0] > self.score[1]) ? '1++' : '2++';  
+          else if ( (Math.abs(self.score[0] - self.score[1])) == 1)
+            win = (self.score[0] > self.score[1]) ? '1+' : '2+';
+        }
+        else {
+          if ( (Math.abs(self.score[0] - self.score[1])) > 0)
+            win = (self.score[0] > self.score[1]) ? '1X' : '2X';  
+        }
       }
-console.log('oh yeah : ', win)
 
+      console.log('win : ', win);
 
       // Number of winning bets.
       var nbPlayers = self.bets.length;
@@ -146,10 +165,11 @@ console.log('oh yeah : ', win)
               minutes : g.timeGoal || 0
             , score : g.score
             , time : moment().tz("America/Fortaleza").format()
+            , correction : g.correction || false
           });
           gameDb.save(function(e, game) {
             if (e) return callback(e);
-            game.calculatePoints(function(e) {
+            game.calculatePoints(g, function(e) {
               callback(e, true);
             });
           });
