@@ -23,12 +23,19 @@ module.exports = function(server) {
     */
   });
 
+  var Goal = new Schema({
+      minutes : { type: Number, default: 0 }
+    , score : [ { type: Number, default: 0 }]
+    , time : { type: String }
+  })
+
   var Game = module.exports = new Schema({
       time  : { type: Date }
     , teams : [ { type: String }]
     , score : [ { type: Number, default: 0 }]
     , group : { type: String }
     , bets  : [Bet]
+    , goals : [Goal]
   });
 
   Game.plugin(common.timestamps('created', 'updated'));
@@ -109,6 +116,11 @@ module.exports = function(server) {
         if (!gameDb) return callback(new Error('There is no game with these teams: ' + JSON.stringify(g.teams)));
         if ( (g.score[0] !== gameDb.score[0]) || (g.score[1] !== gameDb.score[1])) {
           gameDb.score = g.score;
+          gameDb.goals.push({
+              minutes : g.timeGoal || 0
+            , score : g.score
+            , time : moment().tz("America/Fortaleza").format()
+          });
           gameDb.save(function(e, game) {
             if (e) return callback(e);
             game.calculatePoints(function(e) {
