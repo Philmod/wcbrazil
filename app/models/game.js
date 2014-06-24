@@ -251,7 +251,7 @@ module.exports = function(server) {
           for (var i = 0; i<betsOut.length; i++) {
             betsOut[i].differenceRanking = (betsOut[i].rankingBefore) ? (betsOut[i].rankingBefore - betsOut[i].ranking) : '';
           }
-
+// console.log('betsOut : ', betsOut);
           callback(null, betsOut);
         });
         
@@ -275,7 +275,9 @@ module.exports = function(server) {
         query.time.$gte = FINALES_START_DATE;
       }
       // Querying.
+      console.log('query : ', query);
       self.find(query).sort('time').exec(function(e, games) {
+        console.log('yo : ', e, games.length)
         if (e) return callback(e);
         if (!games) return callback();
 
@@ -308,7 +310,7 @@ module.exports = function(server) {
           }
           ranking[betsOrdered[i].user] = rank;
         }
-
+console.log('before : ', bets, ranking);
         callback(null, bets, ranking);
       });
     },
