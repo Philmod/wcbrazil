@@ -35,6 +35,15 @@ module.exports = function(server) {
   });
 
   /**
+   * Goal schema.
+   */
+  var Goal = new Schema({
+      minutes : { type: Number, default: 0 }
+    , score : [ { type: Number, default: 0 }]
+    , time : { type: String }
+  })
+
+  /**
    * Game schema.
    */
   var Game = module.exports = new Schema({
@@ -44,6 +53,7 @@ module.exports = function(server) {
     , group : { type: String }
     , bets  : [Bet]
     , finales : { type: Number, default: -1 }
+    , goals : [Goal]
   });
 
   Game.plugin(common.timestamps('created', 'updated'));
@@ -132,6 +142,11 @@ console.log('oh yeah : ', win)
         if (!gameDb) return callback(new Error('There is no game with these teams: ' + JSON.stringify(g.teams)));
         if ( (g.score[0] !== gameDb.score[0]) || (g.score[1] !== gameDb.score[1])) {
           gameDb.score = g.score;
+          gameDb.goals.push({
+              minutes : g.timeGoal || 0
+            , score : g.score
+            , time : moment().tz("America/Fortaleza").format()
+          });
           gameDb.save(function(e, game) {
             if (e) return callback(e);
             game.calculatePoints(function(e) {
@@ -242,7 +257,14 @@ console.log('oh yeah : ', win)
       // Querying.
       self.find(query).sort('time').exec(function(e, games) {
         if (e) return callback(e);
-        for (var i = 0; i<games.length-1; i++) {
+        if (!games) return callback();
+
+        // Check if the last 2 games were together.
+        var skip = 1;
+        if (games.length > 2 && moment(games[games.length-1].time).format() == moment(games[games.length-2].time).format() )
+          skip = 2;
+
+        for (var i = 0; i<games.length-skip; i++) {
           var g = games[i];
           _.each(g.bets, function(b) {
             if (!bets[b.user])
