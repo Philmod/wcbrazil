@@ -116,11 +116,13 @@ module.exports = function(server) {
         if (!gameDb) return callback(new Error('There is no game with these teams: ' + JSON.stringify(g.teams)));
         if ( (g.score[0] !== gameDb.score[0]) || (g.score[1] !== gameDb.score[1])) {
           gameDb.score = g.score;
-          gameDb.goals.push({
-              minutes : g.timeGoal || 0
-            , score : g.score
-            , time : moment().tz("America/Fortaleza").format()
-          });
+          if (g.fromTwitter) {
+            gameDb.goals.push({
+                minutes : g.timeGoal || 0
+              , score : g.score
+              , time : moment().tz("America/Fortaleza").format()
+            });
+          }
           gameDb.save(function(e, game) {
             if (e) return callback(e);
             game.calculatePoints(function(e) {
