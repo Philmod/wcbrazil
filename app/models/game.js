@@ -175,8 +175,8 @@ module.exports = function(server) {
           for (var i in bets) {
             betsOut.push({
                 user: i
-              , points: Math.round(bets[i] * 10) / 10
-              , differencePoints: (Math.round( (bets[i] - pointsBefore[i]) * 10) / 10)
+              , points: Math.round(bets[i] * 100) / 100
+              , differencePoints: (Math.round( (bets[i] - pointsBefore[i]) * 100) / 100)
               , ranking: null
               , rankingBefore: rankingBefore[i]
               , bets: betsDay[i]
@@ -228,7 +228,7 @@ module.exports = function(server) {
         for (var i in bets) {
           betsOrdered.push({
               user: i
-            , points: Math.round(bets[i] * 10) / 10
+            , points: Math.round(bets[i] * 100) / 100
           });
         }
         betsOrdered = _.sortBy(betsOrdered, function(b) {return -b.points});
