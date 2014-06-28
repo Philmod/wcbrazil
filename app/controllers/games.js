@@ -80,7 +80,9 @@ module.exports = function(server) {
     Game.groupByDate(date, function(e, groups) {
       if (e) return console.error('Error getting the groups of the day : ', e);
 
-      console.log('groups to scrap : ', groups); 
+      console.log('groups to scrap : ', groups);
+      if (!groups)
+        return;
       async.concatSeries(groups, scoreScraper.scrap, function(e, results) {
         if (e) return console.log('Error scraping the results : ', e);
 
