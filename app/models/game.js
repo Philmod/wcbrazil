@@ -1,5 +1,8 @@
 module.exports = function(server) {
 
+  /**
+   * Dependencies.
+   */
   var mongoose = server.mongoose
     , common   = server.common
     , errors   = server.errors
@@ -12,9 +15,17 @@ module.exports = function(server) {
     , moment   = require('moment-timezone')
     ;
 
+  /**
+   * Constants.
+   */
+  var FINALES_START_DATE = new Date(moment.tz("2014-06-28 00:00:00", "America/Fortaleza").format());
+
+  /**
+   * Bet schema.
+   */
   var Bet = new Schema({
       user  : { type: String }
-    , bet   : { type: String } // 1, X, or 2
+    , bet   : { type: String } // 1, X, or 2; 1+, 1++, 2+, 2++, 1X, 2X
     , points: { type: Number, default: 0 }
     /* 
       - N being the number of participants
@@ -23,18 +34,26 @@ module.exports = function(server) {
     */
   });
 
+  /**
+   * Goal schema.
+   */
   var Goal = new Schema({
       minutes : { type: Number, default: 0 }
     , score : [ { type: Number, default: 0 }]
     , time : { type: String }
+    , correction : { type: Boolean, default: false }
   })
 
+  /**
+   * Game schema.
+   */
   var Game = module.exports = new Schema({
       time  : { type: Date }
     , teams : [ { type: String }]
     , score : [ { type: Number, default: 0 }]
     , group : { type: String }
     , bets  : [Bet]
+    , finales : { type: Number, default: -1 }
     , goals : [Goal]
   });
 
@@ -49,13 +68,39 @@ module.exports = function(server) {
     /*
      * Calculate every player's points.
      */
-    calculatePoints: function(callback) {
+    calculatePoints: function(g, callback) {
       var self = this;
 
-      // Winning bet.
+      // Winning bet pool.
       var win = (self.score[0] > self.score[1]) ? '1' : '2';
       if (self.score[0] === self.score[1])
         win = 'X';
+
+      // Winning bet finales.
+      if (new Date(utils.getDate()) >= FINALES_START_DATE) {
+        win = null;
+        var time = g.timeGoal;
+        if (g.correction) {
+          // find the last goal
+          var i = self.goals.length-1;
+          while (self.goals[i].correction && i>=0) {
+            i -= 1;
+          }
+          time = self.goals[i].minutes || 0;
+        }
+        if (time <= 90) {
+          if ( (Math.abs(self.score[0] - self.score[1])) >= 2)
+            win = (self.score[0] > self.score[1]) ? '1++' : '2++';  
+          else if ( (Math.abs(self.score[0] - self.score[1])) == 1)
+            win = (self.score[0] > self.score[1]) ? '1+' : '2+';
+        }
+        else {
+          if ( (Math.abs(self.score[0] - self.score[1])) > 0)
+            win = (self.score[0] > self.score[1]) ? '1X' : '2X';  
+        }
+      }
+
+      console.log('win : ', win);
 
       // Number of winning bets.
       var nbPlayers = self.bets.length;
@@ -125,7 +170,7 @@ module.exports = function(server) {
           }
           gameDb.save(function(e, game) {
             if (e) return callback(e);
-            game.calculatePoints(function(e) {
+            game.calculatePoints(g, function(e) {
               callback(e, true);
             });
           });
@@ -144,8 +189,19 @@ module.exports = function(server) {
       var self = this;
       var bets = {};
       var betsDay = {};
+
       // Get games until end of the day.
-      self.find({time: {$lte: (moment(date).tz('America/Fortaleza').endOf('day').format())}}).sort('time').exec(function(e, games) {
+      var query = {
+        time: {
+          $lte: (moment(date).tz('America/Fortaleza').endOf('day').format())
+        }
+      };
+      // If finales, don't take older bets.
+      if (date >= FINALES_START_DATE) {
+        query.time.$gte = FINALES_START_DATE;
+      }
+      // Querying.
+      self.find(query).sort('time').exec(function(e, games) {
         if (e) return callback(e);
 
         _.each(games, function(g) {
@@ -196,7 +252,7 @@ module.exports = function(server) {
           for (var i = 0; i<betsOut.length; i++) {
             betsOut[i].differenceRanking = (betsOut[i].rankingBefore) ? (betsOut[i].rankingBefore - betsOut[i].ranking) : '';
           }
-
+// console.log('betsOut : ', betsOut);
           callback(null, betsOut);
         });
         
@@ -208,7 +264,19 @@ module.exports = function(server) {
       var bets = {};
       var betsOrdered = [];
       var ranking = {};
-      self.find({time: {$lt: date}}).sort('time').exec(function(e, games) {
+
+      // Get games until end of the day.
+      var query = {
+        time: {
+          $lt: date
+        }
+      };
+      // If finales, don't take older bets.
+      if (date >= FINALES_START_DATE) {
+        query.time.$gte = FINALES_START_DATE;
+      }
+      // Querying.
+      self.find(query).sort('time').exec(function(e, games) {
         if (e) return callback(e);
         if (!games) return callback();
 
