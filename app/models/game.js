@@ -161,12 +161,13 @@ module.exports = function(server) {
         if (!gameDb) return callback(new Error('There is no game with these teams: ' + JSON.stringify(g.teams)));
         if ( (g.score[0] !== gameDb.score[0]) || (g.score[1] !== gameDb.score[1])) {
           gameDb.score = g.score;
-          gameDb.goals.push({
-              minutes : g.timeGoal || 0
-            , score : g.score
-            , time : moment().tz("America/Fortaleza").format()
-            , correction : g.correction || false
-          });
+          if (g.fromTwitter) {
+            gameDb.goals.push({
+                minutes : g.timeGoal || 0
+              , score : g.score
+              , time : moment().tz("America/Fortaleza").format()
+            });
+          }
           gameDb.save(function(e, game) {
             if (e) return callback(e);
             game.calculatePoints(g, function(e) {
@@ -230,8 +231,8 @@ module.exports = function(server) {
           for (var i in bets) {
             betsOut.push({
                 user: i
-              , points: Math.round(bets[i] * 10) / 10
-              , differencePoints: (Math.round( (bets[i] - pointsBefore[i]) * 10) / 10)
+              , points: Math.round(bets[i] * 100) / 100
+              , differencePoints: (Math.round( (bets[i] - pointsBefore[i]) * 100) / 100)
               , ranking: null
               , rankingBefore: rankingBefore[i]
               , bets: betsDay[i]
@@ -295,7 +296,7 @@ module.exports = function(server) {
         for (var i in bets) {
           betsOrdered.push({
               user: i
-            , points: Math.round(bets[i] * 10) / 10
+            , points: Math.round(bets[i] * 100) / 100
           });
         }
         betsOrdered = _.sortBy(betsOrdered, function(b) {return -b.points});
