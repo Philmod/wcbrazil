@@ -1,6 +1,6 @@
 var fs = require('fs')
   , async = require('async')
-  , scoreScraper = require('../../lib/scraper-group.js')()
+  , scoreScraper = require('../../lib/score-scraper.js')()
   , moment = require('moment-timezone')
   ;
 
@@ -77,27 +77,18 @@ module.exports = function(server) {
 
     var date = utils.getDate();
 
-    return;
+    scoreScraper.scrap(function(e, results) {
 
-    Game.groupByDate(date, function(e, groups) {
-      if (e) return console.error('Error getting the groups of the day : ', e);
-
-      console.log('groups to scrap : ', groups);
-      async.concatSeries(groups, scoreScraper.scrap, function(e, results) {
-        if (e) return console.log('Error scraping the results : ', e);
-
-        updateScores(results, function(e, nbUpdated) {
-          console.log('Scraping done, at  : ', new Date(), nbUpdated);
-          if (e) console.error('Error updating the scores : ', e);
-          if (!e && nbUpdated > 0) {
-            broadcastGames(date);
-            broadcastBets(date);
-          }
-        });
-
+      updateScores(results, function(e, nbUpdated) {
+        console.log('Scraping done, at  : ', new Date(), nbUpdated);
+        if (e) console.error('Error updating the scores : ', e);
+        if (!e && nbUpdated > 0) {
+          broadcastGames(date);
+          broadcastBets(date);
+        }
       });
-    })
-    
+
+    });
     
   }, server.config.scraping.dt);
 
