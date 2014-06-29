@@ -168,6 +168,13 @@ module.exports = function(server) {
               , time : moment().tz("America/Fortaleza").format()
             });
           }
+          if (g.scorePenalty && g.scorePenalty.length > 0) {
+            gameDb.goals.push({
+                minutes : 120
+              , score : g.score
+              , time : moment().tz("America/Fortaleza").format()
+            });
+          }
           gameDb.save(function(e, game) {
             if (e) return callback(e);
             game.calculatePoints(g, function(e) {
