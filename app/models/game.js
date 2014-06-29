@@ -106,13 +106,13 @@ module.exports = function(server) {
       var nbPlayers = self.bets.length;
       var nbWin = 0;
       _.each(self.bets, function(b) {
-        if (b.bet === win)
+        if (b.bet.toUpperCase() === win)
           nbWin += 1;
       });
 
       // Calculate the points for everyone.
       self.bets = _.map(self.bets, function(b) {
-        if (b.bet === win)
+        if (b.bet.toUpperCase() === win)
           b.points = nbPlayers / (nbWin + 0.1*nbPlayers);
         else
           b.points = 0;
