@@ -88,6 +88,11 @@ module.exports = function(server) {
           }
           time = self.goals[i].minutes || 0;
         }
+        
+        if (!time && (_.isNull(g.scorePenalty) && _.isNull(g.scoreExtraTime))) {
+          time = 90;
+        }
+
         if (time <= 90) {
           if ( (Math.abs(self.score[0] - self.score[1])) >= 2)
             win = (self.score[0] > self.score[1]) ? '1++' : '2++';  
