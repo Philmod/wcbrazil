@@ -1,0 +1,38 @@
+[
+  {
+    "teams": [
+      "France",
+      "Germany"
+    ],
+    "score": [],
+    "time": "2014-07-04T16:00:00.000Z",
+    "finales": 4
+  },
+  {
+    "teams": [
+      "Brazil",
+      "Colombia"
+    ],
+    "score": [],
+    "time": "2014-07-04T20:00:00.000Z",
+    "finales": 4
+  },
+  {
+    "teams": [
+      "Argentina",
+      "Belgium"
+    ],
+    "score": [],
+    "time": "2014-07-05T16:00:00.000Z",
+    "finales": 4
+  },
+  {
+    "teams": [
+      "Netherlands",
+      "Costa Rica"
+    ],
+    "score": [],
+    "time": "2014-07-05T20:00:00.000Z",
+    "finales": 4
+  }
+]
