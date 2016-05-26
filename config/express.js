@@ -1,83 +1,39 @@
-var express = require('express.io')
-  , exec    = require('child_process').exec
-  , winston = require('winston')
-  , expressWinston = require('express-winston')
-  , RedisStore = require('connect-redis')(express)
-  ;
+const express = require('express');
+const morgan = require('morgan');
+const session = require('express-session');
+const RedisStore = require('connect-redis')(session);
+const bodyParser = require('body-parser');
+const errorhandler = require('errorhandler');
+const path = require('path');
 
 module.exports = function(server) {
 
-  server.configure(function() {
+  // Statics.
+  server.use(express.static('public'));
 
-    server.use(express.logger('dev'));
+  // Views rendering.
+  server.set('view engine', 'jade');
+  server.set('views', path.join(__dirname, '../app/views'));
 
-    server.use(express.compress());
-    server.use(express.staticCache({maxLength:1024}));
-    server.use(express.static(__dirname + '/../public'));
-    // server.use(express.favicon(__dirname + '/../public/img/alarmclock.ico'))
-    server.use(express.bodyParser());
-    server.use(express.methodOverride());
-    server.use(express.cookieParser('7ec7f11a3447b6f3b935ee7ee1e6423667cc3f09'));
-
-    /**
-     * Winston errors logs.
-     */
-    server.use(expressWinston.errorLogger({
-      transports: [
-        new winston.transports.Console({
-          json: true,
-          colorize: true
-        })
-      ]
-    }));
-
-    server.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
-
-  });
-
-  /**
-   * Session store.
-   */
-  var store = new RedisStore({
+  // Sessions.
+  var options = {
     client: server.redis
-  });
-  server.configure(function() {
-    server.use(express.session({
-        secret: '3e78406bffdf4d0b3a35c1d1697d6504e18ac28e'
-      , store: store
-    }));
-    express.session.ignore = ['/robots.txt','/status','/favicon.ico'];
-  });
+  };
+  server.use(session({
+    store: new RedisStore(options),
+    secret: '3e78406bffdf4d0b3a35c1d1697d6504e18ac28e',
+    resave: false,
+    saveUninitialized: true
+  }));
 
+  // Body parser.
+  server.use(bodyParser.json());
+  server.use(bodyParser.urlencoded({ extended: true }));
 
-  /**
-   * Options depending on the environment.
-   */
-  server.set('protocol', 'http');
-  server.configure('development', function() {
-  });
+  // Logs.
+  server.use(morgan('dev'));
 
-  server.configure('test', function() {
-  });
-
-  server.configure('preview', function() {
-  });
-
-  server.configure('production', function() {
-    server.set('protocol', 'https');
-  });
-  /** **/
-
-  server.configure(function() {
-
-    /**
-     * View configuration.
-     */
-    server.set('views', __dirname + '/../app/views');
-    server.set('view engine', 'jade');
-
-
-  });
-
+  // Error handling.
+  server.use(errorhandler());
 
 };

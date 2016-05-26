@@ -1,7 +1,6 @@
 
-var express = require('express.io')
+var express = require('express')
   , redis = require('redis')
-  // , RedisStore = express.io.RedisStore
   ;
 
 module.exports = function(server) {
@@ -10,47 +9,29 @@ module.exports = function(server) {
     , utils = server.utils;
 
   /**
-   * Configuration.
-   */
-  server.io.enable('browser client minification');  // send minified client
-  server.io.enable('browser client etag');          // apply etag caching logic based on version number
-  server.io.enable('browser client gzip');          // gzip the file
-
-  /**
-   * Set Redis store.
-   */
-  // server.io.set('store', new express.io.RedisStore({
-  //   redisPub: server.redis,
-  //   redisSub: server.redis,
-  //   redisClient: server.redis
-  // }));
-
-  /**
    * Basic callbacks.
    */
   server.io.on('connection', function(socket) {
     console.log('Socket.io connection : ', socket.id);
-  });
 
-  /**
-   * Routes.
-   */
-  server.io.route('games:get', function(req) {
-    Game.findByDate(utils.getDate(), function(e, games) {
-      if (!e && games) req.io.emit('games:update', games);
+    var refreshInterval = setInterval(function() {
+      socket.emit('socket:refresh', {});
+    }, 5*1000);
+
+    socket.on('games:get', function() {
+      Game.findByDate(utils.getDate(), function(e, games) {
+        if (!e && games) socket.emit('games:update', games);
+      });
+    });
+    socket.on('bets:get', function() {
+      Game.getBetsPoints(utils.getDate(), function(e, bets) {
+        if (!e && bets) socket.emit('bets:update', bets);
+      });
+    });
+
+    socket.on('disconnect', function() {
+      clearInterval(refreshInterval);
     });
   });
-  server.io.route('bets:get', function(req) {
-    Game.getBetsPoints(utils.getDate(), function(e, bets) {
-      if (!e && bets) req.io.emit('bets:update', bets);
-    });
-  });
-
-  /**
-   * Refresh socket.
-   */
-  setInterval(function() {
-    server.io.broadcast('socket:refresh', {});
-  }, 5*1000);
 
 };
