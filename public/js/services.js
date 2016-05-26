@@ -2,7 +2,7 @@
 
 /* Services */
 
-angular.module('wcbrazilApp.services', []).
+angular.module('france2016App.services', []).
   factory('socket', function (socketFactory) {
     return socketFactory();
   }).
