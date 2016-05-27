@@ -11,32 +11,32 @@ var compressor = require('node-minify');
 /**
  * Set up general configuration.
  */
-require('./config')(app);
+require('./app/lib/config')(app);
 
 /**
  * Express configuration.
  */
-require('./config/express')(app);
+require('./app/lib/express')(app);
 
 /**
  * Models.
  */
-require('./config/models')(app);
+require('./app/models/index.js')(app);
 
 /**
  * Controllers.
  */
-require('./config/controllers')(app);
+app.controllers = require('./app/controllers/index.js')(app);
 
 /**
  * Routes.
  */
-require('./config/routes')(app);
+require('./app/routes')(app);
 
 /**
  * Sockets.
  */
-require('./config/sockets')(app);
+require('./app/sockets')(app);
 
 /**
  * Start server.
@@ -49,12 +49,12 @@ server.listen(process.env.PORT || port || 80, function() {
 /**
  * Start twitter streaming.
  */
-require('./lib/twitter-stream.js')(app);
+require('./app/lib/twitter-stream.js')(app);
 
 /*
  * Check memory leaks.
  */
-require('./lib/memusage')(app, {
+require('./app/lib/memusage')(app, {
     interval: 30000,
     maxMemory: 1024
 });

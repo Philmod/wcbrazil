@@ -36,11 +36,11 @@ module.exports = function(server, next) {
   /**
    * Utilities.
    */
-  server.utils  = require('../lib/utils');
-  server.errors = require('../lib/errors');
-  server.common = require('../lib/common');
+  server.utils  = require('./utils');
+  server.errors = require('./errors');
+  server.common = require('./common');
 
-  /** 
+  /**
    * DB.
    */
   server.config.mongodb = require('./mongodb')[serverEnv];

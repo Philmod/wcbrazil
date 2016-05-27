@@ -1,11 +1,11 @@
-var status = require('../lib/status.js')
+var status = require('./lib/status.js')
   ;
 
 module.exports = function(server) {
 
-  var pages = server.controller('pages');
+  var pages = server.controllers.pages;
 
-  /** 
+  /**
    * Status.
    */
   server.get('/status', status);
@@ -21,7 +21,7 @@ module.exports = function(server) {
   server.get('/partial/:name', function (req, res, next) {
     res.render('partials/' + req.params.name);
   });
-  
+
   /**
    * Error handler.
    */

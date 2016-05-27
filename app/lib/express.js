@@ -13,7 +13,7 @@ module.exports = function(server) {
 
   // Views rendering.
   server.set('view engine', 'jade');
-  server.set('views', path.join(__dirname, '../app/views'));
+  server.set('views', path.join(__dirname, '../views'));
 
   // Sessions.
   var options = {

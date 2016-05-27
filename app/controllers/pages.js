@@ -12,6 +12,7 @@ module.exports = function(server) {
     index: function(req, res, next) {
 
       var date = utils.getDate();
+      var date = new Date("2014-06-13T20:00:00.000Z") //utils.getDate();
 
       Game.findByDate(date, function(e, games) {
 

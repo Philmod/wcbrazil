@@ -1,6 +1,5 @@
 module.exports = function(server) {
   var fs  = require('fs')
-    , ext = '.js'
     , mongoose  = require('mongoose')
     , options   = { autoReconnect: true }
     , mongodb   = server.config.mongodb
@@ -17,7 +16,7 @@ module.exports = function(server) {
   var mongourl = process.env.MONGOLAB_URI ||
     process.env.MONGOHQ_URL ||
     'mongodb://' + auth + mongodb.host + ':' + (mongodb.port || 27017) + '/' + mongodb.database;
-  
+
   db = mongoose.createConnection(mongourl, options, function (err, db2) {
     if (err) log.sub('MONGODB').error(err.message);
   });
@@ -25,11 +24,11 @@ module.exports = function(server) {
 
   eventHandler.on('open', function(err) {
     console.log('Mongoose connected.');
-  }); 
+  });
   eventHandler.on('error', function(err) {
     log.sub('MONGODB').error(err);
-  }); 
-      
+  });
+
   server.set('db', db);
 
 
@@ -37,17 +36,20 @@ module.exports = function(server) {
    * Models.
    */
   server.mongoose = require('mongoose');
-   
-  server.model = function(modelName) {
+
+  var ms = {};
+  var models = [
+    'Game',
+  ];
+
+  server.model = (modelName) => {
     return server.set('db').model(modelName);
   };
 
-  var path = __dirname + '/../app/models';
-  fs.readdirSync(path).forEach(function(filename) {
-    if (!filename.match(ext + '$')) {
-      return;
-    }
-    require(path + '/' + filename)(server);
+  models.forEach(model => {
+    ms[model] = require(`${__dirname}/${model.toLowerCase()}`)(server);
   });
+
+  return ms;
 
 };

@@ -1,6 +1,6 @@
 var fs = require('fs')
   , async = require('async')
-  , scoreScraper = require('../../lib/score-scraper.js')()
+  , scoreScraper = require('../lib/score-scraper.js')()
   , moment = require('moment-timezone')
   ;
 
@@ -23,7 +23,7 @@ module.exports = function(server) {
     });
 
     // Filter the played games.
-    games = _.filter(games, function(g) { return !_.isNaN(parseInt(g.score[0])) });  
+    games = _.filter(games, function(g) { return !_.isNaN(parseInt(g.score[0])) });
 
     return games;
   }
@@ -52,7 +52,7 @@ module.exports = function(server) {
   var broadcastGames = function(date) {
     Game.findByDate(date, function(e, games) {
       if (e) console.error('Error getting the games : ', e);
-      else 
+      else
         server.io.broadcast('games:update', games);
     });
   }
@@ -89,7 +89,7 @@ module.exports = function(server) {
       });
 
     });
-    
+
   }, server.config.scraping.dt);
 
   /**
