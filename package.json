@@ -13,6 +13,7 @@
     "body-parser": "^1.15.1",
     "cheerio": "^0.20.0",
     "cli-color": "^1.1.0",
+    "commander": "^2.9.0",
     "connect-redis": "^3.0.2",
     "errorhandler": "^1.4.3",
     "express": "^4.13.4",
@@ -32,7 +33,9 @@
     "underscore": "^1.8.3"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "npm run clean && node index.js -s",
+    "dev": "node index.js -s -d '2014-06-14'",
+    "clean": "rm *.tmp"
   },
   "repository": {
     "type": "git",

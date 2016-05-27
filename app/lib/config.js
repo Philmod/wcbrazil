@@ -36,7 +36,7 @@ module.exports = function(server, next) {
   /**
    * Utilities.
    */
-  server.utils  = require('./utils');
+  server.utils  = require('./utils')(server);
   server.errors = require('./errors');
   server.common = require('./common');
 

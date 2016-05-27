@@ -9,6 +9,16 @@ var util = require('util');
 var compressor = require('node-minify');
 
 /**
+ * Commander.
+ */
+app.program = require('commander');
+app.program
+  .option('-s, --server', 'Run server')
+  .option('-d, --date [date]', 'Fake current date')
+  .option('-l, --load', 'Load data')
+  .parse(process.argv);
+
+/**
  * Set up general configuration.
  */
 require('./app/lib/config')(app);
@@ -42,9 +52,11 @@ require('./app/sockets')(app);
  * Start server.
  */
 var port = app.set('port');
-server.listen(process.env.PORT || port || 80, function() {
-  console.log("France2016 HTTP listening on port " + port);
-});
+if (app.program.server) {
+  server.listen(process.env.PORT || port || 80, function() {
+    console.log("France2016 HTTP listening on port " + port);
+  });
+}
 
 /**
  * Start twitter streaming.
@@ -62,7 +74,9 @@ require('./app/lib/memusage')(app, {
 /**
  * Load Data.
  */
-require('./db/load_data.js')(app);
+if (app.program.load) {
+  require('./db/load_data.js')(app);
+}
 
 /**
  * Compress/minify statics.
