@@ -18,7 +18,7 @@ module.exports = function(server) {
     'mongodb://' + auth + mongodb.host + ':' + (mongodb.port || 27017) + '/' + mongodb.database;
 
   db = mongoose.createConnection(mongourl, options, function (err, db2) {
-    if (err) log.sub('MONGODB').error(err.message);
+    if (err) console.error('MONGODB : ', err.message);
   });
   var eventHandler = db.db;
 
@@ -26,7 +26,7 @@ module.exports = function(server) {
     console.log('Mongoose connected.');
   });
   eventHandler.on('error', function(err) {
-    log.sub('MONGODB').error(err);
+    console.error('MONGODB : ', err);
   });
 
   server.set('db', db);
