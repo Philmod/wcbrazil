@@ -53,7 +53,7 @@ module.exports = function(server) {
     Game.findByDate(date, function(e, games) {
       if (e) console.error('Error getting the games : ', e);
       else
-        server.io.broadcast('games:update', games);
+        server.io.sockets.emit('games:update', games);
     });
   }
 
@@ -64,7 +64,7 @@ module.exports = function(server) {
     Game.getBetsPoints(date, function(e, bets) {
       if (e) console.error('Error getting the bets : ', e);
       else {
-        server.io.broadcast('bets:update', bets);
+        server.io.sockets.emit('bets:update', bets);
       }
     });
   }
