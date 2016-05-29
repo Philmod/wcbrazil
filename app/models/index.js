@@ -13,8 +13,7 @@ module.exports = function(server) {
   if(mongodb.user)
     auth = mongodb.user+":"+mongodb.pass+"@";
 
-  var mongourl = process.env.MONGOLAB_URI ||
-    process.env.MONGOHQ_URL ||
+  var mongourl = process.env.MONGODB_URI ||
     'mongodb://' + auth + mongodb.host + ':' + (mongodb.port || 27017) + '/' + mongodb.database;
 
   db = mongoose.createConnection(mongourl, options, function (err, db2) {
