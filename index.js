@@ -117,3 +117,5 @@ new compressor.minify({
       else console.log('CSS Minified.');
     }
 });
+
+module.exports = app;
