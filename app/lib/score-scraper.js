@@ -13,7 +13,7 @@ module.exports = function (options) {
   /**
    * Constants.
    */
-  var url = 'http://www.livescore.com/worldcup/';
+  var url = 'http://www.livescore.com/euro/';
   // var url = 'http://www.livescore.com/worldcup/match/?match=1-1444464';
   var mainClass  = '.content';
   var teamsClass = '.name';
@@ -80,8 +80,11 @@ module.exports = function (options) {
             , ss = [];
           html('div').each(function() {
             var arr = /\((\d)\s-\s(\d)\)/.exec($(this).html());
-            if (arr)
+            if (arr) {
               ss.push([parseInt(arr[1]), parseInt(arr[2])]);
+            } else {
+              ss.push([])
+            }
             i += 1;
           });
           if (ss.length > 0) {
