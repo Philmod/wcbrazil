@@ -12,3 +12,5 @@ node_modules
 
 public/base-onefile.css
 public/base-onefile.js
+
+temp.js

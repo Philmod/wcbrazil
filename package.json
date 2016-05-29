@@ -33,9 +33,10 @@
     "underscore": "^1.8.3"
   },
   "scripts": {
-    "start": "npm run clean && node index.js -s",
+    "start": "node index.js -s",
     "dev": "node index.js -s -d '2014-06-14'",
-    "clean": "rm *.tmp"
+    "clean": "rm *.tmp",
+    "load-data": "node index.js -l"
   },
   "repository": {
     "type": "git",

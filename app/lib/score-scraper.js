@@ -15,12 +15,11 @@ module.exports = function (options) {
    */
   var url = 'http://www.livescore.com/worldcup/';
   // var url = 'http://www.livescore.com/worldcup/match/?match=1-1444464';
-  var mainClass  = '.match';
-  var teamAClass = '.tl';
-  var teamBClass = '.tr';
-  var scoreClass = '.fs';
-  var scoresClass = '.ht .fs';
-  var scoresNamesClass = '.ht .tl';
+  var mainClass  = '.content';
+  var teamsClass = '.name';
+  var scoreClass = '.md .row-light .sco';
+  var scoresClass = '.row-gray .sco';
+  var scoresNamesClass = '.row-gray .info';
 
   return {
 
@@ -47,13 +46,13 @@ module.exports = function (options) {
         /**
          * Extract data.
          */
-        $(mainClass + ' ' + teamAClass).each(function() {
-          var team = $(this).html();
-          teamsA.push(team.replace('*', '').trim());
-        });
-        $(mainClass + ' ' + teamBClass).each(function() {
-          var team = $(this).html();
-          teamsB.push(team.replace('*', '').trim());
+        $(mainClass + ' ' + teamsClass).each(function() {
+          var team = $(this).html().replace('*', '').trim();
+          if (teamsA.length > teamsB.length) {
+            teamsB.push(team);
+          } else {
+            teamsA.push(team);
+          }
         });
         $(mainClass + ' ' + scoreClass).each(function() {
           var score = $(this).html();
@@ -70,7 +69,9 @@ module.exports = function (options) {
           html('div').each(function() {
             ss.push($(this).html());
           });
-          scoresDetailsNames.push(ss);
+          if (ss.length > 0) {
+            scoresDetailsNames.push(ss);
+          }
         });
         $(scoresClass).each(function() {
           var score = $(this).html();
@@ -83,7 +84,9 @@ module.exports = function (options) {
               ss.push([parseInt(arr[1]), parseInt(arr[2])]);
             i += 1;
           });
-          scoresDetails.push(ss);
+          if (ss.length > 0) {
+            scoresDetails.push(ss);
+          }
         });
 
         /**
@@ -102,14 +105,14 @@ module.exports = function (options) {
           var scorePenalty = scoresDetails[i][penaltyIndex];
 
           // add the penalty result to the score
-          if (scorePenalty) { 
+          if (scorePenalty) {
             if (scorePenalty[0] > scorePenalty[1]) {
               score[0] += 1;
             } else {
               score[1] += 1;
             }
           }
-          
+
           results.push({
               teams  : [teamsA[i], teamsB[i]]
             , score  : score

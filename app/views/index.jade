@@ -96,30 +96,15 @@ block content
 
   //- Livefyre comments
   script.
-    //- var articleId = fyre.conv.load.makeArticleId(null);
-    //- fyre.conv.load({}, [{
-    //-     el: 'livefyre-comments',
-    //-     network: "livefyre.com",
-    //-     siteId: "358978",
-    //-     articleId: articleId,
-    //-     signed: false,
-    //-     collectionMeta: {
-    //-         articleId: articleId,
-    //-         url: fyre.conv.load.makeCollectionUrl(),
-    //-     }
-    //- }], function() {});
-    
+    var articleId = '1234512345';
     var networkConfig = {
-      network: 'localhost'
+      network: 'livefyre.com'
     };
     var convConfig = {
       siteId: '358978',
-      articleId: '?',
-      el: 'livefyre-comments',
-      collectionMeta: '?',
-      checksum: '?'
-    };
-   
+      articleId: articleId,
+      el: 'livefyre-comments'
+    };   
     Livefyre.require(['fyre.conv#3'], function(Conv) {
         new Conv(networkConfig, [convConfig], function(commentsWidget) {});
     });

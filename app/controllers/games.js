@@ -78,6 +78,10 @@ module.exports = function(server) {
     var date = utils.getDate();
 
     scoreScraper.scrap(function(e, results) {
+      if (e) {
+        console.error('Error scraping scores : ', e);
+        return
+      }
 
       updateScores(results, function(e, nbUpdated) {
         console.log('Scraping done, at  : ', new Date(), nbUpdated);
