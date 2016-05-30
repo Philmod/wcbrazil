@@ -16,15 +16,15 @@ module.exports = function(server) {
    * Data.
    */
   var games = utils.loadJSON(__dirname + '/games.json');
-  var gamesFinales8 = utils.loadJSON(__dirname + '/gamesFinales8.json');
-  var gamesFinales4 = utils.loadJSON(__dirname + '/gamesFinales4.json');
-  var gamesFinales2 = utils.loadJSON(__dirname + '/gamesFinales2.json');
-  var gamesFinales1 = utils.loadJSON(__dirname + '/gamesFinales1.json');
+  var gamesFinales8 = []; // utils.loadJSON(__dirname + '/gamesFinales8.json');
+  var gamesFinales4 = []; // utils.loadJSON(__dirname + '/gamesFinales4.json');
+  var gamesFinales2 = []; // utils.loadJSON(__dirname + '/gamesFinales2.json');
+  var gamesFinales1 = []; // utils.loadJSON(__dirname + '/gamesFinales1.json');
   var bets = utils.loadJSON(__dirname + '/bets.json');
-  var betsFinales8 = utils.loadJSON(__dirname + '/betsFinales8.json');
-  var betsFinales4 = utils.loadJSON(__dirname + '/betsFinales4.json');
-  var betsFinales2 = utils.loadJSON(__dirname + '/betsFinales2.json');
-  var betsFinales1 = utils.loadJSON(__dirname + '/betsFinales1.json');
+  var betsFinales8 = []; // utils.loadJSON(__dirname + '/betsFinales8.json');
+  var betsFinales4 = []; // utils.loadJSON(__dirname + '/betsFinales4.json');
+  var betsFinales2 = []; // utils.loadJSON(__dirname + '/betsFinales2.json');
+  var betsFinales1 = []; // utils.loadJSON(__dirname + '/betsFinales1.json');
 
   /**
    * Stop if error.
@@ -77,7 +77,7 @@ module.exports = function(server) {
         teams = mapTeam(teams);
         Game.findOne({teams: teams}, function(e, g) {
           if (e) return cb(e);
-          if (!g) stop('This teams do not exist : ', teams);
+          if (!g) stop('These teams do not exist : ', teams);
           var users = item;
           delete users.Team1; delete users.Team2;
           var nbBets = Object.keys(users).length;
@@ -131,7 +131,7 @@ module.exports = function(server) {
         callback(e);
       });
 
-      
+
     },
     // 4. Check bets finales 8.
     function(callback) {
@@ -150,7 +150,7 @@ module.exports = function(server) {
           teams = mapTeam(teams);
           Game.findOne({teams: teams, finales: item.finales}, function(e, g) {
             if (e) return cb(e);
-            if (!g) stop('This teams do not exist : ', teams);
+            if (!g) stop('These teams do not exist [finales] : ', teams, item);
             var users = item;
             delete users.Team1; delete users.Team2; delete users.finales;
             var nbBets = Object.keys(users).length;

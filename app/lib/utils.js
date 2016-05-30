@@ -1,4 +1,4 @@
-/** 
+/**
  * Dependencies.
  */
 var _ = require('underscore')
@@ -7,14 +7,14 @@ var _ = require('underscore')
   ;
 
 /**
- * Additional underscore functions. 
+ * Additional underscore functions.
  *
  * [https://gist.github.com/ElliotChong/3861963]
  */
 (function() {
   var arrays, basicObjects, deepClone, deepExtend, deepExtendCouple, isBasicObject,
     __slice = [].slice;
- 
+
   deepClone = function(obj) {
     var func, isArr;
     if (!_.isObject(obj) || _.isFunction(obj)) {
@@ -37,23 +37,23 @@ var _ = require('underscore')
     };
     return _.reduce(obj, func, isArr ? [] : {});
   };
- 
+
   isBasicObject = function(object) {
     return (object.prototype === {}.prototype || object.prototype === Object.prototype) && _.isObject(object) && !_.isArray(object) && !_.isFunction(object) && !_.isDate(object) && !_.isRegExp(object) && !_.isArguments(object);
   };
- 
+
   basicObjects = function(object) {
     return _.filter(_.keys(object), function(key) {
       return isBasicObject(object[key]);
     });
   };
- 
+
   arrays = function(object) {
     return _.filter(_.keys(object), function(key) {
       return _.isArray(object[key]);
     });
   };
- 
+
   deepExtendCouple = function(destination, source, maxDepth) {
     var combine, recurse, sharedArrayKey, sharedArrayKeys, sharedObjectKey, sharedObjectKeys, _i, _j, _len, _len1;
     if (maxDepth == null) {
@@ -81,7 +81,7 @@ var _ = require('underscore')
     }
     return _.extend(destination, source);
   };
- 
+
   deepExtend = function() {
     var finalObj, maxDepth, objects, _i;
     objects = 2 <= arguments.length ? __slice.call(arguments, 0, _i = arguments.length - 1) : (_i = 0, []), maxDepth = arguments[_i++];
@@ -101,7 +101,7 @@ var _ = require('underscore')
     }
     return finalObj;
   };
- 
+
   _.mixin({
     deepClone: deepClone,
     isBasicObject: isBasicObject,
@@ -109,7 +109,7 @@ var _ = require('underscore')
     arrays: arrays,
     deepExtend: deepExtend
   });
- 
+
 }).call(this);
 
 /**
@@ -130,41 +130,47 @@ var parseJSON = function(json) {
 /**
  * Expose methods.
  */
-module.exports = {
+module.exports = server => {
 
-  /**
-   * Underscore.
-   */
-  _: _,
+  return {
+    /**
+     * Underscore.
+     */
+    _: _,
 
-  /**
-   * Parse JSON.
-   */
-  parseJSON: parseJSON,
+    /**
+     * Parse JSON.
+     */
+    parseJSON: parseJSON,
 
-  /**
-   * Is the same day.
-   */
-  isSameDay: function(d1, d2) {
-    d1 = new Date(d1).setHours(0, 0, 0, 0);
-    d2 = new Date(d2).setHours(0, 0, 0, 0);
-    return d1 === d2;
-  },
+    /**
+     * Is the same day.
+     */
+    isSameDay: function(d1, d2) {
+      d1 = new Date(d1).setHours(0, 0, 0, 0);
+      d2 = new Date(d2).setHours(0, 0, 0, 0);
+      return d1 === d2;
+    },
 
-  getDate: function() {
-    // return moment.tz("2014-06-28 22:00:00", "America/Fortaleza").format();
-    return new Date();
-  },
+    getDate: function() {
+      // return moment.tz("2014-06-28 22:00:00", "America/Fortaleza").format();
+      var date = new Date();
+      if (server.program.date) {
+        date = new Date(server.program.date);
+      }
+      return date;
+    },
 
-  loadJSON: function(path) {
-    var content;
-    try {
-      content = JSON.parse(fs.readFileSync(path, 'utf8'));
+    loadJSON: function(path) {
+      var content;
+      try {
+        content = JSON.parse(fs.readFileSync(path, 'utf8'));
+      }
+      catch(e) {
+        // console.log('Error loading the file : ', e);
+      }
+      return content;
     }
-    catch(e) {
-      // console.log('Error loading the file : ', e);
-    }
-    return content;
   }
 
 };

@@ -1,11 +1,11 @@
 var defaults = {
   host     : 'localhost',
-  database : 'wcbrazil_localhost'
+  database : 'france2016_localhost'
 };
 
 exports.test = {
   host     : 'localhost',
-  database : 'wcbrazil_test'
+  database : 'france2016_test'
 };
 
 exports.production  = defaults;

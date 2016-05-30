@@ -9,19 +9,19 @@ module.exports = function (options) {
   /**
    * Constants.
    */
-  var mainClass  = '.league-wc.fixtures';
-  var row = 'tr';
-  var dateClass = '.dt';
-  var hourClass = '.tm';
-  var scoreClass = '.sc';
-  var teamsClass = 'a';
+  var mainClass  = '.content';
+  var row = '.row-gray';
+  var dateClass = '.col-2';
+  var hourClass = '.col-7 .col-2';
+  var scoreClass = '.col-1 .tright'
+  var teamsClass = '.col-7 .col-10 a';
 
   return {
 
     scrap: function(group, callback) {
       if (!group)
         return callback(null, {});
-      var url = 'http://www.livescore.com/worldcup/' + 'group-' + group.toUpperCase();
+      var url = 'http://www.livescore.com/euro/' + 'group-' + group.toUpperCase();
 
       request(url, function(e, r, b) {
         if (e)

@@ -1,7 +1,7 @@
-wcbrazil
-========
+france2016
+==========
 
-Single page to see the last scores of the World Cup 2014, realtime comments, and scores of the bets.
+Single page to see the last scores of the Euro Cup 2016, realtime comments, and scores of the bets.
 
 ## Prerequisites
 - MongoDB

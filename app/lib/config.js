@@ -36,11 +36,11 @@ module.exports = function(server, next) {
   /**
    * Utilities.
    */
-  server.utils  = require('../lib/utils');
-  server.errors = require('../lib/errors');
-  server.common = require('../lib/common');
+  server.utils  = require('./utils')(server);
+  server.errors = require('./errors');
+  server.common = require('./common');
 
-  /** 
+  /**
    * DB.
    */
   server.config.mongodb = require('./mongodb')[serverEnv];
@@ -50,7 +50,7 @@ module.exports = function(server, next) {
    */
   server.config.scraping = {
       groups: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
-    , dt: 60*1000
+    , dt: 1000*60
   };
 
   /**

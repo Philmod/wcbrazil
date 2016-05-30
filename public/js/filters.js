@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('wcbrazilApp.filters', [])
+angular.module('france2016App.filters', [])
   .filter('hours', function (version) {
     return function (date) {
       return new Date(date).getHours();

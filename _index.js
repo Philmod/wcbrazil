@@ -4,12 +4,13 @@
  * Dependencies.
  */
 var async = require('async');
-var scoreScraper = require('./lib/scraper-group.js')();
+var scoreScraper = require('./app/lib/scraper-group.js')();
 
 /**
  * Variables.
  */
-var groups = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+var groups = ['A', 'B', 'C', 'D', 'E', 'F'];
+// var groups = ['A'];
 
 async.concatSeries(groups, scoreScraper.scrap, function(err, results) {
   if (err) console.log('error : ', err);

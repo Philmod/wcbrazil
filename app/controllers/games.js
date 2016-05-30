@@ -1,6 +1,6 @@
 var fs = require('fs')
   , async = require('async')
-  , scoreScraper = require('../../lib/score-scraper.js')()
+  , scoreScraper = require('../lib/score-scraper.js')()
   , moment = require('moment-timezone')
   ;
 
@@ -23,7 +23,7 @@ module.exports = function(server) {
     });
 
     // Filter the played games.
-    games = _.filter(games, function(g) { return !_.isNaN(parseInt(g.score[0])) });  
+    games = _.filter(games, function(g) { return !_.isNaN(parseInt(g.score[0])) });
 
     return games;
   }
@@ -52,8 +52,8 @@ module.exports = function(server) {
   var broadcastGames = function(date) {
     Game.findByDate(date, function(e, games) {
       if (e) console.error('Error getting the games : ', e);
-      else 
-        server.io.broadcast('games:update', games);
+      else
+        server.io.sockets.emit('games:update', games);
     });
   }
 
@@ -64,7 +64,7 @@ module.exports = function(server) {
     Game.getBetsPoints(date, function(e, bets) {
       if (e) console.error('Error getting the bets : ', e);
       else {
-        server.io.broadcast('bets:update', bets);
+        server.io.sockets.emit('bets:update', bets);
       }
     });
   }
@@ -78,6 +78,10 @@ module.exports = function(server) {
     var date = utils.getDate();
 
     scoreScraper.scrap(function(e, results) {
+      if (e) {
+        console.error('Error scraping scores : ', e);
+        return
+      }
 
       updateScores(results, function(e, nbUpdated) {
         console.log('Scraping done, at  : ', new Date(), nbUpdated);
@@ -89,7 +93,7 @@ module.exports = function(server) {
       });
 
     });
-    
+
   }, server.config.scraping.dt);
 
   /**

@@ -2,61 +2,71 @@
  * Dependencies.
  */
 var newrelic = require('newrelic');
-var express = require('express.io')
-  , server  = express()
-  , util = require('util')
-  , compressor = require('node-minify')
-  ;
+var app = require('express')();
+var server  = require('http').createServer(app);
+app.io = require('socket.io')(server);
+var util = require('util');
+var compressor = require('node-minify');
 
-server.http().io();
+/**
+ * Commander.
+ */
+app.program = require('commander');
+app.program
+  .option('-s, --server', 'Run server')
+  .option('-d, --date [date]', 'Fake current date')
+  .option('-l, --load', 'Load data')
+  .parse(process.argv);
 
 /**
  * Set up general configuration.
  */
-require('./config')(server);
+require('./app/lib/config')(app);
 
 /**
  * Express configuration.
  */
-require('./config/express')(server);
+require('./app/lib/express')(app);
 
 /**
  * Models.
  */
-require('./config/models')(server);
+require('./app/models/index.js')(app);
 
 /**
  * Controllers.
  */
-require('./config/controllers')(server);
+app.controllers = require('./app/controllers/index.js')(app);
 
 /**
  * Routes.
  */
-require('./config/routes')(server);
+require('./app/routes')(app);
 
 /**
  * Sockets.
  */
-require('./config/sockets')(server);
+require('./app/sockets')(app);
 
 /**
  * Start server.
  */
-var port = server.set('port');
-server.listen(process.env.PORT || port || 80, function() {
-  console.log("WCBrazil HTTP listening on port " + port);  
-});
+var port = app.set('port');
+if (app.program.server) {
+  server.listen(process.env.PORT || port || 80, function() {
+    console.log("France2016 HTTP listening on port " + port);
+  });
+}
 
 /**
  * Start twitter streaming.
  */
-require('./lib/twitter-stream.js')(server);
+require('./app/lib/twitter-stream.js')(app);
 
 /*
  * Check memory leaks.
  */
-require('./lib/memusage')(server, {
+require('./app/lib/memusage')(app, {
     interval: 30000,
     maxMemory: 1024
 });
@@ -64,7 +74,9 @@ require('./lib/memusage')(server, {
 /**
  * Load Data.
  */
-require('./db/load_data.js')(server);
+if (app.program.load) {
+  require('./db/load_data.js')(app);
+}
 
 /**
  * Compress/minify statics.
@@ -81,7 +93,7 @@ new compressor.minify({
             , 'public/js/services.js'
             , 'public/js/controllers.js'
             , 'public/js/filters.js'
-            , 'node_modules/express.io/node_modules/socket.io/node_modules/socket.io-client/dist/socket.io.min.js'
+            , 'node_modules/socket.io-client/socket.io.js'
             , 'public/js/livefyre.js'
             ],
     fileOut: 'public/base-onefile.js',
@@ -106,3 +118,4 @@ new compressor.minify({
     }
 });
 
+module.exports = app;

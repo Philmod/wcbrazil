@@ -1,0 +1,51 @@
+Friday 10 June, 21.00 (St-Denis): France VS Romania – Group A
+Saturday 11 June, 15.00 (Lens): Albania VS Switzerland – Group A
+Saturday 11 June, 18.00 (Bordeaux): Wales VS Slovakia – Group B
+Saturday 11 June, 21.00 (Marseille): England VS Russia – Group B
+Sunday 12 June, 15.00 (Paris): Turkey VS Croatia – Group D
+Sunday 12 June, 18.00 (Nice): Poland VS Northern Ireland – Group C
+Sunday 12 June, 21.00 (Lille): Germany VS Ukraine – Group C
+Monday 13 June, 15.00 (Toulouse): Spain VS Czech Republic – Group D
+Monday 13 June, 18.00 (St-Denis): Republic of Ireland VS Sweden – Group E
+Monday 13 June, 21.00 (Lyon): Belgium VS Italy – Group E
+Tuesday 14 June, 18.00 (Bordeaux): Austria VS Hungary – Group F
+Tuesday 14 June, 21.00 (St-Etienne): Portugal VS Iceland – Group F
+Wednesday 15 June, 15.00 (Lille): Russia VS Slovakia – Group B
+Wednesday 15 June, 18.00 (Paris): Romania VS Switzerland – Group A
+Wednesday 15 June, 21.00 (Marseille): France VS Albania – Group A
+Thursday 16 June, 15.00 (Lens): England VS Wales – Group B
+Thursday 16 June, 18.00 (Lyon): Ukraine VS Northern Ireland – Group C
+Thursday 16 June, 21.00 (St-Denis): Germany VS Poland – Group C
+Friday 17 June, 15.00 (Toulouse): Italy VS Sweden – Group E
+Friday 17 June, 18.00 (St-Etienne): Czech Republic VS Croatia – Group D
+Friday 17 June, 21.00 (Nice): Spain VS Turkey – Group D
+Saturday 18 June, 15.00 (Bordeaux): Belgium VS Republic of Ireland – Group E
+Saturday 18 June, 18.00 (Marseille): Iceland VS Hungary – Group F
+Saturday 18 June, 21.00 (Paris): Portugal VS Austria – Group F
+Sunday 19 June, 21.00 (Lille): Switzerland VS France – Group A
+Sunday 19 June, 21.00 (Lyon): Romania VS Albania – Group A
+Monday 20 June, 21.00 (St-Etienne): Slovakia VS England – Group B
+Monday 20 June, 21.00 (Toulouse): Russia VS Wales – Group B
+Tuesday 21 June, 18.00 (Paris): Northern Ireland VS Germany – Group C
+Tuesday 21 June, 18.00 (Marseille): Ukraine VS Poland – Group C
+Tuesday 21 June, 21.00 (Bordeaux): Croatia VS Spain – Group D
+Tuesday 21 June, 21.00 (Lens): Czech Republic VS Turkey – Group D
+Wednesday 22 June, 18.00 (Lyon): Hungary VS Portugal – Group F
+Wednesday 22 June, 18.00 (St-Denis): Iceland VS Austria – Group F
+Wednesday 22 June, 21.00 (Nice): Sweden VS Belgium – Group E
+Wednesday 22 June, 21.00 (Lille): Italy VS Republic of Ireland – Group E
+Saturday 25 June, 15.00 (St-Etienne): Runner-up Group A VS Runner-up C – Match 1
+Saturday 25 June, 18.00 (Paris): Winner B VS Third-place A/C/D – Match 2
+Saturday 25 June, 21.00 (Lens): Winner D VS Third-place B/E/F – Match 3
+Sunday 26 June, 15.00 (Lyon): Winner A VS Third-place C/D/E – Match 4
+Sunday 26 June, 18.00 (Lille): Winner C VS Third-place A/B/F – Match 5
+Sunday 26 June, 21.00 (Toulouse): Winner F VS Runner-up E – Match 6
+Monday 27 June, 18.00 (St-Denis): Winner E VS Runner-up D – Match 7
+Monday 27 June, 21.00 (Nice): Runner-up B VS Runner-up F – Match 8
+Thursday 30 June, 21.00 (Marseille): Winner Match 1 VS Winner Match 3 – Match QF1
+Friday 1 July, 21.00 (Lille): Winner Match 2 VS Winner Match 6 – Match QF2
+Saturday 2 July, 21.00 (Bordeaux): Winner Match 5 VS Winner Match 7 – Match QF3
+Sunday 3 July, 21.00 (St-Denis): Winner Match 4 VS Winner Match 8 – Match QF4
+Wednesday 6 July, 21.00 (Lyon): Winner QF1 VS Winner QF2 – Match SF1
+Thursday 7 July, 21.00 (Marseille): Winner QF3 VS Winner QF4 – Match SF2
+Sunday 10 July, 21.00 (St-Denis): Winner SF1 VS Winner SF2 – Match SF2

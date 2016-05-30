@@ -96,15 +96,15 @@ block content
 
   //- Livefyre comments
   script.
-    var articleId = fyre.conv.load.makeArticleId(null);
-    fyre.conv.load({}, [{
-        el: 'livefyre-comments',
-        network: "livefyre.com",
-        siteId: "358978",
-        articleId: articleId,
-        signed: false,
-        collectionMeta: {
-            articleId: articleId,
-            url: fyre.conv.load.makeCollectionUrl(),
-        }
-    }], function() {});
+    var articleId = '1464490717117';
+    var networkConfig = {
+      network: 'livefyre.com'
+    };
+    var convConfig = {
+      siteId: '382607',
+      articleId: articleId,
+      el: 'livefyre-comments'
+    };   
+    Livefyre.require(['fyre.conv#3'], function(Conv) {
+        new Conv(networkConfig, [convConfig], function(commentsWidget) {});
+    });
