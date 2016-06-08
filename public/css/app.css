@@ -6,6 +6,7 @@ body {
   padding-top: 65px;
   padding-bottom: 40px;
   background: #F0F0F0;
+  /* background-image: url("/img/wallpaper_euro2016.jpg") */
 }
 
 .main {
@@ -79,7 +80,7 @@ ul.navbar-nav a.button-href-wrapper {
 .navbar>.container .navbar-brand {
   font-family: 'Anton';
   font-size: 42px;
-  color: #FFD347;
+  color: #1878d8;
   margin: 0;
   padding: 0;
 }
@@ -114,7 +115,7 @@ ul.navbar-nav a.button-href-wrapper {
   padding-bottom: 12px;
 }
 .scores {
-  position: absolute;
+  /* position: absolute; */
   bottom: 0px;
   left: 0px;
   width: 100%;
