@@ -17,7 +17,7 @@ lineReader
     }
     var game = {
       group: arr[8],
-      teams: [arr[5], arr[6]],
+      teams: [arr[5].trim(), arr[6].trim()],
       score: [],
       time: new Date(Date.UTC(2016, months.indexOf(arr[2].split(' ')[1]), parseInt(arr[2].split(' ')[0]), (parseInt(arr[3].split('.')[0])-2), parseInt(arr[3].split('.')[1]), 0)),
       venue: arr[4]

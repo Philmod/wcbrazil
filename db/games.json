@@ -3,7 +3,7 @@
     "group":"A",
     "teams":[
       "France",
-      "Romania "
+      "Romania"
     ],
     "score":[
 
@@ -15,7 +15,7 @@
     "group":"A",
     "teams":[
       "Albania",
-      "Switzerland "
+      "Switzerland"
     ],
     "score":[
 
@@ -27,7 +27,7 @@
     "group":"B",
     "teams":[
       "Wales",
-      "Slovakia "
+      "Slovakia"
     ],
     "score":[
 
@@ -39,7 +39,7 @@
     "group":"B",
     "teams":[
       "England",
-      "Russia "
+      "Russia"
     ],
     "score":[
 
@@ -51,7 +51,7 @@
     "group":"D",
     "teams":[
       "Turkey",
-      "Croatia "
+      "Croatia"
     ],
     "score":[
 
@@ -63,7 +63,7 @@
     "group":"C",
     "teams":[
       "Poland",
-      "Northern Ireland "
+      "Northern Ireland"
     ],
     "score":[
 
@@ -75,7 +75,7 @@
     "group":"C",
     "teams":[
       "Germany",
-      "Ukraine "
+      "Ukraine"
     ],
     "score":[
 
@@ -87,7 +87,7 @@
     "group":"D",
     "teams":[
       "Spain",
-      "Czech Republic "
+      "Czech Republic"
     ],
     "score":[
 
@@ -99,7 +99,7 @@
     "group":"E",
     "teams":[
       "Republic of Ireland",
-      "Sweden "
+      "Sweden"
     ],
     "score":[
 
@@ -111,7 +111,7 @@
     "group":"E",
     "teams":[
       "Belgium",
-      "Italy "
+      "Italy"
     ],
     "score":[
 
@@ -123,7 +123,7 @@
     "group":"F",
     "teams":[
       "Austria",
-      "Hungary "
+      "Hungary"
     ],
     "score":[
 
@@ -135,7 +135,7 @@
     "group":"F",
     "teams":[
       "Portugal",
-      "Iceland "
+      "Iceland"
     ],
     "score":[
 
@@ -147,7 +147,7 @@
     "group":"B",
     "teams":[
       "Russia",
-      "Slovakia "
+      "Slovakia"
     ],
     "score":[
 
@@ -159,7 +159,7 @@
     "group":"A",
     "teams":[
       "Romania",
-      "Switzerland "
+      "Switzerland"
     ],
     "score":[
 
@@ -171,7 +171,7 @@
     "group":"A",
     "teams":[
       "France",
-      "Albania "
+      "Albania"
     ],
     "score":[
 
@@ -183,7 +183,7 @@
     "group":"B",
     "teams":[
       "England",
-      "Wales "
+      "Wales"
     ],
     "score":[
 
@@ -195,7 +195,7 @@
     "group":"C",
     "teams":[
       "Ukraine",
-      "Northern Ireland "
+      "Northern Ireland"
     ],
     "score":[
 
@@ -207,7 +207,7 @@
     "group":"C",
     "teams":[
       "Germany",
-      "Poland "
+      "Poland"
     ],
     "score":[
 
@@ -219,7 +219,7 @@
     "group":"E",
     "teams":[
       "Italy",
-      "Sweden "
+      "Sweden"
     ],
     "score":[
 
@@ -231,7 +231,7 @@
     "group":"D",
     "teams":[
       "Czech Republic",
-      "Croatia "
+      "Croatia"
     ],
     "score":[
 
@@ -243,7 +243,7 @@
     "group":"D",
     "teams":[
       "Spain",
-      "Turkey "
+      "Turkey"
     ],
     "score":[
 
@@ -255,7 +255,7 @@
     "group":"E",
     "teams":[
       "Belgium",
-      "Republic of Ireland "
+      "Republic of Ireland"
     ],
     "score":[
 
@@ -267,7 +267,7 @@
     "group":"F",
     "teams":[
       "Iceland",
-      "Hungary "
+      "Hungary"
     ],
     "score":[
 
@@ -279,7 +279,7 @@
     "group":"F",
     "teams":[
       "Portugal",
-      "Austria "
+      "Austria"
     ],
     "score":[
 
@@ -291,7 +291,7 @@
     "group":"A",
     "teams":[
       "Switzerland",
-      "France "
+      "France"
     ],
     "score":[
 
@@ -303,7 +303,7 @@
     "group":"A",
     "teams":[
       "Romania",
-      "Albania "
+      "Albania"
     ],
     "score":[
 
@@ -315,7 +315,7 @@
     "group":"B",
     "teams":[
       "Slovakia",
-      "England "
+      "England"
     ],
     "score":[
 
@@ -327,7 +327,7 @@
     "group":"B",
     "teams":[
       "Russia",
-      "Wales "
+      "Wales"
     ],
     "score":[
 
@@ -339,7 +339,7 @@
     "group":"C",
     "teams":[
       "Northern Ireland",
-      "Germany "
+      "Germany"
     ],
     "score":[
 
@@ -351,7 +351,7 @@
     "group":"C",
     "teams":[
       "Ukraine",
-      "Poland "
+      "Poland"
     ],
     "score":[
 
@@ -363,7 +363,7 @@
     "group":"D",
     "teams":[
       "Croatia",
-      "Spain "
+      "Spain"
     ],
     "score":[
 
@@ -375,7 +375,7 @@
     "group":"D",
     "teams":[
       "Czech Republic",
-      "Turkey "
+      "Turkey"
     ],
     "score":[
 
@@ -387,7 +387,7 @@
     "group":"F",
     "teams":[
       "Hungary",
-      "Portugal "
+      "Portugal"
     ],
     "score":[
 
@@ -399,7 +399,7 @@
     "group":"F",
     "teams":[
       "Iceland",
-      "Austria "
+      "Austria"
     ],
     "score":[
 
@@ -411,7 +411,7 @@
     "group":"E",
     "teams":[
       "Sweden",
-      "Belgium "
+      "Belgium"
     ],
     "score":[
 
@@ -423,192 +423,12 @@
     "group":"E",
     "teams":[
       "Italy",
-      "Republic of Ireland "
+      "Republic of Ireland"
     ],
     "score":[
 
     ],
     "time":"2016-06-22T19:00:00.000Z",
     "venue":"Lille"
-  },
-  {
-    "group":"1",
-    "teams":[
-      "Runner-up Group A",
-      "Runner-up C "
-    ],
-    "score":[
-
-    ],
-    "time":"2016-06-25T13:00:00.000Z",
-    "venue":"St-Etienne"
-  },
-  {
-    "group":"2",
-    "teams":[
-      "Winner B",
-      "Third-place A/C/D "
-    ],
-    "score":[
-
-    ],
-    "time":"2016-06-25T16:00:00.000Z",
-    "venue":"Paris"
-  },
-  {
-    "group":"3",
-    "teams":[
-      "Winner D",
-      "Third-place B/E/F "
-    ],
-    "score":[
-
-    ],
-    "time":"2016-06-25T19:00:00.000Z",
-    "venue":"Lens"
-  },
-  {
-    "group":"4",
-    "teams":[
-      "Winner A",
-      "Third-place C/D/E "
-    ],
-    "score":[
-
-    ],
-    "time":"2016-06-26T13:00:00.000Z",
-    "venue":"Lyon"
-  },
-  {
-    "group":"5",
-    "teams":[
-      "Winner C",
-      "Third-place A/B/F "
-    ],
-    "score":[
-
-    ],
-    "time":"2016-06-26T16:00:00.000Z",
-    "venue":"Lille"
-  },
-  {
-    "group":"6",
-    "teams":[
-      "Winner F",
-      "Runner-up E "
-    ],
-    "score":[
-
-    ],
-    "time":"2016-06-26T19:00:00.000Z",
-    "venue":"Toulouse"
-  },
-  {
-    "group":"7",
-    "teams":[
-      "Winner E",
-      "Runner-up D "
-    ],
-    "score":[
-
-    ],
-    "time":"2016-06-27T16:00:00.000Z",
-    "venue":"St-Denis"
-  },
-  {
-    "group":"8",
-    "teams":[
-      "Runner-up B",
-      "Runner-up F "
-    ],
-    "score":[
-
-    ],
-    "time":"2016-06-27T19:00:00.000Z",
-    "venue":"Nice"
-  },
-  {
-    "group":"Q",
-    "teams":[
-      "Winner Match 1",
-      "Winner Match 3 "
-    ],
-    "score":[
-
-    ],
-    "time":"2016-06-30T19:00:00.000Z",
-    "venue":"Marseille"
-  },
-  {
-    "group":"Q",
-    "teams":[
-      "Winner Match 2",
-      "Winner Match 6 "
-    ],
-    "score":[
-
-    ],
-    "time":"2016-07-01T19:00:00.000Z",
-    "venue":"Lille"
-  },
-  {
-    "group":"Q",
-    "teams":[
-      "Winner Match 5",
-      "Winner Match 7 "
-    ],
-    "score":[
-
-    ],
-    "time":"2016-07-02T19:00:00.000Z",
-    "venue":"Bordeaux"
-  },
-  {
-    "group":"Q",
-    "teams":[
-      "Winner Match 4",
-      "Winner Match 8 "
-    ],
-    "score":[
-
-    ],
-    "time":"2016-07-03T19:00:00.000Z",
-    "venue":"St-Denis"
-  },
-  {
-    "group":"S",
-    "teams":[
-      "Winner QF1",
-      "Winner QF2 "
-    ],
-    "score":[
-
-    ],
-    "time":"2016-07-06T19:00:00.000Z",
-    "venue":"Lyon"
-  },
-  {
-    "group":"S",
-    "teams":[
-      "Winner QF3",
-      "Winner QF4 "
-    ],
-    "score":[
-
-    ],
-    "time":"2016-07-07T19:00:00.000Z",
-    "venue":"Marseille"
-  },
-  {
-    "group":"S",
-    "teams":[
-      "Winner SF1",
-      "Winner SF2 "
-    ],
-    "score":[
-
-    ],
-    "time":"2016-07-10T19:00:00.000Z",
-    "venue":"St-Denis"
   }
 ]

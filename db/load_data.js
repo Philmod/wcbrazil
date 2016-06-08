@@ -35,14 +35,14 @@ module.exports = function(server) {
   };
 
   var mapTeam = function(teams) {
-    if (teams[0] === 'Bosnia Herzegovina')
-      teams[0] = 'Bosnia-Herzegovina';
-    if (teams[1] === 'Bosnia Herzegovina')
-      teams[1] = 'Bosnia-Herzegovina';
-    if (teams[0] === 'United States')
-      teams[0] = 'USA';
-    if (teams[1] === 'United States')
-      teams[1] = 'USA';
+    // if (teams[0] === 'Bosnia Herzegovina')
+    //   teams[0] = 'Bosnia-Herzegovina';
+    // if (teams[1] === 'Bosnia Herzegovina')
+    //   teams[1] = 'Bosnia-Herzegovina';
+    // if (teams[0] === 'United States')
+    //   teams[0] = 'USA';
+    // if (teams[1] === 'United States')
+    //   teams[1] = 'USA';
     return teams;
   }
 
@@ -52,7 +52,7 @@ module.exports = function(server) {
   async.series([
     // 1. Check games.
     function(callback) {
-      Game.count(function(e,c) {
+      Game.count(function(e, c) {
         if (e) stop('Error counting the games', e);
         if (c < games.length) {
           console.log('Loading the games into the DB...');
