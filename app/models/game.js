@@ -18,7 +18,7 @@ module.exports = function(server) {
   /**
    * Constants.
    */
-  var FINALES_START_DATE = new Date(moment.tz("2014-06-28 00:00:00", "America/Fortaleza").format());
+  var FINALES_START_DATE = new Date(moment.tz("2016-06-24 00:00:00", server.config.tz).format());
 
   /**
    * Bet schema.
@@ -27,7 +27,7 @@ module.exports = function(server) {
       user  : { type: String }
     , bet   : { type: String } // 1, X, or 2; 1+, 1++, 2+, 2++, 1X, 2X
     , points: { type: Number, default: 0 }
-    /* 
+    /*
       - N being the number of participants
       - W being the number of winners for that prediction
       --> The gained points P are calculated by P = N / (W + 0,1 x N)
@@ -88,20 +88,20 @@ module.exports = function(server) {
           }
           time = self.goals[i].minutes || 0;
         }
-        
+
         if (!time && (_.isNull(g.scorePenalty) && _.isNull(g.scoreExtraTime))) {
           time = 90;
         }
 
         if (time <= 90) {
           if ( (Math.abs(self.score[0] - self.score[1])) >= 2)
-            win = (self.score[0] > self.score[1]) ? '1++' : '2++';  
+            win = (self.score[0] > self.score[1]) ? '1++' : '2++';
           else if ( (Math.abs(self.score[0] - self.score[1])) == 1)
             win = (self.score[0] > self.score[1]) ? '1+' : '2+';
         }
         else {
           if ( (Math.abs(self.score[0] - self.score[1])) > 0)
-            win = (self.score[0] > self.score[1]) ? '1X' : '2X';  
+            win = (self.score[0] > self.score[1]) ? '1X' : '2X';
         }
       }
 
@@ -135,14 +135,14 @@ module.exports = function(server) {
    */
   Game.static({
 
-    
+
     findByDate: function(date, callback) {
       date = new Date(date);
-      var dateStart = new Date(2014, 5, 12);
+      var dateStart = new Date(2016, 5, 12);
       if (date < dateStart)
         date = dateStart;
-      var start = moment(date).tz('America/Fortaleza').startOf('day').format();
-      var end = moment(date).tz('America/Fortaleza').endOf('day').format();
+      var start = moment(date).tz(server.config.tz).startOf('day').format();
+      var end = moment(date).tz(server.config.tz).endOf('day').format();
       this.find({time: {$gte: start, $lt: end}}).sort('time').exec(callback);
     },
 
@@ -170,14 +170,14 @@ module.exports = function(server) {
             gameDb.goals.push({
                 minutes : g.timeGoal || 0
               , score : g.score
-              , time : moment().tz("America/Fortaleza").format()
+              , time : moment().tz(server.config.tz).format()
             });
           }
           if (g.scorePenalty && g.scorePenalty.length > 0) {
             gameDb.goals.push({
                 minutes : 120
               , score : g.score
-              , time : moment().tz("America/Fortaleza").format()
+              , time : moment().tz(server.config.tz).format()
             });
           }
           gameDb.save(function(e, game) {
@@ -194,7 +194,7 @@ module.exports = function(server) {
 
     getBetsPoints: function(date, callback) {
       date = new Date(date);
-      var dateStart = new Date(2014, 5, 12);
+      var dateStart = new Date(2016, 5, 12);
       if (date < dateStart)
         date = dateStart;
 
@@ -205,7 +205,7 @@ module.exports = function(server) {
       // Get games until end of the day.
       var query = {
         time: {
-          $lte: (moment(date).tz('America/Fortaleza').endOf('day').format())
+          $lte: (moment(date).tz(server.config.tz).endOf('day').format())
         }
       };
       // If finales, don't take older bets.
@@ -225,7 +225,7 @@ module.exports = function(server) {
           });
 
           // Export the bets of the day.
-          if (moment(g.time).tz('America/Fortaleza').format('YYYY-MM-D') === moment(date).tz('America/Fortaleza').format('YYYY-MM-D')) {
+          if (moment(g.time).tz(server.config.tz).format('YYYY-MM-D') === moment(date).tz(server.config.tz).format('YYYY-MM-D')) {
             _.each(g.bets, function(b) {
               if (!betsDay[b.user])
                 betsDay[b.user] = [];
@@ -256,7 +256,7 @@ module.exports = function(server) {
           var rank = 0;
           for (var i = 0; i<betsOut.length; i++) {
             if (i===0 || betsOut[i].points !== betsOut[i-1].points) {
-              rank = i + 1;  
+              rank = i + 1;
             }
             betsOut[i].ranking = rank;
           }
@@ -267,7 +267,7 @@ module.exports = function(server) {
 // console.log('betsOut : ', betsOut);
           callback(null, betsOut);
         });
-        
+
       });
     },
 
@@ -317,7 +317,7 @@ module.exports = function(server) {
         var rank = 0;
         for (var i = 0; i<betsOrdered.length; i++) {
           if (i===0 || betsOrdered[i].points !== betsOrdered[i-1].points) {
-            rank = i + 1;  
+            rank = i + 1;
           }
           ranking[betsOrdered[i].user] = rank;
         }
@@ -328,13 +328,13 @@ module.exports = function(server) {
 
   });
 
-  
+
   /**
    * Pre save.
    */
   Game.pre('save', function(next) {
     var self = this;
-    
+
     if (this.isNew || this.isModified('score')) {
       // Recalculate the users scores.
 
@@ -342,7 +342,7 @@ module.exports = function(server) {
     } else {
       next();
     }
-    
+
   });
 
   /**

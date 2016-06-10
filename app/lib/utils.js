@@ -153,7 +153,7 @@ module.exports = server => {
     },
 
     getDate: function() {
-      // return moment.tz("2014-06-28 22:00:00", "America/Fortaleza").format();
+      // return moment.tz("2014-06-28 22:00:00", server.config.tz).format();
       var date = new Date();
       if (server.program.date) {
         date = new Date(server.program.date);

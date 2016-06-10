@@ -54,6 +54,11 @@ module.exports = function(server, next) {
   };
 
   /**
+   * Timezone.
+   */
+  server.config.tz = 'CET';
+
+  /**
    * Redis.
    */
   if (process.env.REDISTOGO_URL) {
