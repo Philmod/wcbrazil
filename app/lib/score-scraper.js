@@ -16,8 +16,8 @@ module.exports = function (options) {
   var url = 'http://www.livescore.com/euro/';
   // var url = 'http://www.livescore.com/worldcup/match/?match=1-1444464';
   var mainClass  = '.content';
-  var teamsClass = '.name';
-  var scoreClass = '.md .row-light .sco';
+  var teamsClass = '.ply.name';
+  var scoreClass = '.row-light .sco';
   var scoresClass = '.row-gray .sco';
   var scoresNamesClass = '.row-gray .info';
 
@@ -48,10 +48,12 @@ module.exports = function (options) {
          */
         $(mainClass + ' ' + teamsClass).each(function() {
           var team = $(this).html().replace('*', '').trim();
-          if (teamsA.length > teamsB.length) {
-            teamsB.push(team);
-          } else {
-            teamsA.push(team);
+          if (team) {
+            if (teamsA.length > teamsB.length) {
+              teamsB.push(team);
+            } else {
+              teamsA.push(team);
+            }
           }
         });
         $(mainClass + ' ' + scoreClass).each(function() {
