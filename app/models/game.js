@@ -138,7 +138,7 @@ module.exports = function(server) {
 
     findByDate: function(date, callback) {
       date = new Date(date);
-      var dateStart = new Date(2016, 5, 12);
+      var dateStart = new Date(2016, 5, 9);
       if (date < dateStart)
         date = dateStart;
       var start = moment(date).tz(server.config.tz).startOf('day').format();
@@ -194,7 +194,7 @@ module.exports = function(server) {
 
     getBetsPoints: function(date, callback) {
       date = new Date(date);
-      var dateStart = new Date(2016, 5, 12);
+      var dateStart = new Date(2016, 5, 9);
       if (date < dateStart)
         date = dateStart;
 
