@@ -21,6 +21,13 @@ module.exports = function (options) {
   var scoresClass = '.row-gray .sco';
   var scoresNamesClass = '.row-gray .info';
 
+  var mapTeam = function(team) {
+    if (team === "N.Ireland")
+      team = "Northern Ireland";
+
+    return team;
+  }
+
   return {
 
     scrap: function(callback) {
@@ -47,7 +54,7 @@ module.exports = function (options) {
          * Extract data.
          */
         $(mainClass + ' ' + teamsClass).each(function() {
-          var team = $(this).html().replace('*', '').trim();
+          var team = mapTeam($(this).html().replace('*', '').trim());
           if (team) {
             if (teamsA.length > teamsB.length) {
               teamsB.push(team);
