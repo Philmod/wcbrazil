@@ -24,7 +24,9 @@ module.exports = function (options) {
   var mapTeam = function(team) {
     if (team === "N.Ireland")
       team = "Northern Ireland";
-
+    if (team === "Ireland")
+      team = "Republic of Ireland";
+      
     return team;
   }
 
