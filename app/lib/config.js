@@ -71,7 +71,7 @@ module.exports = function(server, next) {
   server.redis.on("error", function(err) {
     console.log("Redis Error " + err);
   });
-  client.on("connect", function () {
+  server.redis.on("connect", function () {
     console.log('Redis connected.');
   });
 
