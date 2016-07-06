@@ -1,1 +1,28 @@
-[]
+[
+   {
+      "finales":2,
+      "group":"S",
+      "teams":[
+         "Portugal",
+         "Wales"
+      ],
+      "score":[
+
+      ],
+      "time":"2016-07-06T19:00:00.000Z",
+      "venue":"Lyon"
+   },
+   {
+      "finales":2,
+      "group":"S",
+      "teams":[
+         "Germany",
+         "France"
+      ],
+      "score":[
+
+      ],
+      "time":"2016-07-07T19:00:00.000Z",
+      "venue":"Marseille"
+   }
+]
