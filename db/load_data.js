@@ -19,12 +19,12 @@ module.exports = function(server) {
   var gamesFinales8 = utils.loadJSON(__dirname + '/gamesFinales8.json');
   var gamesFinales4 = utils.loadJSON(__dirname + '/gamesFinales4.json');
   var gamesFinales2 = utils.loadJSON(__dirname + '/gamesFinales2.json');
-  var gamesFinales1 = []; // utils.loadJSON(__dirname + '/gamesFinales1.json');
+  var gamesFinales1 = utils.loadJSON(__dirname + '/gamesFinales1.json');
   var bets = utils.loadJSON(__dirname + '/bets.json');
   var betsFinales8 = utils.loadJSON(__dirname + '/betsFinales8.json');
   var betsFinales4 = utils.loadJSON(__dirname + '/betsFinales4.json');
   var betsFinales2 = utils.loadJSON(__dirname + '/betsFinales2.json');
-  var betsFinales1 = []; // utils.loadJSON(__dirname + '/betsFinales1.json');
+  var betsFinales1 = utils.loadJSON(__dirname + '/betsFinales1.json');
 
   /**
    * Stop if error.
