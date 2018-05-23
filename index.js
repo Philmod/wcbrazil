@@ -1,7 +1,6 @@
 /**
  * Dependencies.
  */
-var newrelic = require('newrelic');
 var app = require('express')();
 var server  = require('http').createServer(app);
 app.io = require('socket.io')(server);
