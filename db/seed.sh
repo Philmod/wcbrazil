@@ -1,5 +1,5 @@
 #!/bin/bash
-# usage: db/seed.sh localhost france2016_localhost dbport dbuser dbpwd 
+# usage: db/seed.sh localhost russia2018_localhost dbport dbuser dbpwd 
 
 DIR="$( cd "$( dirname "$0" )" && pwd )"
 
@@ -16,7 +16,7 @@ fi
   
 if [ -z $2 ] 
 then
-  DBNAME="france2016_localhost"
+  DBNAME="russia2018_localhost"
 fi
 
  echo "Running mongo_seed.js with db $DBHOST/$DBNAME"

@@ -1,11 +1,11 @@
 var defaults = {
   host     : 'localhost',
-  database : 'france2016_localhost'
+  database : 'russia2018_localhost'
 };
 
 exports.test = {
   host     : 'localhost',
-  database : 'france2016_test'
+  database : 'russia2018_test'
 };
 
 exports.production  = defaults;
