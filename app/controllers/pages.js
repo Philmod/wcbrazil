@@ -18,7 +18,7 @@ module.exports = function(server) {
         Game.getBetsPoints(date, function(e, bets) {
 
           res.render('index', {
-              title : 'France 2016'
+              title : 'Russia 2018'
             , games : games
             , bets  : bets
           });

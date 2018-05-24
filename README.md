@@ -1,4 +1,4 @@
-france2016
+russia2018
 ==========
 
 Single page to see the last scores of the Euro Cup 2016, realtime comments, and scores of the bets.

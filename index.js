@@ -53,7 +53,7 @@ require('./app/sockets')(app);
 var port = app.set('port');
 if (app.program.server) {
   server.listen(process.env.PORT || port || 80, function() {
-    console.log("France2016 HTTP listening on port " + port);
+    console.log("Russia2018 HTTP listening on port " + port);
   });
 }
 

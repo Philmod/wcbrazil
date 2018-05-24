@@ -2,7 +2,7 @@
 
 /* Controllers */
 
-angular.module('france2016App.controllers', [])
+angular.module('russia2018App.controllers', [])
   .controller('AppCtrl', function ($scope, socket) {
     // Check if ie8.
     if (get_browser() === 'MSIE' && get_browser_version() === '8') {
