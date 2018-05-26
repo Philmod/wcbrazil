@@ -1,5 +1,3 @@
-// http://www.livefyre.com/install/
-
 /**
  * Dependencies.
  */

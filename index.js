@@ -93,7 +93,6 @@ new compressor.minify({
             , 'public/js/controllers.js'
             , 'public/js/filters.js'
             , 'node_modules/socket.io-client/socket.io.js'
-            , 'public/js/livefyre.js'
             ],
     fileOut: 'public/base-onefile.js',
     callback: function(err, min){

@@ -39,7 +39,7 @@
   },
   "scripts": {
     "start": "node index.js -s",
-    "dev": "node index.js -s -d '2016-06-12'",
+    "dev": "node index.js -s -d '2018-06-14'",
     "test": "NODE_ENV=test mocha test",
     "clean": "rm *.tmp",
     "load-data": "node index.js -l"
