@@ -1,7 +1,13 @@
-var fs = require('fs')
-  , async = require('async')
-  ;
+/**
+ * Dependencies.
+ */
+const fs = require('fs');
+const async = require('async');
+const api = require('../app/lib/football-data-api')();
 
+/**
+ * Module.
+ */
 module.exports = function(server) {
 
   /**
@@ -15,16 +21,17 @@ module.exports = function(server) {
   /**
    * Data.
    */
-  var games = utils.loadJSON(__dirname + '/games.json');
-  var gamesFinales8 = utils.loadJSON(__dirname + '/gamesFinales8.json');
-  var gamesFinales4 = utils.loadJSON(__dirname + '/gamesFinales4.json');
-  var gamesFinales2 = utils.loadJSON(__dirname + '/gamesFinales2.json');
-  var gamesFinales1 = utils.loadJSON(__dirname + '/gamesFinales1.json');
-  var bets = utils.loadJSON(__dirname + '/bets.json');
-  var betsFinales8 = utils.loadJSON(__dirname + '/betsFinales8.json');
-  var betsFinales4 = utils.loadJSON(__dirname + '/betsFinales4.json');
-  var betsFinales2 = utils.loadJSON(__dirname + '/betsFinales2.json');
-  var betsFinales1 = utils.loadJSON(__dirname + '/betsFinales1.json');
+  var games = [];
+  // var games = utils.loadJSON(__dirname + '/games.json');
+  // var gamesFinales8 = utils.loadJSON(__dirname + '/gamesFinales8.json');
+  // var gamesFinales4 = utils.loadJSON(__dirname + '/gamesFinales4.json');
+  // var gamesFinales2 = utils.loadJSON(__dirname + '/gamesFinales2.json');
+  // var gamesFinales1 = utils.loadJSON(__dirname + '/gamesFinales1.json');
+  // var bets = utils.loadJSON(__dirname + '/bets.json');
+  // var betsFinales8 = utils.loadJSON(__dirname + '/betsFinales8.json');
+  // var betsFinales4 = utils.loadJSON(__dirname + '/betsFinales4.json');
+  // var betsFinales2 = utils.loadJSON(__dirname + '/betsFinales2.json');
+  // var betsFinales1 = utils.loadJSON(__dirname + '/betsFinales1.json');
 
   /**
    * Stop if error.
@@ -50,6 +57,15 @@ module.exports = function(server) {
    * Check if data.
    */
   async.series([
+    // Get games using API.
+    function(callback) {
+      api.games((e, results) => {
+        if (e) return callback(e);
+        games = results;
+        callback();
+      })
+    },
+
     // 1. Check games.
     function(callback) {
       Game.count(function(e, c) {

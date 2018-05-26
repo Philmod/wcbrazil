@@ -1,9 +1,9 @@
 /**
  * Dependencies.
  */
-var request = require('request');
-var cheerio = require('cheerio');
-
+const request = require('request');
+const cheerio = require('cheerio');
+const fakeUa = require('fake-useragent');
 
 /**
  * Module.
@@ -13,10 +13,9 @@ module.exports = function (options) {
   /**
    * Constants.
    */
-  var url = 'http://www.livescore.com/euro/';
-  // var url = 'http://www.livescore.com/worldcup/match/?match=1-1444464';
+  var url = 'http://terrikon.com/livescore'; // http://www.livescore.cz/
   var mainClass  = '.content';
-  var teamsClass = '.ply.name';
+  var teamsClass = '.ply';
   var scoreClass = '.row-light .sco';
   var scoresClass = '.row-gray .sco';
   var scoresNamesClass = '.row-gray .info';
@@ -34,9 +33,18 @@ module.exports = function (options) {
 
     scrap: function(callback) {
 
-      request(url, function(e, r, b) {
+      request({
+        url: url,
+        headers: {
+          'User-Agent': fakeUa()
+        }
+      }, function(e, r, b) {
         if (e)
           return callback(e);
+        statusCode = r && r.statusCode
+        if (statusCode != 200) {
+          return callback(new Error(statusCode))
+        }
 
         b = b.replace(/<(\/?)script/g, '<$1nobreakage');
 
@@ -55,8 +63,10 @@ module.exports = function (options) {
         /**
          * Extract data.
          */
-        $(mainClass + ' ' + teamsClass).each(function() {
+        $(mainClass + ' ' + teamsClass).each(function(i, element) {
+          console.log("ya: ", $(this).html())
           var team = mapTeam($(this).html().replace('*', '').trim());
+          console.log("team: ", team)
           if (team) {
             if (teamsA.length > teamsB.length) {
               teamsB.push(team);

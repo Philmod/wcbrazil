@@ -51,7 +51,6 @@ module.exports = function(server) {
       time  : { type: Date }
     , teams : [ { type: String }]
     , score : [ { type: Number, default: 0 }]
-    , group : { type: String }
     , bets  : [Bet]
     , finales : { type: Number, default: -1 }
     , goals : [Goal]
@@ -144,20 +143,6 @@ module.exports = function(server) {
       var start = moment(date).tz(server.config.tz).startOf('day').format();
       var end = moment(date).tz(server.config.tz).endOf('day').format();
       this.find({time: {$gte: start, $lt: end}}).sort('time').exec(callback);
-    },
-
-    /**
-     * Get groups playing at that time.
-     */
-    groupByDate: function(date, callback) {
-      date = new Date(date);
-      var start = new Date(moment(date).subtract('hours', 2).format());
-      var end = date;
-      this.find({time: {$gte: start, $lt: end}}, function(e, games) {
-        if (e) return callback(e);
-        var groups = _.map(games, function(g) { return g.group});
-        callback(null, _.uniq(groups));
-      });
     },
 
     updateScore: function(g, callback) {
