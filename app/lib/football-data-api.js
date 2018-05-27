@@ -45,6 +45,30 @@ module.exports = function (options) {
       });
     },
 
+    gameScore: (link, callback) => {
+      let options = {
+        url: link,
+        headers: {
+          'X-Auth-Token': process.env.FOOTBALLDATA_TOKEN,
+        }
+      }
+
+      request(options, (err, res, body) => {
+        if (err || res.statusCode !== 200) {
+          return callback(err || new Error("Error. Got status code " + res.statusCode))
+        }      
+        let info = JSON.parse(body);
+        let result = info.fixture.result;
+        console.log('result', result)
+        return callback({
+            teams  : [info.fixture.homeTeamName, info.fixture.awayTeamName]
+          , score  : [result.goalsHomeTeam || 0, result.goalsAwayTeam || 0]
+          , scoreExtraTime : ( result.extraTime && [result.extraTime.goalsHomeTeam, result.extraTime.goalsAwayTeam] ) || null
+          , scorePenalty : ( result.penaltyShootout && [result.penaltyShootout.goalsHomeTeam, result.penaltyShootout.goalsAwayTeam] ) || null
+        })
+      });
+    },
+
   }
 
 }
