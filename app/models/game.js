@@ -49,11 +49,12 @@ module.exports = function(server) {
    */
   var Game = module.exports = new Schema({
       time  : { type: Date }
-    , teams : [ { type: String }]
+    , teams : [ { type: String } ]
     , score : [ { type: Number, default: 0 }]
     , bets  : [Bet]
     , finales : { type: Number, default: -1 }
     , goals : [Goal]
+    , link  : { type: String }
   });
 
   Game.plugin(common.timestamps('created', 'updated'));
