@@ -15,6 +15,8 @@ module.exports = function(server) {
 
   var mongourl = process.env.MONGODB_URI ||
     'mongodb://' + auth + mongodb.host + ':' + (mongodb.port || 27017) + '/' + mongodb.database;
+  
+  console.log('Connecting to %q', mongourl);
 
   db = mongoose.createConnection(mongourl, options, function (err, db2) {
     if (err) console.error('MONGODB : ', err.message);
