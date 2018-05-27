@@ -7,4 +7,5 @@ steps:
   args: ['build', '-t', 'gcr.io/$PROJECT_ID/russia2018:$REVISION_ID', '.']
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'gcr.io/$PROJECT_ID/russia2018:$REVISION_ID']
+  
 # TODO(philmod): deploy to kubernetes
