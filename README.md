@@ -1,7 +1,7 @@
 russia2018
 ==========
 
-Single page to see the last scores of the Euro Cup 2016, realtime comments, and scores of the bets.
+Single page to see the last scores of the World Cup 2018, realtime comments, and scores of the bets.
 
 ## Prerequisites
 - MongoDB
