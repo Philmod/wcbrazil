@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: russia2018
+  annotations:
+    serviceloadbalancer/lb.aclMatch: "-i /socket.io"
+    # Enable sticky-ness on "SERVERID"
+    serviceloadbalancer/lb.cookie-sticky-session: "true"
+  labels:
+    name: russia2018
+spec:
+  ports:
+  - name: russia2018-service
+    port: 80
+    protocol: TCP
+    targetPort: 4440
+  selector:
+    name: russia2018

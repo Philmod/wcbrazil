@@ -61,13 +61,11 @@ module.exports = function(server, next) {
   /**
    * Redis.
    */
-  if (process.env.REDISTOGO_URL) {
-    var rtg = require("url").parse(process.env.REDISTOGO_URL);
-    server.redis = redis.createClient(rtg.port, rtg.hostname);
-    server.redis.auth(rtg.auth.split(":")[1]);
-  } else {
-    server.redis = redis.createClient();
-  }
+  var redisOptions = {
+    host: process.env.REDIS_SERVICE_HOST || process.env.REDIS_PORT_6379_TCP_ADDR || 'localhost',
+    port: process.env.REDIS_SERVICE_PORT || 6379
+  };
+  server.redis = redis.createClient(redisOptions);
   server.redis.on("error", function(err) {
     console.log("Redis Error " + err);
   });
