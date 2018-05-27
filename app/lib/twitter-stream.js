@@ -28,10 +28,10 @@ module.exports = function(server) {
    * Variables.
    */
   var twitterCreds = {
-      consumer_key: process.env.FRANCE2016_TWITTER_CONSUMER_KEY
-    , consumer_secret: process.env.FRANCE2016_TWITTER_CONSUMER_SECRET
-    , access_token_key: process.env.FRANCE2016_TWITTER_ACCESS_TOKEN_KEY
-    , access_token_secret: process.env.FRANCE2016_TWITTER_ACCESS_TOKEN_SECRET
+      consumer_key: process.env.TWITTER_KEY
+    , consumer_secret: process.env.TWITTER_SECRET
+    , access_token_key: process.env.TWITTER_TOKEN
+    , access_token_secret: process.env.TWITTER_TOKEN_SECRET
   };
   var twit = new twitter(twitterCreds);
   var isConnected = true;

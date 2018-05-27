@@ -1,8 +1,8 @@
-var fs = require('fs')
-  , async = require('async')
-  , scoreScraper = require('../lib/score-scraper.js')()
-  , moment = require('moment-timezone')
-  ;
+const fs = require('fs');
+const async = require('async');
+const scoreScraper = require('../lib/score-scraper.js')();
+const moment = require('moment-timezone');
+const api = require('../lib/football-data-api')();
 
 module.exports = function(server) {
 
@@ -92,6 +92,20 @@ module.exports = function(server) {
         }
       });
 
+    });
+
+    // Also get scores from API.
+    // TODO(philmod): make sure the results are "live" before considering them.
+    Game.findByDate(date, function(e, games) {
+      if (e) console.error('Error getting the games : ', e);
+      else {
+        games.forEach((game) => {
+          api.gameScore(game.link, (e, score) => {
+            if (e) console.error('Error getting the game score (api) : ', e);
+            else console.log('Score:', score)
+          });
+        });
+      }
     });
 
   }, server.config.scraping.dt);

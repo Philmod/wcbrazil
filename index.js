@@ -1,7 +1,6 @@
 /**
  * Dependencies.
  */
-var newrelic = require('newrelic');
 var app = require('express')();
 var server  = require('http').createServer(app);
 app.io = require('socket.io')(server);
@@ -54,7 +53,7 @@ require('./app/sockets')(app);
 var port = app.set('port');
 if (app.program.server) {
   server.listen(process.env.PORT || port || 80, function() {
-    console.log("France2016 HTTP listening on port " + port);
+    console.log("Russia2018 HTTP listening on port " + port);
   });
 }
 
@@ -94,7 +93,6 @@ new compressor.minify({
             , 'public/js/controllers.js'
             , 'public/js/filters.js'
             , 'node_modules/socket.io-client/socket.io.js'
-            , 'public/js/livefyre.js'
             ],
     fileOut: 'public/base-onefile.js',
     callback: function(err, min){

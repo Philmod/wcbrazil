@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('france2016App.filters', [])
+angular.module('russia2018App.filters', [])
   .filter('hours', function (version) {
     return function (date) {
       return new Date(date).getHours();

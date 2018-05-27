@@ -18,7 +18,7 @@ module.exports = function(server) {
   /**
    * Constants.
    */
-  var FINALES_START_DATE = new Date(moment.tz("2016-06-24 00:00:00", server.config.tz).format());
+  var FINALES_START_DATE = new Date(moment.tz("2016-06-30 00:00:00", server.config.tz).format());
 
   /**
    * Bet schema.
@@ -49,12 +49,12 @@ module.exports = function(server) {
    */
   var Game = module.exports = new Schema({
       time  : { type: Date }
-    , teams : [ { type: String }]
+    , teams : [ { type: String } ]
     , score : [ { type: Number, default: 0 }]
-    , group : { type: String }
     , bets  : [Bet]
     , finales : { type: Number, default: -1 }
     , goals : [Goal]
+    , link  : { type: String }
   });
 
   Game.plugin(common.timestamps('created', 'updated'));
@@ -135,7 +135,6 @@ module.exports = function(server) {
    */
   Game.static({
 
-
     findByDate: function(date, callback) {
       date = new Date(date);
       var dateStart = new Date(2016, 5, 9);
@@ -144,20 +143,6 @@ module.exports = function(server) {
       var start = moment(date).tz(server.config.tz).startOf('day').format();
       var end = moment(date).tz(server.config.tz).endOf('day').format();
       this.find({time: {$gte: start, $lt: end}}).sort('time').exec(callback);
-    },
-
-    /**
-     * Get groups playing at that time.
-     */
-    groupByDate: function(date, callback) {
-      date = new Date(date);
-      var start = new Date(moment(date).subtract('hours', 2).format());
-      var end = date;
-      this.find({time: {$gte: start, $lt: end}}, function(e, games) {
-        if (e) return callback(e);
-        var groups = _.map(games, function(g) { return g.group});
-        callback(null, _.uniq(groups));
-      });
     },
 
     updateScore: function(g, callback) {
@@ -194,7 +179,7 @@ module.exports = function(server) {
 
     getBetsPoints: function(date, callback) {
       date = new Date(date);
-      var dateStart = new Date(2016, 5, 9);
+      var dateStart = new Date(2018, 6, 14);
       if (date < dateStart)
         date = dateStart;
 

@@ -14,11 +14,13 @@ module.exports = function(server) {
       var date = utils.getDate();
 
       Game.findByDate(date, function(e, games) {
+        if (e) console.error('Error getting games: ', e);
 
         Game.getBetsPoints(date, function(e, bets) {
+          if (e) console.error('Error getting bets: ', e);
 
           res.render('index', {
-              title : 'France 2016'
+              title : 'Russia 2018'
             , games : games
             , bets  : bets
           });

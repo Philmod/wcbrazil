@@ -62,9 +62,7 @@ block content
           
 
     .row
-      #livefyre-comments.col-sm-6(ng-cloak)
-
-      div(class='col-sm-6 bets' ng-controller='BetsCtrl' ng-cloak)
+      div(class='col-sm-12 bets' ng-controller='BetsCtrl' ng-cloak)
         table(class='table table-hover table-curved')
           thead
             tr
@@ -93,18 +91,3 @@ block content
   script.
     var games = !{JSON.stringify(games)}
     var bets = !{JSON.stringify(bets)}
-
-  //- Livefyre comments
-  script.
-    var articleId = '1464490717117';
-    var networkConfig = {
-      network: 'livefyre.com'
-    };
-    var convConfig = {
-      siteId: '382607',
-      articleId: articleId,
-      el: 'livefyre-comments'
-    };   
-    Livefyre.require(['fyre.conv#3'], function(Conv) {
-        new Conv(networkConfig, [convConfig], function(commentsWidget) {});
-    });

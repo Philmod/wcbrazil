@@ -1,9 +1,9 @@
 /**
  * Dependencies.
  */
-var request = require('request');
-var cheerio = require('cheerio');
-
+const request = require('request');
+const cheerio = require('cheerio');
+const fakeUa = require('fake-useragent');
 
 /**
  * Module.
@@ -13,16 +13,13 @@ module.exports = function (options) {
   /**
    * Constants.
    */
-  var url = 'http://www.livescore.com/euro/';
-  // var url = 'http://www.livescore.com/worldcup/match/?match=1-1444464';
-  var mainClass  = '.content';
-  var teamsClass = '.ply.name';
-  var scoreClass = '.row-light .sco';
-  var scoresClass = '.row-gray .sco';
-  var scoresNamesClass = '.row-gray .info';
+  var url = 'http://terrikon.com/livescore'; // http://www.livescore.cz/
+  var mainClass  = '.content-site';
+  var teamsClass = '.gameresult .team';
+  var scoreClass = '.score';
 
   var mapTeam = function(team) {
-    if (team === "N.Ireland")
+    if (team === "N.Ireland" || team === "North. Ireland")
       team = "Northern Ireland";
     if (team === "Ireland")
       team = "Republic of Ireland";
@@ -34,9 +31,18 @@ module.exports = function (options) {
 
     scrap: function(callback) {
 
-      request(url, function(e, r, b) {
+      request({
+        url: url,
+        headers: {
+          'User-Agent': fakeUa()
+        }
+      }, function(e, r, b) {
         if (e)
           return callback(e);
+        statusCode = r && r.statusCode
+        if (statusCode != 200) {
+          return callback(new Error(statusCode))
+        }
 
         b = b.replace(/<(\/?)script/g, '<$1nobreakage');
 
@@ -48,15 +54,15 @@ module.exports = function (options) {
         var teamsA = [];
         var teamsB = [];
         var scores = [];
-        var scoresDetails = [];
-        var scoresDetailsNames = [];
+        var scoresPenalty = [];
         var results = [];
 
         /**
          * Extract data.
          */
-        $(mainClass + ' ' + teamsClass).each(function() {
+        $(mainClass + ' ' + teamsClass).each(function(i, element) {
           var team = mapTeam($(this).html().replace('*', '').trim());
+          team = team.substring(team.indexOf('>')+1, team.indexOf('</a>'));
           if (team) {
             if (teamsA.length > teamsB.length) {
               teamsB.push(team);
@@ -70,56 +76,27 @@ module.exports = function (options) {
           if (score.match('</a>'))
             score = score.substring(score.indexOf('>')+1, score.indexOf('</a>'));
           score = score.trim();
-          scores.push(score);
-        });
-        $(scoresNamesClass).each(function() {
-          var scoreName = $(this).html();
-          var html = cheerio.load(scoreName);
-          var i = 0
-            , ss = [];
-          html('div').each(function() {
-            ss.push($(this).html());
-          });
-          if (ss.length > 0) {
-            scoresDetailsNames.push(ss);
-          }
-        });
-        $(scoresClass).each(function() {
-          var score = $(this).html();
-          var html = cheerio.load(score);
-          var i = 0
-            , ss = [];
-          html('div').each(function() {
-            var arr = /\((\d)\s-\s(\d)\)/.exec($(this).html());
-            if (arr) {
-              ss.push([parseInt(arr[1]), parseInt(arr[2])]);
-            } else {
-              ss.push([])
-            }
-            i += 1;
-          });
-          if (ss.length > 0) {
-            scoresDetails.push(ss);
+          scoreSplit = score.split('<br>')
+          if (scoreSplit.length > 1) {
+            scores.push(scoreSplit[0]);
+            scoresPenalty.push(scoreSplit[1].replace('(', '').replace(')', '').trim());
+          } else {
+            scores.push(score);
+            scoresPenalty.push('')
           }
         });
 
         /**
          * Gather the result in a array of objects.
          */
-        for (var i = 0; i < scores.length; i++) {
-          var score = scores[i];
-          score = [parseInt(score.substring(0,score.indexOf('-')-1)), parseInt(score.substring(score.indexOf('-')+2))];
-
-          // Get penaly index.
-          var penaltyIndex = 2;
-          for (var j = 0; j<scoresDetails[i].length; j++) {
-            if (scoresDetailsNames[i][j].match('penalty'))
-              penaltyIndex = j;
-          };
-          var scorePenalty = scoresDetails[i][penaltyIndex];
+        for (let i = 0; i < scores.length; i++) {
+          let score = scores[i];
+          score = [parseInt(score.substring(0,score.indexOf(':'))), parseInt(score.substring(score.indexOf(':')+1,score.length))];
 
           // add the penalty result to the score
+          let scorePenalty = scoresPenalty[i];
           if (scorePenalty) {
+            scorePenalty = [parseInt(scorePenalty.substring(0,scorePenalty.indexOf(':'))), parseInt(scorePenalty.substring(scorePenalty.indexOf(':')+1,scorePenalty.length))];
             if (scorePenalty[0] > scorePenalty[1]) {
               score[0] += 1;
             } else {
@@ -130,7 +107,8 @@ module.exports = function (options) {
           results.push({
               teams  : [teamsA[i], teamsB[i]]
             , score  : score
-            , scoreExtraTime : scoresDetails[i][1] || null
+            // TODO(philmod): detect extra time score.
+            , scoreExtraTime : null
             , scorePenalty : scorePenalty || null
           });
         };
