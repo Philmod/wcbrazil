@@ -10,7 +10,7 @@ module.exports = function(server) {
   /**
    * Set up mongodb.
    */
-  if(mongodb.user)
+  if (mongodb.user)
     auth = mongodb.user+":"+mongodb.pass+"@";
 
   var mongourl = process.env.MONGODB_URI ||
