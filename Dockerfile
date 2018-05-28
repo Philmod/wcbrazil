@@ -28,6 +28,8 @@ RUN apk add --no-cache --virtual=build-dependencies wget ca-certificates unzip &
     apk del build-dependencies && \
     rm "/tmp/"*
 
+RUN java -version
+
 # Copy code
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
