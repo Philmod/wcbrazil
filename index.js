@@ -80,9 +80,9 @@ if (app.program.load) {
 /**
  * Compress/minify statics.
  */
-compressor.minify({
-    compressor: 'uglifyjs',
-    input: [ 'public/bower_components/angular/angular.js'
+new compressor.minify({
+    type: 'uglifyjs',
+    fileIn: [ 'public/bower_components/angular/angular.js'
             , 'public/bower_components/angular-route/angular-route.js'
             , 'public/bower_components/angular-socket-io/socket.js'
             , 'public/js/lib/jquery/jquery-2.0.3.min.js'
@@ -94,22 +94,22 @@ compressor.minify({
             , 'public/js/filters.js'
             , 'node_modules/socket.io-client/dist/socket.io.js'
             ],
-    output: 'public/base-onefile.js',
+    fileOut: 'public/base-onefile.js',
     callback: function(err, min){
       if (err) console.log('Error minifying JS files', err);
       else console.log('JS Minified.');
     }
 });
-compressor.minify({
-    compressor: 'yui-css',
-    input: [ 'public/bootstrap/css/bootstrap.min.css'
+new compressor.minify({
+    type: 'clean-css',
+    fileIn: [ 'public/bootstrap/css/bootstrap.min.css'
             , 'public/css/app.css'
             , 'public/css/app-responsive.css'
             , 'public/css/app-browser.css'
             , 'public/css/flip.css'
             , 'public/css/anton.css'
             ],
-    output: 'public/base-onefile.css',
+    fileOut: 'public/base-onefile.css',
     callback: function(err, min){
       if (err) console.log('Error minifying CSS files', err);
       else console.log('CSS Minified.');
