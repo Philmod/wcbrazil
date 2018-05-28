@@ -5,31 +5,30 @@ RUN apk update && \
     apk add --no-cache git openssh
 
 # Install java
+ENV JAVA_VERSION=8 \
+    JAVA_UPDATE=171 \
+    JAVA_BUILD=11 \
+    JAVA_PATH=512cd62ec5174c3487ac17c61aaa89e8 \
+    JAVA_HOME="/usr/lib/jvm/default-jvm"
 
-# Default to UTF-8 file.encoding
-ENV LANG C.UTF-8
+RUN apk add --no-cache --virtual=build-dependencies wget ca-certificates unzip && \
+    cd "/tmp" && \
+    wget --header "Cookie: oraclelicense=accept-securebackup-cookie;" \
+        "http://download.oracle.com/otn-pub/java/jdk/${JAVA_VERSION}u${JAVA_UPDATE}-b${JAVA_BUILD}/${JAVA_PATH}/jdk-${JAVA_VERSION}u${JAVA_UPDATE}-linux-x64.tar.gz" && \
+    tar -xzf "jdk-${JAVA_VERSION}u${JAVA_UPDATE}-linux-x64.tar.gz" && \
+    mkdir -p "/usr/lib/jvm" && \
+    mv "/tmp/jdk1.${JAVA_VERSION}.0_${JAVA_UPDATE}" "/usr/lib/jvm/java-${JAVA_VERSION}-oracle" && \
+    ln -s "java-${JAVA_VERSION}-oracle" "$JAVA_HOME" && \
+    ln -s "$JAVA_HOME/bin/"* "/usr/bin/" && \
+    rm -rf "$JAVA_HOME/"*src.zip && \
+    wget --header "Cookie: oraclelicense=accept-securebackup-cookie;" \
+        "http://download.oracle.com/otn-pub/java/jce/${JAVA_VERSION}/jce_policy-${JAVA_VERSION}.zip" && \
+    unzip -jo -d "${JAVA_HOME}/jre/lib/security" "jce_policy-${JAVA_VERSION}.zip" && \
+    rm "${JAVA_HOME}/jre/lib/security/README.txt" && \
+    apk del build-dependencies && \
+    rm "/tmp/"*
 
-# add a simple script that can auto-detect the appropriate JAVA_HOME value
-# based on whether the JDK or only the JRE is installed
-RUN { \
-    echo '#!/bin/sh'; \
-    echo 'set -e'; \
-    echo; \
-    echo 'dirname "$(dirname "$(readlink -f "$(which javac || which java)")")"'; \
-  } > /usr/local/bin/docker-java-home \
-  && chmod +x /usr/local/bin/docker-java-home
-ENV JAVA_HOME /usr/lib/jvm/java-1.8-openjdk/jre
-ENV PATH $PATH:/usr/lib/jvm/java-1.8-openjdk/jre/bin:/usr/lib/jvm/java-1.8-openjdk/bin
-
-ENV JAVA_VERSION 8u151
-ENV JAVA_ALPINE_VERSION 8.151.12-r0
-
-RUN set -x \
-  && apk add --no-cache \
-    openjdk8-jre="$JAVA_ALPINE_VERSION" \
-  && [ "$JAVA_HOME" = "$(docker-java-home)" ]
-
-
+# Copy code
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
