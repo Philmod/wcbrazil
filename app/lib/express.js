@@ -10,6 +10,7 @@ module.exports = function(server) {
 
   // Statics.
   server.use(express.static('public'));
+  server.use('/russia2018', express.static('public'));
 
   // Views rendering.
   server.set('view engine', 'jade');
