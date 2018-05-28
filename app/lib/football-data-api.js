@@ -60,7 +60,7 @@ module.exports = function (options) {
         let info = JSON.parse(body);
         let result = info.fixture.result;
         console.log('result', result)
-        return callback({
+        return callback(null, {
             teams  : [info.fixture.homeTeamName, info.fixture.awayTeamName]
           , score  : [result.goalsHomeTeam || 0, result.goalsAwayTeam || 0]
           , scoreExtraTime : ( result.extraTime && [result.extraTime.goalsHomeTeam, result.extraTime.goalsAwayTeam] ) || null
