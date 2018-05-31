@@ -12,6 +12,9 @@ module.exports = function(server) {
     index: function(req, res, next) {
 
       var date = utils.getDate();
+      if (req.query.date) {
+        date = new Date(req.query.date);
+      }
 
       Game.findByDate(date, function(e, games) {
         if (e) console.error('Error getting games: ', e);
