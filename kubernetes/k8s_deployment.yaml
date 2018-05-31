@@ -1,0 +1,64 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: russia2018
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: russia2018
+        uses: redis
+    spec:
+      containers:
+      - name: russia2018
+        image: gcr.io/node-example-gke/russia2018:341778accb61b79a0d19b4a8c50bfa0f1fdbe7bc
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        env:
+        - name: MONGODB_URI
+          value: mongodb://mongo-0.mongo,mongo-1.mongo,mongo-2.mongo:27017/russia2018_localhost
+        - name: WEBSOCKET_PATH
+          value: /websocket
+        - name: TWITTER_KEY
+          valueFrom:
+            secretKeyRef:
+              name: russia2018-secret
+              key: twitter_key
+        - name: TWITTER_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: russia2018-secret
+              key: twitter_secret
+        - name: TWITTER_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: russia2018-secret
+              key: twitter_token
+        - name: TWITTER_TOKEN_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: russia2018-secret
+              key: twitter_token_secret
+        - name: FOOTBALLDATA_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: russia2018-secret
+              key: footballdata_token
+        ports:
+        - containerPort: 3002
+          protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /status?livenessProbe=1
+            port: 4440
+          initialDelaySeconds: 15
+          timeoutSeconds: 1
+        readinessProbe:
+          httpGet:
+            path: /status?readinessProbe=1
+            port: 4440
+          initialDelaySeconds: 15
+          timeoutSeconds: 1

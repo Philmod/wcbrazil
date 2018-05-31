@@ -1,5 +1,4 @@
-var status = require('./lib/status.js')
-  ;
+const status = require('./lib/status.js');
 
 module.exports = function(server) {
 
@@ -8,7 +7,14 @@ module.exports = function(server) {
   /**
    * Status.
    */
-  server.get('/status', status);
+  server.get('/status', (req, res, next) => {
+    // make sure the database is connected.
+    server.model('Game').count(function(e, c) {
+      if (e) 
+        return next(e);
+      status(req, res, next);
+    })
+  });
 
   /**
    * Main page.

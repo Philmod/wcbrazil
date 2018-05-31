@@ -14,3 +14,5 @@ public/base-onefile.css
 public/base-onefile.js
 
 temp.js
+
+kubernetes/k8s_secret.yaml

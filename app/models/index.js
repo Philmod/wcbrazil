@@ -10,11 +10,13 @@ module.exports = function(server) {
   /**
    * Set up mongodb.
    */
-  if(mongodb.user)
+  if (mongodb.user)
     auth = mongodb.user+":"+mongodb.pass+"@";
 
   var mongourl = process.env.MONGODB_URI ||
     'mongodb://' + auth + mongodb.host + ':' + (mongodb.port || 27017) + '/' + mongodb.database;
+  
+  console.log('Connecting to %s', mongourl);
 
   db = mongoose.createConnection(mongourl, options, function (err, db2) {
     if (err) console.error('MONGODB : ', err.message);

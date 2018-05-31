@@ -101,7 +101,7 @@ new compressor.minify({
     }
 });
 new compressor.minify({
-    type: 'yui-css',
+    type: 'clean-css',
     fileIn: [ 'public/bootstrap/css/bootstrap.min.css'
             , 'public/css/app.css'
             , 'public/css/app-responsive.css'

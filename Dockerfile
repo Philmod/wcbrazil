@@ -4,6 +4,7 @@ FROM zzrot/alpine-node
 RUN apk update && \
     apk add --no-cache git openssh
 
+# Copy code
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
