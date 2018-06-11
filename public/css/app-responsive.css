@@ -23,14 +23,14 @@
   .games p {
     font-size: 12px;
   }
-  
+
   .game {
     min-height: 130px;
   }
 
   .bets .table td {
     font-size: 16px;
-  } 
+  }
 
   .bets .table td, th {
     height: 48px;
@@ -68,7 +68,7 @@
 
   .bets .table td {
     font-size: 12px;
-  } 
+  }
 
   .bets .table td, th {
     height: 32px;
@@ -85,7 +85,7 @@
   .fyre .fyre-comment-footer a {
     padding: 0;
   }
-  
+
 }
 
 @media (max-width: 768px) {
@@ -103,11 +103,11 @@
   .col-sm-12 {
     width: 96%;
   }
-  
-  .bets, #livefyre-comments {
+
+  .bets {
     width: 96.1%;
   }
-  
+
 }
 
 @media (max-width: 568px) {
@@ -122,7 +122,7 @@
   .col-sm-4 {
     width: 30.8%;
   }
-  
+
   .scoresText {
     display: inline;
   }
