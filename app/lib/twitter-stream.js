@@ -74,11 +74,11 @@ module.exports = function(server) {
    */
   // var tweets = JSON.parse(fs.readFileSync(__dirname + '/../test/mocks/GoalFlashTweets.json', 'utf-8'));
   // setTimeout(function() {
-  //   // var data = tweets[0];
+  //   var data = tweets[0];
   //   var data = {
   //     // text: "Brazil *4-2 Chile (101') http://t.co/blabla #GoalFlash #WorldCup"
   //     // text: "Correction: Brazil 3-2 Chile http://www.goal.com/  #GoalFlash #WorldCup"
-  //     text: "Colombia *4-3 Italia (102') http://t.co/blabla #GoalFlash #WorldCup"
+  //     text: "Russia 1-3 Saudi Arabia (12') http://t.co/blabla #GoalFlash #WorldCup"
   //     // text: "Correction: Colombia 0-0 Italia http://www.goal.com/  #GoalFlash #WorldCup"
   //   };
   //   if(!data.text) return;       

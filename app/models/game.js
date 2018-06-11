@@ -18,7 +18,7 @@ module.exports = function(server) {
   /**
    * Constants.
    */
-  var FINALES_START_DATE = new Date(moment.tz("2016-06-30 00:00:00", server.config.tz).format());
+  var FINALES_START_DATE = new Date(moment.tz("2018-06-29 00:00:00", server.config.tz).format());
 
   /**
    * Bet schema.
@@ -179,7 +179,7 @@ module.exports = function(server) {
 
     getBetsPoints: function(date, callback) {
       date = new Date(date);
-      var dateStart = new Date(2018, 6, 14);
+      var dateStart = new Date(2018, 5, 14);
       if (date < dateStart)
         date = dateStart;
 
