@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: russia2018
 spec:
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
