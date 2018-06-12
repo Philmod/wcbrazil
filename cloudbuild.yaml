@@ -13,5 +13,5 @@ steps:
   args:
   - '-c'
   - |
-    echo hello $$BRANCH_NAME
+    echo hello $$PROJECT_ID $$REVISION_ID $$TAG_NAME $$REPO_NAME $$BRANCH_NAME
     # kubectl set image deployment/russia2018 russia2018=gcr.io/$PROJECT_ID/russia2018:$REVISION_ID
