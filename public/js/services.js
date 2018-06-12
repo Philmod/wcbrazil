@@ -5,8 +5,7 @@
 angular.module('russia2018App.services', []).
   factory('socket', function (socketFactory) {
     return socketFactory({
-      // TODO(philmod): set this link in the config.
-      ioSocket: io.connect('/russia2018/socket.io');
+      ioSocket: io(websocketHost, {path: websocketPath}),
     });
   }).
   value('version', '0.1');

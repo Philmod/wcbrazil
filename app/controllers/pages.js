@@ -26,6 +26,8 @@ module.exports = function(server) {
               title : 'Russia 2018'
             , games : games
             , bets  : bets
+            , websocketHost: process.env.WEBSOCKET_HOST || 'ws://localhost:4440'
+            , websocketPath: process.env.WEBSOCKET_PATH || '/socket.io'
           });
 
         });
