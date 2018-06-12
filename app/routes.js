@@ -35,6 +35,9 @@ module.exports = function(server) {
     if (!req.query.key || req.query.key !== process.env.SCORE_KEY) {
       return res.send(401);
     }
+    if (!req.query.teams || req.query.teams.length != 2 || !req.query.score || req.query.teams.score != 2) {
+      return res.send(400);
+    }
     server.controllers.games.newScore({
         teams: req.query.teams
       , score: req.query.score
