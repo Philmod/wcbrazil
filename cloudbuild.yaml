@@ -17,4 +17,4 @@ steps:
       echo "Not master branch, exiting without deploying to gke"
       exit 0
     fi
-    kubectl set image deployment/russia2018 russia2018=gcr.io/$PROJECT_ID/russia2018:$REVISION_ID
+    /builder/kubectl.bash set image deployment/russia2018 russia2018=gcr.io/$PROJECT_ID/russia2018:$REVISION_ID
