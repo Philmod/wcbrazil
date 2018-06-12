@@ -99,9 +99,10 @@ module.exports = function(server) {
       return;
     }
     console.log(humanize.date("Y-m-d H:i:s")+" Connecting to the Twitter Stream for @"+TWITTER_USERNAME);
-    twit.stream('user', {track:TWITTER_USERNAME}, function(stream) {
+    twit.stream('statuses/filter', {track: TWITTER_USERNAME}, function(stream) {
       console.log(humanize.date("Y-m-d H:i:s")+" Connected");
       stream.on('data', function(data) {
+        console.log('hello data : ', data.user.screen_name, data.text)
         if(!data.text) return;       
         if(data.user.screen_name != TWITTER_USERNAME) return;
         console.log('GOOOOALLLL : ');
