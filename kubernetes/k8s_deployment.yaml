@@ -24,6 +24,11 @@ spec:
           value: /russia2018/socket.io
         - name: MONGODB_URI
           value: mongodb://mongo-0.mongo,mongo-1.mongo,mongo-2.mongo:27017/russia2018_localhost
+        - name: SCORE_KEY
+          valueFrom:
+            secretKeyRef:
+              name: russia2018-secret
+              key: score_key
         - name: TWITTER_KEY
           valueFrom:
             secretKeyRef:

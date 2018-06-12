@@ -29,6 +29,20 @@ module.exports = function(server) {
   });
 
   /**
+   * Private endpoint to update score.
+   */
+  server.get('/score', function(req, res, next) {
+    if (!req.query.key || req.query.key !== process.env.SCORE_KEY) {
+      return res.send(401);
+    }
+    server.controllers.games.newScore({
+        teams: req.query.teams
+      , score: req.query.score
+    });
+    res.send(200);
+  });
+
+  /**
    * Error handler.
    */
   server.use(function(err, req, res, next) {
