@@ -1,10 +1,10 @@
 steps:
-# - name: 'gcr.io/cloud-builders/npm'
-#   args: ['install']
-# - name: 'gcr.io/cloud-builders/docker'
-#   args: ['build', '-t', 'gcr.io/$PROJECT_ID/russia2018:$REVISION_ID', '.']
-# - name: 'gcr.io/cloud-builders/docker'
-#   args: ['push', 'gcr.io/$PROJECT_ID/russia2018:$REVISION_ID']
+- name: 'gcr.io/cloud-builders/npm'
+  args: ['install']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/$PROJECT_ID/russia2018:$REVISION_ID', '.']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/$PROJECT_ID/russia2018:$REVISION_ID']
 - name: 'gcr.io/cloud-builders/kubectl'
   entrypoint: 'bash'
   env:
@@ -14,7 +14,7 @@ steps:
   - '-c'
   - |
     if [ "$BRANCH_NAME" != "master" ]; then
-      echo "not master branch, exiting without deploying to gke"
+      echo "Not master branch, exiting without deploying to gke"
       exit 0
     fi
-    # kubectl set image deployment/russia2018 russia2018=gcr.io/$PROJECT_ID/russia2018:$REVISION_ID
+    kubectl set image deployment/russia2018 russia2018=gcr.io/$PROJECT_ID/russia2018:$REVISION_ID
