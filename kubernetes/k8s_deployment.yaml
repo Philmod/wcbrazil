@@ -18,10 +18,12 @@ spec:
             cpu: 100m
             memory: 100Mi
         env:
+        - name: WEBSOCKET_HOST
+          value: /
+        - name: WEBSOCKET_PATH
+          value: /russia2018/socket.io
         - name: MONGODB_URI
           value: mongodb://mongo-0.mongo,mongo-1.mongo,mongo-2.mongo:27017/russia2018_localhost
-        - name: WEBSOCKET_PATH
-          value: /websocket
         - name: TWITTER_KEY
           valueFrom:
             secretKeyRef:
