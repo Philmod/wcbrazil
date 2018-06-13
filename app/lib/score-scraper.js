@@ -23,7 +23,7 @@ module.exports = function (options) {
       team = "Northern Ireland";
     if (team === "Ireland")
       team = "Republic of Ireland";
-      
+
     return team;
   }
 
@@ -39,7 +39,7 @@ module.exports = function (options) {
       }, function(e, r, b) {
         if (e)
           return callback(e);
-        statusCode = r && r.statusCode
+        var statusCode = r && r.statusCode
         if (statusCode != 200) {
           return callback(new Error(statusCode))
         }
