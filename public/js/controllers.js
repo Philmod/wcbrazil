@@ -79,7 +79,7 @@ angular.module('russia2018App.controllers', ['chart.js'])
     }
     bets.forEach(function(b) { 
       for (var i = 0; i < nbGames; i++) {
-        var choice = b.bets[i].toUpperCase(); // !!!
+        var choice = b.bets[i].toUpperCase();
         if (!betChoices[i]) {
           betChoices[i] = {};
           choices[i] = [];
