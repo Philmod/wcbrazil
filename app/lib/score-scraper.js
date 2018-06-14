@@ -62,7 +62,9 @@ module.exports = function (options) {
          */
         $(mainClass + ' ' + teamsClass).each(function(i, element) {
           var team = mapTeam($(this).html().replace('*', '').trim());
-          team = team.substring(team.indexOf('>')+1, team.indexOf('</a>'));
+          if (team.indexOf('</a>') > -1) {
+            team = team.substring(team.indexOf('>')+1, team.indexOf('</a>'));
+          }
           if (team) {
             if (teamsA.length > teamsB.length) {
               teamsB.push(team);
