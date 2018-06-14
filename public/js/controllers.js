@@ -2,7 +2,14 @@
 
 /* Controllers */
 
-angular.module('russia2018App.controllers', [])
+angular.module('russia2018App.controllers', ['chart.js'])
+  .config(['ChartJsProvider', function (ChartJsProvider) {
+    ChartJsProvider.setOptions({
+      chartColors: [ '#4d5360', '#dcdcdc', '#BE131A'],
+      responsive: false,
+    });
+  }])
+
   .controller('AppCtrl', function ($scope, socket) {
     // Check if ie8.
     if (get_browser() === 'MSIE' && get_browser_version() === '8') {
@@ -60,7 +67,47 @@ angular.module('russia2018App.controllers', [])
       refreshing = true;
     }
 
+    /**
+     * Set up pie charts.
+     */
+    var labels = [];
+    var choices = [];
+    var betChoices = {};
+    var nbGames = 0;
+    if (bets && bets[0]) {
+      nbGames = bets[0].bets.length;
+    }
+    bets.forEach(function(b) { 
+      for (var i = 0; i < nbGames; i++) {
+        var choice = b.bets[i].toUpperCase(); // !!!
+        if (!betChoices[i]) {
+          betChoices[i] = {};
+          choices[i] = [];
+          labels[i] = [];
+        }
+        if (!betChoices[i][choice]) {
+          betChoices[i][choice] = 0;
+        }
+        betChoices[i][choice] += 1;
+      }
+    });
+    for (var gameIndex in betChoices) {
+      for (var key in betChoices[gameIndex]) {
+        if (betChoices[gameIndex].hasOwnProperty(key)) {
+          if (key != "X") {
+            labels[gameIndex].push( games[gameIndex].teams[parseInt(key)-1] );
+          } else {
+            labels[gameIndex].push(key);
+          }
+          choices[gameIndex].push(betChoices[gameIndex][key]);
+        }
+      }
+    }
+    $scope.labels = labels;
+    $scope.choices = choices;
+
   })
+
   .controller('GamesCtrl', function ($scope, socket) {
     // Store games.
     $scope.games = games;
@@ -73,6 +120,7 @@ angular.module('russia2018App.controllers', [])
       loadGamesScores(data);
     });
   })
+
   .controller('BetsCtrl', function ($scope, socket) {
     $scope.bets = bets;
     socket.on('bets:update', function (data) {

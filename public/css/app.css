@@ -107,6 +107,13 @@ ul.navbar-nav a.button-href-wrapper {
   min-height: 160px;
 }
 
+.chart {
+  height: 130px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* Score */
 .score, .dash {
   display: inline-block;

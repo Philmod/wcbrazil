@@ -82,7 +82,7 @@ if (app.program.load) {
  */
 new compressor.minify({
     type: 'uglifyjs',
-    fileIn: [ 'public/bower_components/angular/angular.js'
+    fileIn: [ 'node_modules/angular/angular.min.js'
             , 'public/bower_components/angular-route/angular-route.js'
             , 'public/bower_components/angular-socket-io/socket.js'
             , 'public/js/lib/jquery/jquery-2.0.3.min.js'
@@ -93,10 +93,15 @@ new compressor.minify({
             , 'public/js/controllers.js'
             , 'public/js/filters.js'
             , 'node_modules/socket.io-client/dist/socket.io.js'
+            , 'node_modules/chart.js/dist/Chart.min.js'
+            , 'node_modules/angular-chart.js/dist/angular-chart.min.js'
             ],
     fileOut: 'public/base-onefile.js',
     callback: function(err, min){
-      if (err) console.log('Error minifying JS files', err);
+      if (err) {
+        console.log('Error minifying JS files', err);
+        process.exit(1);
+      }
       else console.log('JS Minified.');
     }
 });
@@ -111,7 +116,10 @@ new compressor.minify({
             ],
     fileOut: 'public/base-onefile.css',
     callback: function(err, min){
-      if (err) console.log('Error minifying CSS files', err);
+      if (err) {
+        console.log('Error minifying CSS files', err);
+        process.exit(1);
+      }
       else console.log('CSS Minified.');
     }
 });

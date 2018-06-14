@@ -82,8 +82,8 @@
     font-size: 11px;
   }
 
-  .fyre .fyre-comment-footer a {
-    padding: 0;
+  .chart {
+    height: 100px;
   }
 
 }
@@ -106,6 +106,10 @@
 
   .bets {
     width: 96.1%;
+  }
+
+  .chart {
+    height: 85px;
   }
 
 }
@@ -142,6 +146,11 @@
 
   .game {
     min-height: 108px;
+  }
+
+  .chart {
+    visibility: hidden;
+    height: 0;
   }
 }
 

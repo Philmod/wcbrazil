@@ -59,7 +59,10 @@ block content
                       .inn 
                         =i
               - }
-          
+        .chart-container
+          .chart
+            canvas(id="{{ 'pie-' + $index}}" class="chart chart-pie" chart-data="choices[$index]" chart-labels="labels[$index]")
+
 
     .row
       div(class='col-sm-12 bets' ng-controller='BetsCtrl' ng-cloak)
