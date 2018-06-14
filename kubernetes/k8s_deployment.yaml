@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
       - name: russia2018
-        image: gcr.io/node-example-gke/russia2018:341778accb61b79a0d19b4a8c50bfa0f1fdbe7bc
+        image: gcr.io/node-example-gke/russia2018:latest
         resources:
           requests:
             cpu: 100m

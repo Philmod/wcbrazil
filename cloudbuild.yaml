@@ -2,7 +2,13 @@ steps:
 - name: 'gcr.io/cloud-builders/npm'
   args: ['install']
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/$PROJECT_ID/russia2018:$REVISION_ID', '.']
+  args: 
+  - 'build'
+  - '-t'
+  - 'gcr.io/$PROJECT_ID/russia2018:$REVISION_ID'
+  - '-t'
+  - 'gcr.io/$PROJECT_ID/russia2018:latest'
+  - '.'
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'gcr.io/$PROJECT_ID/russia2018:$REVISION_ID']
 - name: 'gcr.io/cloud-builders/kubectl'
@@ -18,3 +24,5 @@ steps:
       exit 0
     fi
     /builder/kubectl.bash set image deployment/russia2018 russia2018=gcr.io/$PROJECT_ID/russia2018:$REVISION_ID
+
+images: ['gcr.io/$PROJECT_ID/russia2018:$REVISION_ID', 'gcr.io/$PROJECT_ID/russia2018:latest']
