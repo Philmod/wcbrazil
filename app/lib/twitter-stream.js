@@ -15,7 +15,7 @@ var twitter = require('twitter')
 /**
  * Constants.
  */
-var TWITTER_USERNAME = "GoalFlash";
+var TWITTER_USERNAME = process.env.TWITTER_FOLLOW_USERNAME;
 
 module.exports = function(server) {
 
@@ -124,7 +124,9 @@ module.exports = function(server) {
       });
     });
   }
-  connectStream();
+  if (TWITTER_USERNAME) {
+    connectStream();
+  }
 
   /**
    * Public methods.

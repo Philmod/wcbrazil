@@ -31,6 +31,8 @@ spec:
             secretKeyRef:
               name: russia2018-secret
               key: score_key
+        - name: TWITTER_FOLLOW_USERNAME
+          value: GoalFlash
         - name: TWITTER_KEY
           valueFrom:
             secretKeyRef:
