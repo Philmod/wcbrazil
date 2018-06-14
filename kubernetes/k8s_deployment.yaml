@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: russia2018
 spec:
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
@@ -19,7 +19,7 @@ spec:
             memory: 100Mi
         env:
         - name: SCRAPING_DT_MS
-          value: 10000
+          value: "10000"
         - name: WEBSOCKET_HOST
           value: /
         - name: WEBSOCKET_PATH
