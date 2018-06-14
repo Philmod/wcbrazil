@@ -1,18 +1,20 @@
 
-var express = require('express')
-  , redis = require('redis')
-  ;
+const express = require('express');
+const redis = require('redis');
 
 module.exports = function(server) {
 
-  var Game = server.model('Game')
-    , utils = server.utils;
+  var Game = server.model('Game');
+  var utils = server.utils;
+
+  var nbConnected = 0;
 
   /**
    * Basic callbacks.
    */
   server.io.on('connection', function(socket) {
-    console.log('Socket.io connection : ', socket.id);
+    nbConnected++;
+    console.log('Socket.io connection: %s (total connections: %d)', socket.id, nbConnected);
 
     var refreshInterval = setInterval(function() {
       socket.emit('socket:refresh', {});
@@ -31,6 +33,7 @@ module.exports = function(server) {
 
     socket.on('disconnect', function() {
       clearInterval(refreshInterval);
+      nbConnected--;
     });
   });
 
