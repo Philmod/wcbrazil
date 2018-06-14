@@ -59,7 +59,7 @@ module.exports = function (options) {
         }      
         let info = JSON.parse(body);
         let result = info.fixture.result;
-        console.log('result', result)
+        // console.log('Result from API:', result)
         return callback(null, {
             teams  : [info.fixture.homeTeamName, info.fixture.awayTeamName]
           , score  : [result.goalsHomeTeam || 0, result.goalsAwayTeam || 0]

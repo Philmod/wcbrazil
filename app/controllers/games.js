@@ -82,9 +82,10 @@ module.exports = function(server) {
         console.error('Error scraping scores : ', e);
         return
       }
+      console.log('Score from Scrapping:', results);
 
       updateScores(results, function(e, nbUpdated) {
-        console.log('Scraping done, at  : ', new Date(), nbUpdated);
+        console.log('Scraping update:', new Date(), nbUpdated);
         if (e) console.error('Error updating the scores : ', e);
         if (!e && nbUpdated > 0) {
           broadcastGames(date);
@@ -102,7 +103,7 @@ module.exports = function(server) {
         games.forEach((game) => {
           api.gameScore(game.link, (e, score) => {
             if (e) console.error('Error getting the game score (api) : ', e);
-            else console.log('Score:', score)
+            else console.log('Score from API:', score)
           });
         });
       }
