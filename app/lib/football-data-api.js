@@ -10,10 +10,24 @@ const BASE_URL = 'https://api.football-data.org/v1';
 const COMPETITION_ID = 467;
 
 /**
+ * Parse JSON.
+ */
+var parseJSON = function(json) {
+  var out = {};
+  if (!json || (typeof json === 'undefined')) return out;
+  try {
+    out = JSON.parse(json);
+  } catch(e) {
+    // console.error('Error parsing JSON: ', e, json);
+    out = json;
+  }
+  return out;
+};
+
+/**
  * Module.
  */
 module.exports = function (options) {
-
   return {
 
     games: (callback) => {
@@ -27,8 +41,8 @@ module.exports = function (options) {
       request(options, (err, res, body) => {
         if (err || res.statusCode !== 200) {
           return callback(err || new Error("Error. Got status code " + res.statusCode))
-        }      
-        let info = JSON.parse(body);
+        }
+        let info = parseJSON(body);
         let games = [];
         console.log('%d games', info.fixtures.length)
         info.fixtures.forEach(game => {
@@ -56,7 +70,7 @@ module.exports = function (options) {
       request(options, (err, res, body) => {
         if (err || res.statusCode !== 200) {
           return callback(err || new Error("Error. Got status code " + res.statusCode))
-        }      
+        }
         let info = JSON.parse(body);
         let result = info.fixture.result;
         // console.log('Result from API:', result)

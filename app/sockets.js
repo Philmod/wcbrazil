@@ -14,6 +14,7 @@ module.exports = function(server) {
    */
   server.io.on('connection', function(socket) {
     nbConnected++;
+    socket.emit('users:number', nbConnected);
     console.log('Socket.io connection: %s (total connections: %d)', socket.id, nbConnected);
 
     var refreshInterval = setInterval(function() {
@@ -34,6 +35,7 @@ module.exports = function(server) {
     socket.on('disconnect', function() {
       clearInterval(refreshInterval);
       nbConnected--;
+      socket.emit('users:number', nbConnected);
     });
   });
 
