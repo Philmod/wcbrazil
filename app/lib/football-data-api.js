@@ -71,7 +71,7 @@ module.exports = function (options) {
         if (err || res.statusCode !== 200) {
           return callback(err || new Error("Error. Got status code " + res.statusCode))
         }
-        let info = JSON.parse(body);
+        let info = parseJSON(body);
         let result = info.fixture.result;
         // console.log('Result from API:', result)
         return callback(null, {
