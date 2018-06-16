@@ -71,12 +71,6 @@ module.exports = function(server) {
     calculatePoints: function(g, callback) {
       var self = this;
 
-      // Ignore if before the game.
-      if (utils.getDate() < self.time && self.score[0] === 0 && self.score[1] === 0) {
-        console.log('Ignoring score before game (%s < %s)', utils.getDate(), self.time)
-        return callback();
-      }
-
       // Winning bet pool.
       var win = (self.score[0] > self.score[1]) ? '1' : '2';
       if (self.score[0] === self.score[1])
@@ -152,9 +146,16 @@ module.exports = function(server) {
     },
 
     updateScore: function(g, callback) {
-      this.findOne({teams: g.teams}, function(e, gameDb) {
+      this.findOne({
+        teams: g.teams, 
+        time : {$lte: utils.getDate()}
+      }, function(e, gameDb) {
         if (e) return callback(e);
-        if (!gameDb) return callback(new Error('There is no game with these teams: ' + JSON.stringify(g.teams)));
+        if (!gameDb) {
+          console.log('There is no started game with these teams: ' + JSON.stringify(g.teams));
+          return callback();
+        }
+        
         if ( (g.score[0] !== gameDb.score[0]) || (g.score[1] !== gameDb.score[1])) {
           gameDb.score = g.score;
           if (g.fromTwitter) {
