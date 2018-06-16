@@ -120,14 +120,21 @@ var chartData = function(bets, games) {
       betChoices[i][choice] += 1;
     }
   });
+  // Aggregates numbers per bet.
   for (var gameIndex in betChoices) {
+    nbBets = 0;
+    for (var key in betChoices[gameIndex]) {
+      nbBets += betChoices[gameIndex][key];
+    }
     for (var key in betChoices[gameIndex]) {
       if (betChoices[gameIndex].hasOwnProperty(key)) {
+        var pay = nbBets / (betChoices[gameIndex][key] + 0.1*nbBets);
+        pay = Math.round(pay * 100) / 100;
+        var label = key;
         if (key != "X") {
-          labels[gameIndex].push( games[gameIndex].teams[parseInt(key)-1] );
-        } else {
-          labels[gameIndex].push(key);
+          label = games[gameIndex].teams[parseInt(key)-1];
         }
+        labels[gameIndex].push(label + ' (+' + pay + ')');
         choices[gameIndex].push(betChoices[gameIndex][key]);
       }
     }
