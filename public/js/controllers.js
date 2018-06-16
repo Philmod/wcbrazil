@@ -70,41 +70,9 @@ angular.module('russia2018App.controllers', ['chart.js'])
     /**
      * Set up pie charts.
      */
-    var labels = [];
-    var choices = [];
-    var betChoices = {};
-    var nbGames = 0;
-    if (bets && bets[0]) {
-      nbGames = bets[0].bets.length;
-    }
-    bets.forEach(function(b) { 
-      for (var i = 0; i < nbGames; i++) {
-        var choice = b.bets[i].toUpperCase();
-        if (!betChoices[i]) {
-          betChoices[i] = {};
-          choices[i] = [];
-          labels[i] = [];
-        }
-        if (!betChoices[i][choice]) {
-          betChoices[i][choice] = 0;
-        }
-        betChoices[i][choice] += 1;
-      }
-    });
-    for (var gameIndex in betChoices) {
-      for (var key in betChoices[gameIndex]) {
-        if (betChoices[gameIndex].hasOwnProperty(key)) {
-          if (key != "X") {
-            labels[gameIndex].push( games[gameIndex].teams[parseInt(key)-1] );
-          } else {
-            labels[gameIndex].push(key);
-          }
-          choices[gameIndex].push(betChoices[gameIndex][key]);
-        }
-      }
-    }
-    $scope.labels = labels;
-    $scope.choices = choices;
+    var data = chartData(bets, games);
+    $scope.labels = data.labels;
+    $scope.choices = data.choices;
 
   })
 
@@ -129,6 +97,46 @@ angular.module('russia2018App.controllers', ['chart.js'])
     });
   })
   ;
+
+var chartData = function(bets, games) {
+  var labels = [];
+  var choices = [];
+  var betChoices = {};
+  var nbGames = 0;
+  if (bets && bets[0]) {
+    nbGames = bets[0].bets.length;
+  }
+  bets.forEach(function(b) { 
+    for (var i = 0; i < nbGames; i++) {
+      var choice = b.bets[i].toUpperCase();
+      if (!betChoices[i]) {
+        betChoices[i] = {};
+        choices[i] = [];
+        labels[i] = [];
+      }
+      if (!betChoices[i][choice]) {
+        betChoices[i][choice] = 0;
+      }
+      betChoices[i][choice] += 1;
+    }
+  });
+  for (var gameIndex in betChoices) {
+    for (var key in betChoices[gameIndex]) {
+      if (betChoices[gameIndex].hasOwnProperty(key)) {
+        if (key != "X") {
+          labels[gameIndex].push( games[gameIndex].teams[parseInt(key)-1] );
+        } else {
+          labels[gameIndex].push(key);
+        }
+        choices[gameIndex].push(betChoices[gameIndex][key]);
+      }
+    }
+  }
+  return {
+    labels: labels, 
+    choices: choices,
+  };
+}
 
 var loadGamesScores = function(games) {
   setTimeout(function() {
