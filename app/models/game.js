@@ -71,6 +71,12 @@ module.exports = function(server) {
     calculatePoints: function(g, callback) {
       var self = this;
 
+      // Ignore if before the game.
+      if (utils.getDate() < self.time && self.score[0] === 0 && self.score[1] === 0) {
+        console.log('Ignoring score before game (%s < %s)', utils.getDate(), self.time)
+        return callback();
+      }
+
       // Winning bet pool.
       var win = (self.score[0] > self.score[1]) ? '1' : '2';
       if (self.score[0] === self.score[1])
