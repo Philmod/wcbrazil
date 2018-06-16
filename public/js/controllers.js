@@ -68,6 +68,15 @@ angular.module('russia2018App.controllers', ['chart.js'])
     }
 
     /**
+     * Arlon is the Capital of the World.
+     */
+    var elt = $('.navbar-brand');
+    elt.fadeToggle(1000, function() {
+      elt.text("RUSSIA 2018"); 
+      elt.fadeToggle(1000);
+    }); 
+
+    /**
      * Set up pie charts.
      */
     var labels = [];
