@@ -1,6 +1,5 @@
 const fs = require('fs');
 const async = require('async');
-const scoreScraper = require('../lib/score-scraper.js')();
 const moment = require('moment-timezone');
 const api = require('../lib/football-data-api')();
 
@@ -69,47 +68,25 @@ module.exports = function(server) {
     });
   }
 
-
   /**
-   * Scrap scores.
+   * Listen to maybe-new scores.
    */
-  var scoreScraping = setInterval(function() {
-
-    var date = utils.getDate();
-
-    scoreScraper.scrap(function(e, results) {
-      if (e) {
-        console.error('Error scraping scores : ', e);
-        return
-      }
-      console.log('Score from Scrapping:', results);
-
-      updateScores(results, function(e, nbUpdated) {
-        console.log('Scraping update:', new Date(), nbUpdated);
-        if (e) console.error('Error updating the scores : ', e);
-        if (!e && nbUpdated > 0) {
-          broadcastGames(date);
-          broadcastBets(date);
-        }
-      });
-
-    });
-
-    // Also get scores from API.
-    // TODO(philmod): make sure the results are "live" before considering them.
-    Game.findByDate(date, function(e, games) {
-      if (e) console.error('Error getting the games : ', e);
-      else {
-        games.forEach((game) => {
-          api.gameScore(game.link, (e, score) => {
-            if (e) console.error('Error getting the game score (api) : ', e);
-            else console.log('Score from API:', score)
-          });
-        });
+  server.redis.on("message", (channel, message) => {
+    let results = utils.parseJSON(message);
+    if (!Array.isArray(results)) {
+      console.error("Results from Redis is not an array:", results);
+      return
+    }
+    updateScores(results, function(e, nbUpdated) {
+      console.log('Score update:', new Date(), nbUpdated);
+      if (e) console.error('Error updating the scores : ', e);
+      if (!e && nbUpdated > 0) {
+        broadcastGames(date);
+        broadcastBets(date);
       }
     });
-
-  }, server.config.scraping.dt);
+  });
+  server.redis.subscribe(process.env.REDIS_CHANNEL);
 
   /**
    * Public methods.

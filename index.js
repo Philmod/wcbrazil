@@ -57,11 +57,6 @@ if (app.program.server) {
   });
 }
 
-/**
- * Start twitter streaming.
- */
-require('./app/lib/twitter-stream.js')(app);
-
 /*
  * Check memory leaks.
  */
