@@ -1,7 +1,7 @@
 const fs = require('fs');
 const async = require('async');
-const scoreScraper = require('../lib/score-scraper.js')();
 const moment = require('moment-timezone');
+const scoreScraper = require('../lib/score-scraper.js')();
 const api = require('../lib/football-data-api')();
 
 module.exports = function(server) {
@@ -69,6 +69,25 @@ module.exports = function(server) {
     });
   }
 
+  /**
+   * Listen to maybe-new scores.
+   */
+  server.redis.on("message", (channel, message) => {
+    results = utils.parseJSON(message);
+    if (!Array.isArray(results)) {
+      console.error("Results from Redis is not an array:", results);
+      return
+    }
+    updateScores(results, function(e, nbUpdated) {
+      console.log('Score update:', new Date(), nbUpdated);
+      if (e) console.error('Error updating the scores : ', e);
+      if (!e && nbUpdated > 0) {
+        broadcastGames(date);
+        broadcastBets(date);
+      }
+    });
+  });
+  server.redis.subscribe(process.env.REDIS_CHANNEL);
 
   /**
    * Scrap scores.
