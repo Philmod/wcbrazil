@@ -72,12 +72,8 @@ module.exports = function(server) {
    * Listen to maybe-new scores.
    */
   server.redisSub.on("message", (channel, message) => {
-    let results = utils.parseJSON(message);
-    if (!Array.isArray(results)) {
-      console.error("Results from Redis is not an array:", results);
-      return
-    }
-    updateScores(results, function(e, nbUpdated) {
+    let res = utils.parseJSON(message);
+    updateScores([res], function(e, nbUpdated) {
       console.log('Score update:', new Date(), nbUpdated);
       if (e) console.error('Error updating the scores : ', e);
       if (!e && nbUpdated > 0) {
