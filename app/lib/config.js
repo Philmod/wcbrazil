@@ -65,4 +65,12 @@ module.exports = function(server, next) {
     console.log('Redis connected.');
   });
 
+  server.redisSub = redis.createClient(redisOptions);
+  server.redisSub.on("error", function(err) {
+    console.log("Redis Error " + err);
+  });
+  server.redisSub.on("connect", function () {
+    console.log('Redis connected.');
+  });
+
 };

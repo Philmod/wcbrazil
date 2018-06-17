@@ -71,7 +71,7 @@ module.exports = function(server) {
   /**
    * Listen to maybe-new scores.
    */
-  server.redis.on("message", (channel, message) => {
+  server.redisSub.on("message", (channel, message) => {
     let results = utils.parseJSON(message);
     if (!Array.isArray(results)) {
       console.error("Results from Redis is not an array:", results);
@@ -86,7 +86,7 @@ module.exports = function(server) {
       }
     });
   });
-  server.redis.subscribe(process.env.REDIS_CHANNEL);
+  server.redisSub.subscribe(process.env.REDIS_CHANNEL);
 
   /**
    * Public methods.
