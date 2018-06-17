@@ -46,14 +46,6 @@ module.exports = function(server, next) {
   server.config.mongodb = require('./mongodb')[serverEnv];
 
   /**
-   * Scraping.
-   */
-  server.config.scraping = {
-      groups: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
-    , dt: ( process.env.SCRAPING_DT_MS && parseInt(process.env.SCRAPING_DT_MS) ) || 1000*60
-  };
-
-  /**
    * Timezone.
    */
   server.config.tz = 'CET';

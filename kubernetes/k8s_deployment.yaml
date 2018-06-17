@@ -18,8 +18,6 @@ spec:
             cpu: 100m
             memory: 100Mi
         env:
-        - name: SCRAPING_DT_MS
-          value: "10000"
         - name: WEBSOCKET_HOST
           value: /
         - name: WEBSOCKET_PATH
