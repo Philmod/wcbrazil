@@ -72,7 +72,7 @@ module.exports = function(server) {
    * Listen to maybe-new scores.
    */
   server.redis.on("message", (channel, message) => {
-    results = utils.parseJSON(message);
+    let results = utils.parseJSON(message);
     if (!Array.isArray(results)) {
       console.error("Results from Redis is not an array:", results);
       return
