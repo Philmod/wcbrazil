@@ -18,6 +18,8 @@ spec:
             cpu: 100m
             memory: 100Mi
         env:
+        - name: REDIS_CHANNEL
+          value: "goalwarner"
         - name: WEBSOCKET_HOST
           value: /
         - name: WEBSOCKET_PATH
