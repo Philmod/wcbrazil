@@ -45,7 +45,7 @@
     "start": "node index.js -s",
     "dev": "node index.js -s -d '2018-06-14'",
     "test": "NODE_ENV=test mocha test",
-    "clean": "rm *.tmp",
+    "clean": "rm *.tmp && rm dump.rdb",
     "load-data": "node index.js -l"
   },
   "repository": {
