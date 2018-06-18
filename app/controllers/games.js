@@ -77,6 +77,7 @@ module.exports = function(server) {
       console.log('Score update:', new Date(), nbUpdated);
       if (e) console.error('Error updating the scores : ', e);
       if (!e && nbUpdated > 0) {
+        var date = utils.getDate();
         broadcastGames(date);
         broadcastBets(date);
       }

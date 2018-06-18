@@ -79,7 +79,7 @@ block content
               td(class='daybet' ng-repeat='b in bet.bets track by $index')
                 | {{b}}
               td(class='betPoints')
-                {{bet.points}}
+                | {{bet.points}}
               td(class='betDiffRanking', ng-class="{ 'up': bet.differenceRanking>0, 'down': bet.differenceRanking<0, 'stable': bet.differenceRanking===0 }")
                 | {{bet.differenceRanking > 0 ? '&#x25B2;' : ''}}
                 | {{bet.differenceRanking < 0 ? '&#x25BC;' : ''}}
