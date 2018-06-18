@@ -146,9 +146,16 @@ module.exports = function(server) {
     },
 
     updateScore: function(g, callback) {
-      this.findOne({teams: g.teams}, function(e, gameDb) {
+      this.findOne({
+        teams: g.teams, 
+        time : {$lte: utils.getDate()}
+      }, function(e, gameDb) {
         if (e) return callback(e);
-        if (!gameDb) return callback(new Error('There is no game with these teams: ' + JSON.stringify(g.teams)));
+        if (!gameDb) {
+          console.log('There is no started game with these teams: ' + JSON.stringify(g.teams));
+          return callback();
+        }
+        
         if ( (g.score[0] !== gameDb.score[0]) || (g.score[1] !== gameDb.score[1])) {
           gameDb.score = g.score;
           if (g.fromTwitter) {

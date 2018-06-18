@@ -1,6 +1,5 @@
 const fs = require('fs');
 const async = require('async');
-const scoreScraper = require('../lib/score-scraper.js')();
 const moment = require('moment-timezone');
 const api = require('../lib/football-data-api')();
 
@@ -69,45 +68,20 @@ module.exports = function(server) {
     });
   }
 
-
   /**
-   * Scrap scores.
+   * Listen to maybe-new scores.
    */
-  var scoreScraping = setInterval(function() {
-
-    var date = utils.getDate();
-
-    scoreScraper.scrap(function(e, results) {
-      if (e) {
-        console.error('Error scraping scores : ', e);
-        return
-      }
-      console.log('Score from Scrapping:', results);
-
-      updateScores(results, function(e, nbUpdated) {
-        console.log('Scraping update:', new Date(), nbUpdated);
-        if (e) console.error('Error updating the scores : ', e);
-        broadcastGames(date);
-        broadcastBets(date);
-      });
-
+  server.redisSub.on("message", (channel, message) => {
+    let res = utils.parseJSON(message);
+    updateScores([res], function(e, nbUpdated) {
+      console.log('Score update:', new Date(), nbUpdated);
+      if (e) console.error('Error updating the scores : ', e);
+      var date = utils.getDate();
+      broadcastGames(date);
+      broadcastBets(date);
     });
-
-    // Also get scores from API.
-    // TODO(philmod): make sure the results are "live" before considering them.
-    Game.findByDate(date, function(e, games) {
-      if (e) console.error('Error getting the games : ', e);
-      else {
-        games.forEach((game) => {
-          api.gameScore(game.link, (e, score) => {
-            if (e) console.error('Error getting the game score (api) : ', e);
-            else console.log('Score from API:', score)
-          });
-        });
-      }
-    });
-
-  }, server.config.scraping.dt);
+  });
+  server.redisSub.subscribe(process.env.REDIS_CHANNEL);
 
   /**
    * Public methods.

@@ -14,19 +14,19 @@ block content
       div(class='game col-xs-6 col-sm-{{12/games.length}}' ng-repeat='game in games')
         .teams
           h2 
-            {{game.teams[0]}}
+            | {{game.teams[0]}}
             |  vs 
-            {{game.teams[1]}}
+            | {{game.teams[1]}}
         .time
           p
-            {{game.time | hours }}
+            | {{game.time | hours }}
             |  h  
-            {{game.time | minutes }}
+            | {{game.time | minutes }}
         .scoresText
           h3
-            {{game.score[0] || 0}}
+            | {{game.score[0] || 0}}
             |  - 
-            {{game.score[1] || 0}}
+            | {{game.score[1] || 0}}
         .scores
           div(id="flip" class='games score play')
             ul(class="flip {{(game.teams[0] + game.teams[1] + 0) | removeSpace}}")
@@ -73,17 +73,17 @@ block content
           tbody
             tr(ng-repeat='bet in bets')
               td
-                {{bet.ranking === bets[$index-1].ranking ? '-' : bet.ranking}}
+                | {{bet.ranking === bets[$index-1].ranking ? '-' : bet.ranking}}
               td 
-                {{bet.user}}
+                | {{bet.user}}
               td(class='daybet' ng-repeat='b in bet.bets track by $index')
-                {{b}}
+                | {{b}}
               td(class='betPoints')
-                {{bet.points}}
+                | {{bet.points}}
               td(class='betDiffRanking', ng-class="{ 'up': bet.differenceRanking>0, 'down': bet.differenceRanking<0, 'stable': bet.differenceRanking===0 }")
-                {{bet.differenceRanking > 0 ? '&#x25B2;' : ''}}
-                {{bet.differenceRanking < 0 ? '&#x25BC;' : ''}}
-                {{bet.differenceRanking | removeSign}}
+                | {{bet.differenceRanking > 0 ? '&#x25B2;' : ''}}
+                | {{bet.differenceRanking < 0 ? '&#x25BC;' : ''}}
+                | {{bet.differenceRanking | removeSign}}
 
 
   //- Bootstrap core JavaScript

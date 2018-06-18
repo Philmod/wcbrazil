@@ -46,14 +46,6 @@ module.exports = function(server, next) {
   server.config.mongodb = require('./mongodb')[serverEnv];
 
   /**
-   * Scraping.
-   */
-  server.config.scraping = {
-      groups: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
-    , dt: ( process.env.SCRAPING_DT_MS && parseInt(process.env.SCRAPING_DT_MS) ) || 1000*60
-  };
-
-  /**
    * Timezone.
    */
   server.config.tz = 'CET';
@@ -70,6 +62,14 @@ module.exports = function(server, next) {
     console.log("Redis Error " + err);
   });
   server.redis.on("connect", function () {
+    console.log('Redis connected.');
+  });
+
+  server.redisSub = redis.createClient(redisOptions);
+  server.redisSub.on("error", function(err) {
+    console.log("Redis Error " + err);
+  });
+  server.redisSub.on("connect", function () {
     console.log('Redis connected.');
   });
 
