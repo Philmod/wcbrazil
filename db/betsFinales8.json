@@ -2,6 +2,7 @@
   {
     "Team1": "France",
     "Team2": "Argentina",
+    "finales": 8,
     "David Van Brussel": "1++",
     "Denis Arendt": "1+",
     "Dimitri Arendt": "2+",
@@ -22,6 +23,8 @@
   {
     "Team1": "Uruguay",
     "Team2": "Portugal",
+    "finales": 8,
+    "finales": 8,
     "David Van Brussel": "2+",
     "Denis Arendt": "2+",
     "Dimitri Arendt": "2+",
@@ -42,6 +45,7 @@
   {
     "Team1": "Spain",
     "Team2": "Russia",
+    "finales": 8,
     "David Van Brussel": "1++",
     "Denis Arendt": "2+",
     "Dimitri Arendt": "1+",
@@ -62,6 +66,7 @@
   {
     "Team1": "Croatia",
     "Team2": "Denmark",
+    "finales": 8,
     "David Van Brussel": "1+",
     "Denis Arendt": "1+",
     "Dimitri Arendt": "1++",
@@ -82,6 +87,7 @@
   {
     "Team1": "Brazil",
     "Team2": "Mexico",
+    "finales": 8,
     "David Van Brussel": "1X",
     "Denis Arendt": "1+",
     "Dimitri Arendt": "1++",
@@ -102,6 +108,7 @@
   {
     "Team1": "Belgium",
     "Team2": "Japan",
+    "finales": 8,
     "David Van Brussel": "1++",
     "Denis Arendt": "1++",
     "Dimitri Arendt": "1+",
@@ -122,6 +129,7 @@
   {
     "Team1": "Sweden",
     "Team2": "Switzerland",
+    "finales": 8,
     "David Van Brussel": "1+",
     "Denis Arendt": "1+",
     "Dimitri Arendt": "1+",
@@ -142,6 +150,7 @@
   {
     "Team1": "Colombia",
     "Team2": "England",
+    "finales": 8,
     "David Van Brussel": "2+",
     "Denis Arendt": "1+",
     "Dimitri Arendt": "1+",

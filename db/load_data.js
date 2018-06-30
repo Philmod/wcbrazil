@@ -5,6 +5,11 @@ const fs = require('fs');
 const async = require('async');
 const api = require('../app/lib/football-data-api')();
 
+const FINALES_8_START_DATE = new Date('2018-06-29 00:00:00')
+const FINALES_4_START_DATE = new Date('2018-07-04 00:00:00')
+const FINALES_2_START_DATE = new Date('2018-07-09 00:00:00')
+const FINALES_1_START_DATE = new Date('2018-07-12 00:00:00')
+
 /**
  * Module.
  */
@@ -72,6 +77,18 @@ module.exports = function(server) {
           // Game.remove();
           async.each(games, function(item, cb) {
             var game = new Game(item);
+            if (new Date(game.time) >= FINALES_8_START_DATE) {
+              game.finales = 8;
+            }
+            if (new Date(game.time) >= FINALES_4_START_DATE) {
+              game.finales = 4;
+            }
+            if (new Date(game.time) >= FINALES_2_START_DATE) {
+              game.finales = 2;
+            }
+            if (new Date(game.time) >= FINALES_1_START_DATE) {
+              game.finales = 1;
+            }
             game.save(cb);
           }, function(e) {
             if (e) stop('Error loading the games', e);
