@@ -21,12 +21,6 @@ module.exports = function(server) {
   /**
    * Data.
    */
-  var games = [];
-  // var games = utils.loadJSON(__dirname + '/games.json');
-  // var gamesFinales8 = utils.loadJSON(__dirname + '/gamesFinales8.json');
-  // var gamesFinales4 = utils.loadJSON(__dirname + '/gamesFinales4.json');
-  // var gamesFinales2 = utils.loadJSON(__dirname + '/gamesFinales2.json');
-  // var gamesFinales1 = utils.loadJSON(__dirname + '/gamesFinales1.json');
   var bets = utils.loadJSON(__dirname + '/bets.json');
   // var betsFinales8 = utils.loadJSON(__dirname + '/betsFinales8.json');
   // var betsFinales4 = utils.loadJSON(__dirname + '/betsFinales4.json');
@@ -115,41 +109,7 @@ module.exports = function(server) {
         callback(e);
       });
     },
-    // 3. Check games finales.
-    function(callback) {
-
-      var files = [gamesFinales8, gamesFinales4, gamesFinales2, gamesFinales1];
-
-      async.each(files, function(file, cbFile) {
-
-        if (!file)
-          return cbFile();
-
-        var games = file;
-        var n = 0;
-
-        async.each(games, function(item, cb) {
-          Game.findOne({teams: item.teams, time: item.time, finales: item.finales}, function(e, g) {
-            if (e) return cb(e);
-            if (g) return cb();
-            var game = new Game(item);
-            n += 1;
-            game.save(cb);
-          });
-        }, function(e) {
-          if (e) stop('Error loading the games finales ', e);
-          console.log('Games finales loaded : ', n);
-          cbFile(e);
-        });
-
-      }, function(e) {
-        if (e) stop('Error loading the finales ', e);
-        callback(e);
-      });
-
-
-    },
-    // 4. Check bets finales.
+    // 3. Check bets finales.
     function(callback) {
       var files = [betsFinales8, betsFinales4, betsFinales2, betsFinales1];
 
