@@ -72,7 +72,7 @@ module.exports = function(server) {
     function(callback) {
       Game.count(function(e, c) {
         if (e) stop('Error counting the games', e);
-        if (c < games.length) {
+        if (c < games.length) { // TODO(philmod): change this and check game by game (score, teams, finales, time)
           console.log('Loading the games into the DB...');
           // Game.remove();
           async.each(games, function(item, cb) {

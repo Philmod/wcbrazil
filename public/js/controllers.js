@@ -5,7 +5,7 @@
 angular.module('russia2018App.controllers', ['chart.js'])
   .config(['ChartJsProvider', function (ChartJsProvider) {
     ChartJsProvider.setOptions({
-      chartColors: [ '#4d5360', '#dcdcdc', '#BE131A'],
+      chartColors: [ '#4d5360', '#dcdcdc', '#BE131A', '#ff9933', '#5f6694'],
       responsive: false,
     });
   }])
@@ -106,7 +106,7 @@ var chartData = function(bets, games) {
   if (bets && bets[0]) {
     nbGames = bets[0].bets.length;
   }
-  bets.forEach(function(b) { 
+  bets.forEach(function(b) {
     for (var i = 0; i < nbGames; i++) {
       var choice = b.bets[i].toUpperCase();
       if (!betChoices[i]) {
@@ -131,16 +131,13 @@ var chartData = function(bets, games) {
         var pay = nbBets / (betChoices[gameIndex][key] + 0.1*nbBets);
         pay = Math.round(pay * 100) / 100;
         var label = key;
-        if (key != "X") {
-          label = games[gameIndex].teams[parseInt(key)-1];
-        }
         labels[gameIndex].push(label + ' (+' + pay + ')');
         choices[gameIndex].push(betChoices[gameIndex][key]);
       }
     }
   }
   return {
-    labels: labels, 
+    labels: labels,
     choices: choices,
   };
 }
