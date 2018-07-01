@@ -32,7 +32,7 @@ module.exports = function(server) {
       - W being the number of winners for that prediction
       --> The gained points P are calculated by P = N / (W + 0,1 x N)
     */
-  });
+  }, { usePushEach: true });
 
   /**
    * Goal schema.
@@ -42,7 +42,7 @@ module.exports = function(server) {
     , score : [ { type: Number, default: 0 }]
     , time : { type: String }
     , correction : { type: Boolean, default: false }
-  })
+  }, { usePushEach: true })
 
   /**
    * Game schema.
@@ -55,7 +55,7 @@ module.exports = function(server) {
     , finales : { type: Number, default: -1 }
     , goals : [Goal]
     , link  : { type: String }
-  });
+  }, { usePushEach: true });
 
   Game.plugin(common.timestamps('created', 'updated'));
 
@@ -147,7 +147,7 @@ module.exports = function(server) {
 
     updateScore: function(g, callback) {
       this.findOne({
-        teams: g.teams, 
+        teams: g.teams,
         time : {$lte: utils.getDate()}
       }, function(e, gameDb) {
         if (e) return callback(e);
@@ -155,7 +155,7 @@ module.exports = function(server) {
           console.log('There is no started game with these teams: ' + JSON.stringify(g.teams));
           return callback();
         }
-        
+
         if ( (g.score[0] !== gameDb.score[0]) || (g.score[1] !== gameDb.score[1])) {
           gameDb.score = g.score;
           if (g.fromTwitter) {
