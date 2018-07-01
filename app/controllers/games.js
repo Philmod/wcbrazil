@@ -75,7 +75,7 @@ module.exports = function(server) {
     let res = utils.parseJSON(message);
     updateScores([res], function(e, nbUpdated) {
       console.log('Score update:', new Date(), nbUpdated);
-      if (e) console.error('Error updating the scores : ', e);
+      if (e) console.error('Error updating the scores : ', e, res);
       var date = utils.getDate();
       broadcastGames(date);
       broadcastBets(date);
