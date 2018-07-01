@@ -10,7 +10,7 @@ module.exports = function(server) {
   server.get('/status', (req, res, next) => {
     // make sure the database is connected.
     server.model('Game').count(function(e, c) {
-      if (e) 
+      if (e)
         return next(e);
       status(req, res, next);
     })
@@ -41,6 +41,8 @@ module.exports = function(server) {
     server.controllers.games.newScore({
         teams: req.query.teams
       , score: req.query.score
+      , scoreExtraTime : req.query.scoreextratime
+      , scorePenalty : req.query.scorepenalty
     });
     res.send(200);
   });
