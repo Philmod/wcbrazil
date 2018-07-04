@@ -103,7 +103,7 @@ var chartData = function(bets, games) {
   var choices = [];
   var betChoices = {};
   var nbGames = 0;
-  if (bets && bets[0]) {
+  if (bets && bets[0] && bets[0].bets) {
     nbGames = bets[0].bets.length;
   }
   bets.forEach(function(b) {
