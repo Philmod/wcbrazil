@@ -3,12 +3,60 @@ const async = require('async');
 const moment = require('moment-timezone');
 const api = require('../lib/football-data-api')();
 
+const FINALES_8_START_DATE = new Date('2018-06-29 00:00:00')
+const FINALES_4_START_DATE = new Date('2018-07-04 00:00:00')
+const FINALES_2_START_DATE = new Date('2018-07-09 00:00:00')
+const FINALES_1_START_DATE = new Date('2018-07-12 00:00:00')
+
+function fin(game) {
+  let finales = -1;
+  if (new Date(game.time) >= FINALES_8_START_DATE) {
+    finales = 8;
+  }
+  if (new Date(game.time) >= FINALES_4_START_DATE) {
+    finales = 4;
+  }
+  if (new Date(game.time) >= FINALES_2_START_DATE) {
+    finales = 2;
+  }
+  if (new Date(game.time) >= FINALES_1_START_DATE) {
+    finales = 1;
+  }
+  return finales;
+}
+
 module.exports = function(server) {
 
   var Game = server.model('Game')
     , utils = server.utils
     , _ = utils._
     ;
+
+  /**
+   * Check for new games.
+   */
+  setInterval(() => {
+    api.games((e, results) => {
+      if (e) console.error(e);
+      else {
+        async.each(results, function(item, cb) {
+          finales = fin(item);
+          Game.findOne({teams: item.teams, finales: finales}, function(e, g) {
+            if (e) return cb(e);
+            if (g) return cb();
+            let game = new Game(item);
+            game.date.created = new Date();
+            game.finales = finales;
+            console.log('New game to save: ', item.teams, finales);
+            game.save(cb);
+          });
+        }, (err) => {
+          if (err) console.error('Error loading new games: ', err)
+          else console.log('Games loaded')
+        });
+      }
+    })
+  }, 3600*1000); // hourly
 
   /**
    * Changed games.
