@@ -28,10 +28,9 @@ module.exports = function(server) {
    */
   var bets = utils.loadJSON(__dirname + '/bets.json');
   var betsFinales8 = utils.loadJSON(__dirname + '/betsFinales8.json');
-  var betsFinales4 = [];
+  var betsFinales4 = utils.loadJSON(__dirname + '/betsFinales4.json');
   var betsFinales2 = [];
   var betsFinales1 = [];
-  // var betsFinales4 = utils.loadJSON(__dirname + '/betsFinales4.json');
   // var betsFinales2 = utils.loadJSON(__dirname + '/betsFinales2.json');
   // var betsFinales1 = utils.loadJSON(__dirname + '/betsFinales1.json');
 
@@ -74,7 +73,6 @@ module.exports = function(server) {
         if (e) stop('Error counting the games', e);
         if (c < games.length) { // TODO(philmod): change this and check game by game (score, teams, finales, time)
           console.log('Loading the games into the DB...');
-          // Game.remove();
           async.each(games, function(item, cb) {
             var game = new Game(item);
             if (new Date(game.time) >= FINALES_8_START_DATE) {
@@ -89,6 +87,7 @@ module.exports = function(server) {
             if (new Date(game.time) >= FINALES_1_START_DATE) {
               game.finales = 1;
             }
+            console.log('Saving new game', game);
             game.save(cb);
           }, function(e) {
             if (e) stop('Error loading the games', e);
