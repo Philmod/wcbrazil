@@ -29,9 +29,8 @@ module.exports = function(server) {
   var bets = utils.loadJSON(__dirname + '/bets.json');
   var betsFinales8 = utils.loadJSON(__dirname + '/betsFinales8.json');
   var betsFinales4 = utils.loadJSON(__dirname + '/betsFinales4.json');
-  var betsFinales2 = [];
+  var betsFinales2 = utils.loadJSON(__dirname + '/betsFinales2.json');
   var betsFinales1 = [];
-  // var betsFinales2 = utils.loadJSON(__dirname + '/betsFinales2.json');
   // var betsFinales1 = utils.loadJSON(__dirname + '/betsFinales1.json');
 
   /**
