@@ -23,4 +23,3 @@ $ node .
 - Add the bets into `betsFinalesX.json`, without forgetting the property `finales: X`.
 - Uncomment the lines for the games and bets in db/load_data
 - `npm run load-data`
-
